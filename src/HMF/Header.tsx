@@ -58,16 +58,16 @@ export default function Header() {
             ) : (
               <div className="logo">
                 {!isRegistratedUser ? (
-                  <>
+                  <div onClick={() => navigate("/")}>
                     <div className="unity-logo-wrapper">
                       <img src="photos/UnityLogoCuted.png" alt="" className="unity-image" />
                     </div>
                     <div className="unity-name-wrapper">
                       <img src="photos/UnityLogo.png" alt="" />
                     </div>
-                  </>
+                  </div>
                 ) : (
-                  <div className="photoUrl-displayName-wrapper">
+                  <div className="photoUrl-displayName-wrapper" onClick={() => navigate("/")}>
                     <img src={isRegistratedUser?.photoURL} alt="" />
                     <div>
                       {isRegistratedUser?.displayName || isRegistratedUser?.email} {}
