@@ -226,7 +226,7 @@ export default function PlayerInfo() {
                 </legend>
                 <div className="measure-wrapper">
                   <div>
-                    {userInfo.height} cm ; {Math.round(+userInfo.height / 2.54 / 1.2) / 10} ft
+                    {currentValue} cm ; {Math.round(+currentValue / 2.54 / 1.2) / 10} ft
                   </div>
                   <input
                     type="range"
