@@ -58,7 +58,7 @@ export default function Header() {
             ) : (
               <div className="logo">
                 {!isRegistratedUser ? (
-                  <div onClick={() => navigate("/")}>
+                  <div onClick={() => navigate("/")} style={{ display: "flex" }}>
                     <div className="unity-logo-wrapper">
                       <img src="photos/UnityLogoCuted.png" alt="" className="unity-image" />
                     </div>
