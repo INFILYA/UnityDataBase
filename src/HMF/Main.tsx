@@ -5,27 +5,10 @@ import { auth } from "../config/firebase";
 import Table from "./components/Table";
 import { useSelector } from "react-redux";
 import { selectPlayers } from "../states/slices/playersSlice";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 export default function Main() {
   const [isRegistratedUser] = useAuthState(auth);
   const players = useSelector(selectPlayers);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    async function signInWithEmail() {
-      try {
-        if (!isRegistratedUser) {
-          navigate("/");
-        }
-      } catch (err) {
-        console.log(err);
-        navigate("/");
-      }
-    }
-    signInWithEmail();
-  }, [isRegistratedUser, navigate]);
 
   const showRightData = <T extends TUserInfo>(arr: T[]): T | undefined => {
     const condition = arr.find((player) => player.email === isRegistratedUser?.email);
