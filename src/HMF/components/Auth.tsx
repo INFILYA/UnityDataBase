@@ -48,9 +48,10 @@ export function Auth() {
   async function signInWithGoogle() {
     try {
       await signInWithPopup(auth, googleProvider);
-      navigate("/Main");
+      // navigate("/Main");
     } catch (err) {
       console.error(err);
+      navigate("/");
     }
   }
 
