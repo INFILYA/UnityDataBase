@@ -60,7 +60,7 @@ export function Auth() {
       setIsLoginLoading(true);
       // ПОмеНЯТЬ ЛиНКДОМАИН !!!
       await sendSignInLinkToEmail(auth, email, {
-        url: "http://localhost:5173/",
+        url: "https://unity-data-base-628a9.web.app//Auth",
         handleCodeInApp: true,
         dynamicLinkDomain: "unitydatabase.page.link",
       });
