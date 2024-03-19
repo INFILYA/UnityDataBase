@@ -1,0 +1,176 @@
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+header .header-background {
+  background-color: aliceblue;
+  filter: contrast(50%) grayscale(20%);
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+header .barWrapper {
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  padding: 15px;
+  padding-left: 2vmax;
+  padding-right: 2vmax;
+  display: flex;
+  justify-content: center;
+  z-index: 3;
+}
+header .barWrapper .innerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100svw;
+  min-width: 325px;
+}
+header .barWrapper .innerContainer .titleNavWrapper {
+  width: clamp(200px, 95%, 100%);
+}
+header .barWrapper .innerContainer .titleNavWrapper .logo {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+header .barWrapper .innerContainer .titleNavWrapper .logo .unity-logo-wrapper {
+  display: flex;
+  height: 60px;
+  margin-right: 10px;
+}
+header .barWrapper .innerContainer .titleNavWrapper .logo .unity-name-wrapper {
+  height: 60px;
+  display: flex;
+}
+header .barWrapper .innerContainer .titleNavWrapper .logo .unity-name-wrapper img {
+  width: 100%;
+}
+header .barWrapper .innerContainer .titleNavWrapper .logo .photoUrl-displayName-wrapper {
+  display: flex;
+}
+header .barWrapper .innerContainer .titleNavWrapper .logo .photoUrl-displayName-wrapper img {
+  border-radius: 50%;
+  width: 60px;
+  margin-right: 10px;
+}
+header .barWrapper .innerContainer .titleNavWrapper .logo .photoUrl-displayName-wrapper div {
+  font-size: 20px;
+  font-weight: 600;
+  align-self: center;
+}
+header .barWrapper .innerContainer .navbar-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+header .barWrapper .innerContainer .navbar-wrapper a {
+  margin: 10px;
+}
+header .barWrapper .innerContainer .acions-logout-wrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+header .barWrapper .innerContainer .acions-logout-wrapper .social {
+  display: flex;
+  justify-content: end;
+  margin-right: 20px;
+}
+header .barWrapper .innerContainer .acions-logout-wrapper .social a {
+  margin: 5px;
+  width: 35px;
+  height: 35px;
+}
+header .barWrapper .innerContainer .acions-logout-wrapper .social a img {
+  width: 35px;
+}
+header .barWrapper .innerContainer .acions-logout-wrapper .social a img:hover {
+  scale: 1.25;
+  transition: 0.3s;
+}
+header .barWrapper .innerContainer .acions-logout-wrapper .social .logout-button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-left: 20px;
+}
+header .barWrapper .innerContainer .header-burger {
+  display: flex;
+  justify-content: center;
+  width: clamp(50px, 75%, 5%);
+  height: 100%;
+}
+header .barWrapper .innerContainer .header-burger button {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .barWrapper .innerContainer .header-burger button .burger-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  aspect-ratio: 4/2;
+}
+header .barWrapper .innerContainer .header-burger button .burger-box .burger-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+header .barWrapper .innerContainer .header-burger button .burger-box .burger-inner div {
+  height: 2px;
+  background-color: black;
+}
+header .barWrapper .innerContainer .header-burger button .close-burger-menu {
+  font-size: 20px;
+  font-weight: 600;
+  border: 1px solid black;
+  border-radius: 50%;
+  padding: 5px;
+  background-color: #dbdcdd;
+  width: 19px;
+  height: 19px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .barWrapper .innerContainer .header-burger button .close-burger-menu:hover {
+  background-color: #693575;
+  color: white;
+  border: none;
+}
+header .barWrapper .innerContainer .burger-actions-logout-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 7.5px;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+header .barWrapper .innerContainer .burger-actions-logout-wrapper .social {
+  display: flex;
+}
+header .barWrapper .innerContainer .burger-actions-logout-wrapper .social a {
+  margin: 5px;
+  width: 35px;
+  height: 35px;
+}
+header .barWrapper .innerContainer .burger-actions-logout-wrapper .social a img {
+  width: 35px;
+}
+header .barWrapper .innerContainer .burger-actions-logout-wrapper .social a img:hover {
+  scale: 1.25;
+  transition: 0.3s;
+}
+
+/*# sourceMappingURL=newHeader.css.map */

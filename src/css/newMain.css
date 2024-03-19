@@ -1,0 +1,345 @@
+body {
+  margin: 0 auto;
+  --normal-text-size-value: 1.25;
+}
+
+@keyframes fillUp {
+  from {
+    height: -100%;
+  }
+  to {
+    height: 0;
+  }
+}
+header,
+main,
+footer {
+  width: 100svw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 10svh;
+}
+
+h1 {
+  font-size: clamp(21px, 2.5vw, 27px);
+  margin: 1.5vmax 1vmax;
+}
+
+.regular-button {
+  background-color: #3789b7;
+  padding: 0 1vmax;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: clamp(14px, 1.5vw, 18px);
+  font-weight: 600;
+  box-sizing: border-box;
+  white-space: nowrap;
+  height: 40px;
+  width: 100%;
+  cursor: pointer;
+}
+.regular-button:hover {
+  background-color: #693575;
+  scale: 1.1;
+  transition: 0.5s;
+}
+
+.regular-button[disabled] {
+  background-color: gainsboro;
+  scale: 1;
+}
+
+main {
+  min-height: 80svh;
+  align-items: start;
+}
+main article section form {
+  width: clamp(325px, 65vw, 640px);
+}
+main article section form .sign-logo-wrapper {
+  justify-content: center;
+  display: flex;
+  margin-bottom: -30px;
+  z-index: 5;
+}
+main article section form .sign-logo-wrapper img {
+  width: 60px;
+  aspect-ratio: 1/1;
+  background-color: white;
+  border-radius: 50%;
+  box-sizing: border-box;
+  padding: 5px;
+}
+main article section form .email-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #693575;
+  border-radius: 15px;
+  color: white;
+}
+main article section form .email-wrapper .form-button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 0 0;
+  width: 100%;
+}
+main article section form .email-wrapper .form-button-wrapper button:hover {
+  box-sizing: border-box;
+  border: 1px solid white;
+  scale: 1;
+}
+main article section form .email-wrapper h2 {
+  font-weight: 600;
+  margin: 25px 0 10px 0;
+}
+main article section form .email-wrapper .auth-wrapper {
+  width: 100%;
+}
+main article section form .email-wrapper .auth-wrapper .email-field-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 8px 0 16px 0;
+}
+main article section form .email-wrapper .auth-wrapper .email-field-content label {
+  margin-bottom: 5px;
+  font-size: clamp(14px, 2vw, 17px);
+}
+main article section form .email-wrapper .auth-wrapper .email-field-content input {
+  height: 32px;
+  border-radius: 4px;
+  padding: 0 10px;
+}
+main article section form .email-wrapper .sendForm-wrapper,
+main article section form .email-wrapper .playerInfo-wrapper {
+  padding: 5px 10px 5px 10px;
+  border: 1px solid black;
+  width: 100%;
+  background-color: white;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main article section form .email-wrapper .sendForm-wrapper fieldset,
+main article section form .email-wrapper .playerInfo-wrapper fieldset {
+  width: 100%;
+  box-sizing: border-box;
+  color: #000;
+}
+main article section form .email-wrapper .sendForm-wrapper .iframe-wrapper,
+main article section form .email-wrapper .playerInfo-wrapper .iframe-wrapper {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main article section form .email-wrapper .sendForm-wrapper .iframe-wrapper button,
+main article section form .email-wrapper .playerInfo-wrapper .iframe-wrapper button {
+  margin: 2.5% 2.5% 0 2.5%;
+}
+main article section form .email-wrapper .sendForm-wrapper .iframe-wrapper iframe,
+main article section form .email-wrapper .playerInfo-wrapper .iframe-wrapper iframe {
+  width: inherit;
+  aspect-ratio: 16/9;
+  margin-top: 2.5%;
+  border: none;
+}
+main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields,
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: clamp(16px, 2.5vw, 19.33px);
+  color: #000;
+  margin: 5px;
+  width: 85%;
+}
+main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields button,
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields button {
+  background-color: transparent;
+  border: none;
+  margin-left: 10px;
+}
+main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields img,
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields img {
+  width: 20px;
+}
+main article section form .email-wrapper .sendForm-wrapper .nav-buttons,
+main article section form .email-wrapper .playerInfo-wrapper .nav-buttons {
+  display: flex;
+  width: 100%;
+}
+main article section form .email-wrapper .sendForm-wrapper .nav-buttons button,
+main article section form .email-wrapper .playerInfo-wrapper .nav-buttons button {
+  margin: 2.5%;
+}
+main article section form .email-wrapper .sendForm-wrapper .player-photo-wrapper,
+main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapper {
+  width: 85%;
+  display: flex;
+  justify-content: center;
+}
+main article section form .email-wrapper .sendForm-wrapper .player-photo-wrapper img,
+main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapper img {
+  width: inherit;
+}
+main article section form .email-wrapper .sendForm-wrapper label,
+main article section form .email-wrapper .playerInfo-wrapper label {
+  font-weight: 600;
+  margin: 0.5vh 0.5vw;
+}
+main article section form .email-wrapper .sendForm-wrapper fieldset legend,
+main article section form .email-wrapper .playerInfo-wrapper fieldset legend {
+  font-size: clamp(16px, 2vw, 20px);
+}
+main article section form .email-wrapper .sendForm-wrapper fieldset legend span:first-child,
+main article section form .email-wrapper .playerInfo-wrapper fieldset legend span:first-child {
+  color: black;
+  opacity: 1;
+}
+main article section form .email-wrapper .sendForm-wrapper fieldset legend span,
+main article section form .email-wrapper .playerInfo-wrapper fieldset legend span {
+  color: red;
+  margin-right: 5px;
+  opacity: 0.5;
+}
+main article section form .email-wrapper .sendForm-wrapper fieldset .measure-wrapper,
+main article section form .email-wrapper .playerInfo-wrapper fieldset .measure-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+main article section form .email-wrapper .sendForm-wrapper fieldset .measure-wrapper div,
+main article section form .email-wrapper .playerInfo-wrapper fieldset .measure-wrapper div {
+  font-size: 20px;
+}
+main article section form .email-wrapper .sendForm-wrapper fieldset input,
+main article section form .email-wrapper .playerInfo-wrapper fieldset input {
+  padding: 7.5px;
+  width: 100%;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  margin-right: 5px;
+  color: #000;
+}
+main article section form .email-wrapper .sendForm-wrapper fieldset select,
+main article section form .email-wrapper .playerInfo-wrapper fieldset select {
+  border: none;
+  background-color: #3789b7;
+  color: white;
+  font-size: clamp(14px, 2vw, 18px);
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-align: center;
+}
+main article section form .email-wrapper .sendForm-wrapper fieldset select:hover,
+main article section form .email-wrapper .playerInfo-wrapper fieldset select:hover {
+  scale: 1.1;
+  transition: 0.5s;
+  background-color: #693575;
+}
+main article section form .email-wrapper .sendForm-wrapper fieldset select option,
+main article section form .email-wrapper .playerInfo-wrapper fieldset select option {
+  display: flex;
+  justify-content: center;
+}
+main article section form .email-wrapper .btn-submit-wrapper {
+  width: 100%;
+  display: flex;
+  margin-bottom: 16px;
+}
+main article section form .border-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 10px 0;
+  width: 100%;
+}
+main article section form .border-wrapper label {
+  padding: 4px;
+  width: 6%;
+  text-align: center;
+  font-size: clamp(14px, 2vw, 17px);
+}
+main article section form .border-wrapper div {
+  width: 45%;
+  height: 1px;
+  background-color: white;
+}
+main article section form .google-button-wrapper {
+  width: 100%;
+}
+main article section form .google-button-wrapper button div {
+  display: flex;
+  font-size: 14px;
+  justify-content: center;
+}
+main article section form .google-button-wrapper button div img {
+  width: 16px;
+  aspect-ratio: 1/1;
+  margin-right: 10px;
+}
+main article section form .google-button-wrapper button:hover {
+  scale: 1;
+  box-sizing: border-box;
+  border: 1px solid white;
+  box-sizing: border-box;
+}
+main article section .table-section table {
+  width: 100%;
+}
+main article section .table-section table caption {
+  margin-bottom: 2vmax;
+}
+main article section .table-section table caption nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  justify-content: center;
+  gap: 1vmax;
+}
+main article section .table-section table tbody tr th {
+  border: 1px solid black;
+  box-sizing: border-box;
+  max-width: 13vw;
+}
+main article section .table-section table tbody tr th button {
+  border: none;
+  width: 100%;
+  padding: 1.5vmax 0.6vmax;
+  font-size: clamp(12px, 1.5vmax, 20px);
+  white-space: nowrap;
+  font-weight: 600;
+  background-color: #693575;
+  color: white;
+  overflow: hidden;
+}
+main article section .table-section table tbody tr th button:hover {
+  background-color: #3789b7;
+}
+main article section .table-section table tbody .rating-row td {
+  text-align: center;
+  padding: 1.5vmin;
+  border: 1px solid black;
+  font-size: clamp(12px, 1.65vmax, 20px);
+  white-space: nowrap;
+  font-weight: 600;
+  overflow: hidden;
+  max-width: 12vw;
+  box-sizing: border-box;
+}
+main article section .table-section table tbody .rating-row .rating-player-name {
+  max-width: 24vw;
+}
+
+/*# sourceMappingURL=newMain.css.map */
