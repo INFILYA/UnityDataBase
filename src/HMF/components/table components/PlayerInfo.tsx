@@ -100,7 +100,6 @@ export default function PlayerInfo() {
     isRegistratedUser?.email === myParam || isRegistratedUser?.email === "infilya89@gmail.com";
   const disabledButton =
     currentField === "telephone" ? properPhoneLength : currentValue.length <= 1;
-  const accesToHighlights = isRegistratedUser?.email === myParam;
   if (userInfo === undefined || userInfo === null) return;
   const id = `${userInfo?.firstName} ${userInfo?.lastName}, ${userInfo.team}`;
 
@@ -411,7 +410,7 @@ export default function PlayerInfo() {
                 </>
               ) : (
                 <div className="iframe-wrapper">
-                  {accesToHighlights && (
+                  {fieldAccess && (
                     <>
                       {userInfo.highlights ? (
                         <div className="playerInfo-fields" style={{ justifyContent: "center" }}>
