@@ -294,6 +294,46 @@ export default function PlayerInfo() {
                 )}
               </div>
             )}
+            {/* Reach Height */}
+            {currentField === "reach" ? (
+              <Fieldset valid={styledComponentValidator(!currentValue)}>
+                <legend>
+                  <div className="forspan">
+                    <span>
+                      <strong>Reach height</strong>
+                    </span>
+                    {!userInfo.reach && <span> (required)</span>}
+                  </div>
+                </legend>
+                <div className="measure-wrapper">
+                  <div>
+                    {currentValue} cm ; {Math.round(+currentValue / 2.54 / 1.2) / 10} Foots
+                  </div>
+                  <input
+                    type="range"
+                    onChange={handleEditField}
+                    value={currentValue}
+                    name="reach"
+                    min={280}
+                    max={380}
+                  />
+                </div>
+              </Fieldset>
+            ) : (
+              <div className="playerInfo-fields">
+                <label>Reach height:</label>
+                <div>
+                  {userInfo.reach} cm ;&nbsp;{Math.round(+userInfo.reach / 2.54 / 1.2) / 10} ft
+                </div>
+                {fieldAccess && (
+                  <div>
+                    <button onClick={() => setCurrentFieldValue("reach", userInfo.reach)}>
+                      <img src="/photos/pencil.png"></img>
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
             {/* Number */}
             {currentField === "number" ? (
               <Fieldset valid={styledComponentValidator(!currentValue)}>
@@ -329,30 +369,6 @@ export default function PlayerInfo() {
                 )}
               </div>
             )}
-            {/* Reach Height */}
-            {/* <Fieldset valid={styledComponentValidator(!userInfo.reach)}> */}
-            {/* <legend>
-                <div className="forspan">
-                  <span>
-                    <strong>Reach height</strong>
-                  </span>
-                  {!userInfo.reach && <span > (required)</span>}
-                </div>
-              </legend>
-              <div className="measure-wrapper">
-                <div>
-                  {userInfo.reach} cm ; {Math.round(+userInfo.reach / 2.54 / 1.2) / 10} Foots
-                </div>
-                <input
-                  type="range"
-                  onChange={handleUserChange}
-                  value={userInfo.reach}
-                  name="reach"
-                  min={280}
-                  max={380}
-                />
-              </div>
-            </Fieldset> */}
           </>
           {currentField ? (
             <div className="nav-buttons">
