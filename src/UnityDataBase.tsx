@@ -17,9 +17,9 @@ export default function UnityDataBase() {
       <main>
         <article>
           <Routes>
-            <Route path="/" element={<Auth />} />
+            <Route path="/" element={<Main />} />
+            <Route path="/Auth" element={<Auth />} />
             <Route path="/PlayerInfo" element={<PlayerInfo />} />
-            <Route path="/Main" element={<Main />} />
           </Routes>
         </article>
       </main>

@@ -26,7 +26,7 @@ export function Auth() {
     async function signInWithEmail() {
       try {
         if (isRegistratedUser) {
-          navigate("/Main");
+          navigate("/");
         } else {
           if (isSignInWithEmailLink(auth, window.location.href)) {
             await signInWithEmailLink(
@@ -39,7 +39,6 @@ export function Auth() {
         }
       } catch (err) {
         console.log(err);
-        navigate("/");
       }
     }
     signInWithEmail();
@@ -48,10 +47,8 @@ export function Auth() {
   async function signInWithGoogle() {
     try {
       await signInWithPopup(auth, googleProvider);
-      // navigate("/Main");
     } catch (err) {
       console.error(err);
-      navigate("/");
     }
   }
 
@@ -61,7 +58,7 @@ export function Auth() {
       setIsLoginLoading(true);
       // ПОмеНЯТЬ ЛиНКДОМАИН !!!
       await sendSignInLinkToEmail(auth, email, {
-        url: "https://unity-data-base-628a9.web.app",
+        url: "https://unity-data-base-628a9.web.app/Auth",
         handleCodeInApp: true,
         dynamicLinkDomain: "unitydatabase.page.link",
       });
