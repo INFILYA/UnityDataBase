@@ -16,8 +16,6 @@ export default function Header() {
     isBurger && setBurgerMenu(false);
   }, [isBurger]);
 
-  if (isRegistratedUser?.photoURL === null) return;
-
   async function logout() {
     try {
       await signOut(auth);
@@ -68,7 +66,7 @@ export default function Header() {
                   </div>
                 ) : (
                   <div className="photoUrl-displayName-wrapper" onClick={() => navigate("/")}>
-                    <img src={isRegistratedUser?.photoURL} alt="" />
+                    <img src={isRegistratedUser.photoURL || "photos/UnityLogoCuted.png"} alt="" />
                     <div>
                       {isRegistratedUser?.displayName || isRegistratedUser?.email} {}
                     </div>

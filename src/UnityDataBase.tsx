@@ -5,8 +5,8 @@ import Main from "./HMF/Main";
 import "./css/newMain.css";
 import "./css/newHeader.css";
 import "./css/newFooter.css";
-// import { Auth } from "./HMF/components/Auth";
 import PlayerInfo from "./HMF/components/table components/PlayerInfo";
+import { Auth } from "./HMF/components/Auth";
 
 export default function UnityDataBase() {
   return (
@@ -18,7 +18,7 @@ export default function UnityDataBase() {
         <article>
           <Routes>
             <Route path="/" element={<Main />} />
-            {/* <Route path="/Auth" element={<Auth />} /> */}
+            <Route path="/Auth" element={<Auth />} />
             <Route path="/PlayerInfo" element={<PlayerInfo />} />
           </Routes>
         </article>
