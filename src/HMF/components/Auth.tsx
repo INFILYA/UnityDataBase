@@ -58,7 +58,7 @@ export function Auth() {
       setIsLoginLoading(true);
       // ПОмеНЯТЬ ЛиНКДОМАИН !!!
       await sendSignInLinkToEmail(auth, email, {
-        url: "unity-data-base-628a9.firebaseapp.com",
+        url: "https://unity-data-base-628a9.web.app",
         handleCodeInApp: true,
         dynamicLinkDomain: "unitydatabase.page.link",
       });
