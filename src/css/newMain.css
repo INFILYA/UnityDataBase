@@ -181,13 +181,13 @@ main article section form .email-wrapper .playerInfo-wrapper .nav-buttons button
 }
 main article section form .email-wrapper .sendForm-wrapper .player-photo-wrapper,
 main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapper {
-  width: 85%;
   display: flex;
   justify-content: center;
 }
 main article section form .email-wrapper .sendForm-wrapper .player-photo-wrapper img,
 main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapper img {
-  width: inherit;
+  width: clamp(250px, 85%, 375px);
+  object-fit: contain;
 }
 main article section form .email-wrapper .sendForm-wrapper label,
 main article section form .email-wrapper .playerInfo-wrapper label {

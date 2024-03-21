@@ -179,11 +179,11 @@ main {
               }
             }
             .player-photo-wrapper {
-              width: 85%;
               display: flex;
               justify-content: center;
               img {
-                width: inherit;
+                width: clamp(250px, 85%, 375px);
+                object-fit: contain;
               }
             }
             label {
