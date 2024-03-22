@@ -16,9 +16,12 @@ export default function Table() {
   const [isChoosenFilter, setChoosenFilter] = useState<boolean>(false);
   const [isBiggest, setIsBiggest] = useState<boolean>(false);
 
-  
   const isUserHaveProfile = (arr: TUserInfo[]): TUserInfo[] => {
-    if (isRegistratedUser?.email === "infilya89@gmail.com") return arr; // EXPERIMENt
+    if (
+      isRegistratedUser?.email === "infilya89@gmail.com" ||
+      isRegistratedUser?.email === "daniel@unitysports.ca"
+    )
+      return arr; // EXPERIMENt
     if (arr.find((player) => player.email === isRegistratedUser?.email)?.position !== "Coach") {
       return arr.filter(
         (player) =>
