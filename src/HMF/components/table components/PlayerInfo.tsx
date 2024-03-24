@@ -8,11 +8,16 @@ import { auth, playersRef } from "../../../config/firebase";
 import SectionWrapper from "../../../wpappers/SectionWrapper";
 import { useAppDispatch } from "../../../states/store";
 import { Fieldset } from "../../../css/UnityDataBase.styled";
-import { firstLetterCapital, styledComponentValidator } from "../../../utilities/functions";
+import {
+  // checkPhotoFormat,
+  firstLetterCapital,
+  styledComponentValidator,
+} from "../../../utilities/functions";
 import { selectUserInfo, setUserInfo } from "../../../states/slices/userInfoSlice";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { onValue, remove, update } from "firebase/database";
 import FormWrapper from "../../../wpappers/FormWrapper";
+// import { ref, uploadBytes } from "firebase/storage";
 
 export default function PlayerInfo() {
   const [searchParams] = useSearchParams();
@@ -23,6 +28,10 @@ export default function PlayerInfo() {
   const [currentField, setCurrentField] = useState<keyof TUserInfo | "">("");
   const [currentValue, setCurrentValue] = useState<string>("");
   const [showHighlights, setShowHighlights] = useState<boolean>(false);
+  const [confirmationHighlights, setConfirmationHighlights] = useState(false);
+  // const [fileUpload, setFileUpload] = useState<File | null>(null);
+  // const [showDownloadBar, setShowDownloadBar] = useState<boolean>(false);
+
   const myParam = searchParams.get("player");
 
   useEffect(() => {
@@ -95,6 +104,33 @@ export default function PlayerInfo() {
     }
     setCurrentValue(inputNumber);
   };
+
+  // function handleUserUpload(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+  //   const target = e.target as HTMLInputElement;
+  //   const files = target.files;
+  //   if (!files) return;
+  //   setFileUpload(files[0]);
+  // }
+
+  // const downloadNewPhoto = async () => {
+  //   try {
+  //     if (!fileUpload) return;
+  //     const filesFoldersRef = ref(storage, `playersPhotos/${id}/${fileUpload.name}`);
+  //     await uploadBytes(filesFoldersRef, fileUpload);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+
+  function confirmHighlights() {
+    setEditedProfile({
+      ...userInfo,
+      highlights: true,
+      highlightsLink: "",
+    });
+    setConfirmationHighlights(false);
+  }
+
   const properPhoneLength = currentValue.length !== 12;
   const fieldAccess =
     isRegistratedUser?.email === myParam || isRegistratedUser?.email === "infilya89@gmail.com";
@@ -111,8 +147,37 @@ export default function PlayerInfo() {
         </h2>
         <div className="playerInfo-wrapper">
           <div className="player-photo-wrapper">
+            {/* <div className="download-button-wrapper">
+              <button onClick={() => setShowDownloadBar(!showDownloadBar)}>
+                <img src={`/photos/Download.png`} />
+              </button>
+            </div> */}
             <img src={`/photos/${userInfo.photo}`} alt="" />
           </div>
+          {/* Photo */}
+          {/* {showDownloadBar && (
+            <Fieldset valid={styledComponentValidator(checkPhotoFormat(userInfo.photo))}>
+              <legend>
+                <div className="forspan">
+                  <span>
+                    <strong>Photo</strong>
+                  </span>
+                  {!userInfo.photo && <span> (required)</span>}
+                  {checkPhotoFormat(userInfo.photo) && userInfo.photo && (
+                    <span>(File resolution is invalid)</span>
+                  )}
+                </div>
+              </legend>
+              <input
+                type="file"
+                onChange={handleUserUpload}
+                // value={userInfo.photo}
+                name="photo"
+                required
+              />
+              <button onClick={downloadNewPhoto}>Ok</button>
+            </Fieldset>
+          )} */}
           {/* Birthday */}
           {currentField === "birthday" ? (
             <Fieldset valid={styledComponentValidator(!currentValue)}>
@@ -369,6 +434,7 @@ export default function PlayerInfo() {
               </div>
             )}
           </>
+
           {currentField ? (
             <div className="nav-buttons">
               <Button
@@ -410,34 +476,48 @@ export default function PlayerInfo() {
                 </>
               ) : (
                 <div className="iframe-wrapper">
-                  {fieldAccess && (
+                  {confirmationHighlights ? (
+                    <div className="confirm-wrapper">
+                      <div>Are you sure?</div>
+                      <Button type="button" text="Confirm" onClick={confirmHighlights} />
+                      <Button
+                        type="button"
+                        text="Cancel"
+                        onClick={() => setConfirmationHighlights(false)}
+                      />
+                    </div>
+                  ) : (
                     <>
-                      {userInfo.highlights ? (
-                        <div className="playerInfo-fields" style={{ justifyContent: "center" }}>
-                          <label style={{ color: "black" }}>
-                            Highlights will be here , soon...
-                          </label>
-                        </div>
-                      ) : (
-                        <Button
-                          type="button"
-                          text="Make highlights 2023/2024"
-                          style={{ background: "orangered" }}
-                          onClick={() =>
-                            setEditedProfile({ ...userInfo, highlights: true, highlightsLink: "" })
-                          }
-                        />
+                      {fieldAccess && (
+                        <>
+                          {userInfo.highlights ? (
+                            <div className="playerInfo-fields" style={{ justifyContent: "center" }}>
+                              <label style={{ color: "black" }}>
+                                Highlights will be here , soon...
+                              </label>
+                            </div>
+                          ) : (
+                            <Button
+                              type="button"
+                              text="Make highlights 2023/2024"
+                              style={{ background: "orangered" }}
+                              onClick={() => setConfirmationHighlights(true)}
+                            />
+                          )}
+                        </>
                       )}
                     </>
                   )}
                 </div>
               )}
-              <div className="nav-buttons">
-                {fieldAccess && (
-                  <Button type="button" text="Delete Profile" onClick={deletePlayerProfile} />
-                )}
-                <Button type="button" text="Back" onClick={() => navigate("/")} />
-              </div>
+              {!confirmationHighlights && (
+                <div className="nav-buttons">
+                  {fieldAccess && (
+                    <Button type="button" text="Delete Profile" onClick={deletePlayerProfile} />
+                  )}
+                  <Button type="button" text="Back" onClick={() => navigate("/")} />
+                </div>
+              )}
             </>
           )}
         </div>

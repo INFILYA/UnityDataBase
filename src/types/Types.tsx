@@ -22,7 +22,7 @@ export type TUserInfo = {
   email: string | null | undefined;
   gender: string;
   team: string;
-  position: "OH" | "Opp" | "Set" | "Lib" | "MB" | "Coach" | "";
+  position: "OH" | "Opp" | "Set" | "Lib" | "MB" | "Coach" | "Parent" | "";
   birthday: string;
   height: string;
   weight: string;

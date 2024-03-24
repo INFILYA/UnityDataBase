@@ -17,22 +17,20 @@ export default function Table() {
   const [isBiggest, setIsBiggest] = useState<boolean>(false);
 
   const isUserHaveProfile = (arr: TUserInfo[]): TUserInfo[] => {
+    const choosenPlayer = arr.find((player) => player.email === isRegistratedUser?.email);
     if (
       isRegistratedUser?.email === "infilya89@gmail.com" ||
       isRegistratedUser?.email === "daniel@unitysports.ca"
     )
       return arr; // EXPERIMENt
-    if (arr.find((player) => player.email === isRegistratedUser?.email)?.position !== "Coach") {
+    if (choosenPlayer?.position !== "Coach" && choosenPlayer?.position !== "Parent") {
       return arr.filter(
         (player) =>
-          player.team === arr.find((player) => player.email === isRegistratedUser?.email)?.team &&
-          player.position !== "Coach"
+          player.team === choosenPlayer?.team &&
+          player.position !== "Coach" &&
+          player.position !== "Parent"
       );
-    } else
-      return arr.filter(
-        (player) =>
-          player.team === arr.find((player) => player.email === isRegistratedUser?.email)?.team
-      );
+    } else return arr.filter((player) => player.team === choosenPlayer?.team);
   };
 
   const filterForTeams = (team: string) => {

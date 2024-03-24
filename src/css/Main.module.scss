@@ -134,6 +134,7 @@ main {
             display: flex;
             flex-direction: column;
             align-items: center;
+            color: black;
             fieldset {
               width: 100%;
               box-sizing: border-box;
@@ -144,6 +145,17 @@ main {
               display: flex;
               flex-direction: column;
               align-items: center;
+              .confirm-wrapper {
+                display: flex;
+                margin-bottom: 2.5%;
+                flex-direction: column;
+                width: 90%;
+                align-items: center;
+                div {
+                  margin: 5px 0;
+                  font-size: clamp(13px, 2.5vw, 16px);
+                }
+              }
               button {
                 margin: 2.5% 2.5% 0 2.5%;
               }

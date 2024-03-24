@@ -260,6 +260,9 @@ export default function SendForm() {
               <option value="Coach" onClick={giveCoachAccess}>
                 Coach
               </option>
+              <option value="Parent" onClick={giveCoachAccess}>
+                Parent
+              </option>
             </select>
           </Fieldset>
           {/* Acces to Position coach */}
