@@ -7,10 +7,18 @@ export default function Footer() {
       <SectionWrapper>
         <div className="footer-content">
           <div className="footer-image-block">
-            <MyLogo />
-            <img alt="" src="/photos/UnityLogoCuted.png" />
-            <img alt="" src="/photos/OVALogo.png" />
-            <img alt="" src="/photos/VolleyballCanada_Logo.png" />
+            <a href="https://philforskill-ts.web.app/">
+              <MyLogo />
+            </a>
+            <a href="https://unityvolleyball.ca/">
+              <img alt="" src="/photos/UnityLogoCuted.png" />
+            </a>
+            <a href="https://www.ontariovolleyball.org/">
+              <img alt="" src="/photos/OVALogo.png" />
+            </a>
+            <a href="https://volleyball.ca/">
+              <img alt="" src="/photos/VolleyballCanada_Logo.png" />
+            </a>
           </div>
           <div className="footer-info-block">
             <div className="footer-my-info">
