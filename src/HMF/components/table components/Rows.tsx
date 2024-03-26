@@ -10,7 +10,7 @@ type TRows = {
 export function Rows(props: TRows) {
   const { filteredPlayers } = props;
   const navigate = useNavigate();
-  const isBurger = useSetWidth() > 768;
+  const isBurger = useSetWidth() > 639;
 
   return (
     <>

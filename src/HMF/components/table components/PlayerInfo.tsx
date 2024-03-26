@@ -4,20 +4,20 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { TUserInfo } from "../../../types/Types";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Button from "../../../utilities/Button";
-import { auth, playersRef } from "../../../config/firebase";
+import { auth, playersRef, storage } from "../../../config/firebase";
 import SectionWrapper from "../../../wpappers/SectionWrapper";
 import { useAppDispatch } from "../../../states/store";
 import { Fieldset } from "../../../css/UnityDataBase.styled";
 import {
-  // checkPhotoFormat,
+  checkPhotoFormat,
   firstLetterCapital,
   styledComponentValidator,
 } from "../../../utilities/functions";
 import { selectUserInfo, setUserInfo } from "../../../states/slices/userInfoSlice";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { onValue, remove, update } from "firebase/database";
+import { onValue, remove, update, set } from "firebase/database";
 import FormWrapper from "../../../wpappers/FormWrapper";
-// import { ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes } from "firebase/storage";
 
 export default function PlayerInfo() {
   const [searchParams] = useSearchParams();
@@ -29,8 +29,8 @@ export default function PlayerInfo() {
   const [currentValue, setCurrentValue] = useState<string>("");
   const [showHighlights, setShowHighlights] = useState<boolean>(false);
   const [confirmationHighlights, setConfirmationHighlights] = useState(false);
-  // const [fileUpload, setFileUpload] = useState<File | null>(null);
-  // const [showDownloadBar, setShowDownloadBar] = useState<boolean>(false);
+  const [fileUpload, setFileUpload] = useState<File | null>(null);
+  const [showDownloadBar, setShowDownloadBar] = useState<boolean>(false);
 
   const myParam = searchParams.get("player");
 
@@ -105,22 +105,28 @@ export default function PlayerInfo() {
     setCurrentValue(inputNumber);
   };
 
-  // function handleUserUpload(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
-  //   const target = e.target as HTMLInputElement;
-  //   const files = target.files;
-  //   if (!files) return;
-  //   setFileUpload(files[0]);
-  // }
+  function handleUserUpload(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+    const target = e.target as HTMLInputElement;
+    const files = target.files;
+    if (!files) return;
+    setFileUpload(files[0]);
+    dispatch(setUserInfo({ ...userInfo, photo: files[0].name }));
+  }
 
-  // const downloadNewPhoto = async () => {
-  //   try {
-  //     if (!fileUpload) return;
-  //     const filesFoldersRef = ref(storage, `playersPhotos/${id}/${fileUpload.name}`);
-  //     await uploadBytes(filesFoldersRef, fileUpload);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
+  const downloadNewPhoto = async () => {
+    try {
+      if (!fileUpload) return;
+      const filesFoldersRef = ref(storage, `playersPhotos/${id}/${fileUpload.name}`);
+      await uploadBytes(filesFoldersRef, fileUpload);
+      await set(playersRef(id), { ...userInfo, photo: fileUpload.name });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  function cancelDownload() {
+    setShowDownloadBar(false);
+    setFileUpload(null);
+  }
 
   function confirmHighlights() {
     setEditedProfile({
@@ -139,6 +145,7 @@ export default function PlayerInfo() {
   if (userInfo === undefined || userInfo === null) return;
   const id = `${userInfo?.firstName} ${userInfo?.lastName}, ${userInfo.team}`;
 
+  console.log(userInfo.photo);
   return (
     <SectionWrapper>
       <FormWrapper onSubmit={(e) => e.preventDefault()}>
@@ -147,15 +154,15 @@ export default function PlayerInfo() {
         </h2>
         <div className="playerInfo-wrapper">
           <div className="player-photo-wrapper">
-            {/* <div className="download-button-wrapper">
+            <div className="download-button-wrapper">
               <button onClick={() => setShowDownloadBar(!showDownloadBar)}>
                 <img src={`/photos/Download.png`} />
               </button>
-            </div> */}
+            </div>
             <img src={`/photos/${userInfo.photo}`} alt="" />
           </div>
           {/* Photo */}
-          {/* {showDownloadBar && (
+          {showDownloadBar && (
             <Fieldset valid={styledComponentValidator(checkPhotoFormat(userInfo.photo))}>
               <legend>
                 <div className="forspan">
@@ -168,16 +175,15 @@ export default function PlayerInfo() {
                   )}
                 </div>
               </legend>
-              <input
-                type="file"
-                onChange={handleUserUpload}
-                // value={userInfo.photo}
-                name="photo"
-                required
-              />
-              <button onClick={downloadNewPhoto}>Ok</button>
+              <input type="file" onChange={handleUserUpload} name="photo" />
+              {fileUpload && (
+                <button onClick={downloadNewPhoto} disabled={checkPhotoFormat(userInfo.photo)}>
+                  Ok
+                </button>
+              )}
+              <button onClick={cancelDownload}>Cancel</button>
             </Fieldset>
-          )} */}
+          )}
           {/* Birthday */}
           {currentField === "birthday" ? (
             <Fieldset valid={styledComponentValidator(!currentValue)}>
