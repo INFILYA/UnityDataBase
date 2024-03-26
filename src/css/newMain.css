@@ -198,6 +198,22 @@ main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapp
   display: flex;
   justify-content: center;
 }
+main article section form .email-wrapper .sendForm-wrapper .player-photo-wrapper .download-button-wrapper,
+main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapper .download-button-wrapper {
+  position: static;
+  left: 85%;
+  top: 15%;
+}
+main article section form .email-wrapper .sendForm-wrapper .player-photo-wrapper .download-button-wrapper button,
+main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapper .download-button-wrapper button {
+  width: clamp(30px, 3vw, 40px);
+  aspect-ratio: 1/1;
+}
+main article section form .email-wrapper .sendForm-wrapper .player-photo-wrapper .download-button-wrapper button img,
+main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapper .download-button-wrapper button img {
+  object-fit: contain;
+  width: 100%;
+}
 main article section form .email-wrapper .sendForm-wrapper .player-photo-wrapper img,
 main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapper img {
   width: clamp(250px, 85%, 375px);
