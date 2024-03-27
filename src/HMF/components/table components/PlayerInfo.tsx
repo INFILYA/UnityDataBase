@@ -110,7 +110,7 @@ export default function PlayerInfo() {
     const files = target.files;
     if (!files) return;
     setFileUpload(files[0]);
-    dispatch(setUserInfo({ ...userInfo, photo: files[0].name }));
+    // dispatch(setUserInfo({ ...userInfo, photo: files[0].name }));
   }
 
   const downloadNewPhoto = async () => {
@@ -165,20 +165,20 @@ export default function PlayerInfo() {
           </div>
           {/* Photo */}
           {showDownloadBar && (
-            <Fieldset valid={styledComponentValidator(checkPhotoFormat(userInfo.photo))}>
+            <Fieldset valid={styledComponentValidator(checkPhotoFormat(fileUpload?.name))}>
               <legend>
                 <div className="forspan">
                   <span>
                     <strong>Photo</strong>
                   </span>
-                  {!userInfo.photo && <span> (required)</span>}
-                  {checkPhotoFormat(userInfo.photo) && userInfo.photo && (
+                  {!fileUpload?.name && <span> (required)</span>}
+                  {checkPhotoFormat(fileUpload?.name) && fileUpload?.name && (
                     <span>(File resolution is invalid)</span>
                   )}
                 </div>
               </legend>
               <input type="file" onChange={handleUserUpload} name="photo" />
-              {fileUpload && (
+              {!checkPhotoFormat(fileUpload?.name) && (
                 <button onClick={downloadNewPhoto} disabled={checkPhotoFormat(userInfo.photo)}>
                   Ok
                 </button>

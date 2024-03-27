@@ -54,7 +54,7 @@ export const checkUserEmail = (email: string) => {
   else return false;
 };
 
-export const checkPhotoFormat = (photo: string) => {
+export const checkPhotoFormat = (photo: string | null | undefined ) => {
   if (!photo || photo === null) return true;
   const jpg = photo.toLowerCase().match(/jpg/g);
   const png = photo.toLowerCase().match(/png/g);
