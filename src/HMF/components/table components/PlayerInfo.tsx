@@ -121,6 +121,8 @@ export default function PlayerInfo() {
       await set(playersRef(id), { ...userInfo, photo: fileUpload.name });
     } catch (err) {
       console.error(err);
+    } finally {
+      setShowDownloadBar(false);
     }
   };
   function cancelDownload() {

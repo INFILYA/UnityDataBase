@@ -207,12 +207,11 @@ main article section form .email-wrapper .playerInfo-wrapper .download-button-wr
   display: flex;
   justify-content: center;
   background-color: transparent;
-  border: 1px solid transparent;
+  border: 1px solid black;
   padding: 5px;
 }
 main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper button:hover,
 main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper button:hover {
-  border: 1px solid black;
   background-color: greenyellow;
 }
 main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper button img,
@@ -230,6 +229,7 @@ main article section form .email-wrapper .sendForm-wrapper .player-photo-wrapper
 main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapper img {
   width: clamp(250px, 85%, 375px);
   object-fit: contain;
+  mix-blend-mode: darken;
 }
 main article section form .email-wrapper .sendForm-wrapper label,
 main article section form .email-wrapper .playerInfo-wrapper label {
