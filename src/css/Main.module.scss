@@ -201,6 +201,7 @@ main {
                 display: flex;
                 justify-content: center;
                 background-color: transparent;
+                border: 1px solid transparent;
                 padding: 5px;
                 &:hover {
                   background-color: greenyellow;
