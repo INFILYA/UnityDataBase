@@ -202,13 +202,24 @@ main article section form .email-wrapper .playerInfo-wrapper .download-button-wr
 }
 main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper button,
 main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper button {
-  width: clamp(30px, 3vw, 40px);
+  width: clamp(35px, 4vw, 45px);
   aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 5px;
+}
+main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper button:hover,
+main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper button:hover {
+  border: 1px solid black;
+  background-color: greenyellow;
 }
 main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper button img,
 main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper button img {
   object-fit: contain;
   width: 100%;
+  width: clamp(35px, 4vw, 45px);
 }
 main article section form .email-wrapper .sendForm-wrapper .player-photo-wrapper,
 main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapper {

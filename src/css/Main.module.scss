@@ -196,11 +196,21 @@ main {
               width: 100%;
               margin: 10px 0 5px 0;
               button {
-                width: clamp(30px, 3vw, 40px);
+                width: clamp(35px, 4vw, 45px);
                 aspect-ratio: 1/1;
+                display: flex;
+                justify-content: center;
+                background-color: transparent;
+                border: 1px solid transparent;
+                padding: 5px;
+                &:hover {
+                  border: 1px solid black;
+                  background-color: greenyellow;
+                }
                 img {
                   object-fit: contain;
                   width: 100%;
+                  width: clamp(35px, 4vw, 45px);
                 }
               }
             }
