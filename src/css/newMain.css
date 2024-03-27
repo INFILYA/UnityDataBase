@@ -196,7 +196,9 @@ main article section form .email-wrapper .playerInfo-wrapper .nav-buttons button
 main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper,
 main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper {
   display: flex;
-  justify-content: end;
+  justify-content: center;
+  width: 100%;
+  margin: 10px 0 5px 0;
 }
 main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper button,
 main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper button {
