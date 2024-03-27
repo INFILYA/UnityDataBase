@@ -190,22 +190,21 @@ main {
                 margin: 2.5%;
               }
             }
+            .download-button-wrapper {
+              display: flex;
+              justify-content: end;
+              button {
+                width: clamp(30px, 3vw, 40px);
+                aspect-ratio: 1/1;
+                img {
+                  object-fit: contain;
+                  width: 100%;
+                }
+              }
+            }
             .player-photo-wrapper {
               display: flex;
               justify-content: center;
-              .download-button-wrapper {
-                position: static;
-                left: 85%;
-                top: 15%;
-                button {
-                  width: clamp(30px, 3vw, 40px);
-                  aspect-ratio: 1/1;
-                  img {
-                    object-fit: contain;
-                    width: 100%;
-                  }
-                }
-              }
               img {
                 width: clamp(250px, 85%, 375px);
                 object-fit: contain;

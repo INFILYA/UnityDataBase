@@ -144,8 +144,7 @@ export default function PlayerInfo() {
     currentField === "telephone" ? properPhoneLength : currentValue.length <= 1;
   if (userInfo === undefined || userInfo === null) return;
   const id = `${userInfo?.firstName} ${userInfo?.lastName}, ${userInfo.team}`;
-
-  console.log(userInfo.photo);
+  const photoDownloaded = userInfo.photo.startsWith("C:");
   return (
     <SectionWrapper>
       <FormWrapper onSubmit={(e) => e.preventDefault()}>
@@ -153,14 +152,15 @@ export default function PlayerInfo() {
           {userInfo?.firstName} {userInfo?.lastName}
         </h2>
         <div className="playerInfo-wrapper">
+          <div
+            className="download-button-wrapper"
+            style={!photoDownloaded ? { width: "100%" } : { margin: 10 }}
+          >
+            <button onClick={() => setShowDownloadBar(!showDownloadBar)} title={`Download photo`}>
+              <img src={`/photos/Download.png`} />
+            </button>
+          </div>
           <div className="player-photo-wrapper">
-            {userInfo.photo && (
-              <div className="download-button-wrapper">
-                <button onClick={() => setShowDownloadBar(!showDownloadBar)}>
-                  <img src={`/photos/Download.png`} />
-                </button>
-              </div>
-            )}
             <img src={`/photos/${userInfo.photo}`} alt="" />
           </div>
           {/* Photo */}
@@ -179,11 +179,20 @@ export default function PlayerInfo() {
               </legend>
               <input type="file" onChange={handleUserUpload} name="photo" />
               {!checkPhotoFormat(fileUpload?.name) && (
-                <button onClick={downloadNewPhoto} disabled={checkPhotoFormat(userInfo.photo)}>
-                  Ok
-                </button>
+                <Button
+                  text=" Ok "
+                  type="button"
+                  onClick={downloadNewPhoto}
+                  disabled={checkPhotoFormat(userInfo.photo)}
+                  style={{ width: "auto" }}
+                />
               )}
-              <button onClick={cancelDownload}>Cancel</button>
+              <Button
+                text="Cancel"
+                type="button"
+                onClick={cancelDownload}
+                style={{ width: "auto", marginLeft: 10 }}
+              />
             </Fieldset>
           )}
           {/* Birthday */}
