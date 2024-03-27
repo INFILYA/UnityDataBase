@@ -207,8 +207,7 @@ main article section form .email-wrapper .playerInfo-wrapper .download-button-wr
   display: flex;
   justify-content: center;
   background-color: transparent;
-  border: 1px solid black;
-  padding: 5px 10px;
+  padding: 5px;
 }
 main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper button:hover,
 main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper button:hover {
