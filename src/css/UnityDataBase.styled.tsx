@@ -8,12 +8,11 @@ export const Fieldset = styled.fieldset<TFieldset>`
   padding: 10px;
   padding-left: 15px;
   padding-right: 15px;
-  margin-bottom: 10px;
   display: flex;
   justify-content: center;
   border-radius: 15px;
   background-color: ${(props) => (props.valid === "true" ? "#FFE8F2" : "aliceblue")};
-  border: ${(props) => (props.valid === "true" ? "1px solid orangered" : "aliceblue")};
+  border: ${(props) => (props.valid === "true" ? "1px solid orangered" : "1px solid blue")};
 `;
 
 export const Section = styled.section`
