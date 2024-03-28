@@ -172,8 +172,9 @@ main {
               align-items: center;
               font-size: clamp(16px, 2.5vw, 19.33px);
               color: #000;
-              margin: 5px;
-              width: 85%;
+              padding: 5px 1vw 5px 2vw;
+              width: 100%;
+              box-sizing: border-box;
               button {
                 background-color: transparent;
                 border: none;
@@ -192,9 +193,10 @@ main {
             }
             .download-button-wrapper {
               display: flex;
-              justify-content: center;
+              justify-content: end;
               width: 100%;
-              margin: 10px 0 5px 0;
+              padding: 10px 1vw 5px 2vw;
+              box-sizing: border-box;
               button {
                 width: clamp(35px, 4vw, 45px);
                 aspect-ratio: 1/1;
@@ -202,7 +204,6 @@ main {
                 justify-content: center;
                 background-color: transparent;
                 border: 1px solid transparent;
-                padding: 5px;
                 &:hover {
                   background-color: greenyellow;
                 }

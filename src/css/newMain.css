@@ -171,8 +171,9 @@ main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields 
   align-items: center;
   font-size: clamp(16px, 2.5vw, 19.33px);
   color: #000;
-  margin: 5px;
-  width: 85%;
+  padding: 5px 1vw 5px 2vw;
+  width: 100%;
+  box-sizing: border-box;
 }
 main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields button,
 main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields button {
@@ -196,9 +197,10 @@ main article section form .email-wrapper .playerInfo-wrapper .nav-buttons button
 main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper,
 main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: end;
   width: 100%;
-  margin: 10px 0 5px 0;
+  padding: 10px 1vw 5px 2vw;
+  box-sizing: border-box;
 }
 main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper button,
 main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper button {
@@ -208,7 +210,6 @@ main article section form .email-wrapper .playerInfo-wrapper .download-button-wr
   justify-content: center;
   background-color: transparent;
   border: 1px solid transparent;
-  padding: 5px;
 }
 main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper button:hover,
 main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper button:hover {
