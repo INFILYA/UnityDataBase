@@ -11,6 +11,7 @@ export const Fieldset = styled.fieldset<TFieldset>`
   display: flex;
   justify-content: center;
   border-radius: 15px;
+  margin: 5px;
   background-color: ${(props) => (props.valid === "true" ? "#FFE8F2" : "aliceblue")};
   border: ${(props) => (props.valid === "true" ? "1px solid orangered" : "1px solid blue")};
 `;
