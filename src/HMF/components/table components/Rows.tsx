@@ -26,9 +26,15 @@ export function Rows(props: TRows) {
           </td>
           <td>{upgradeAge(player).birthday}</td>
           <td>{player.position}</td>
-          <td>{Math.round(+player.height / 2.54 / 1.2) / 10} ft</td>
-          <td>{Math.round(+player.weight * 2.2)} lbs</td>
-          <td>{Math.round(+player.reach / 2.54 / 1.2) / 10} ft</td>
+          <td>
+            {Math.round(+player.height / 2.54 / 1.2) / 10} {isBurger && "ft"}
+          </td>
+          <td>
+            {Math.round(+player.weight * 2.2)} {isBurger && "lbs"}
+          </td>
+          <td>
+            {Math.round(+player.reach / 2.54 / 1.2) / 10} {isBurger && "ft"}
+          </td>
         </tr>
       ))}
     </>

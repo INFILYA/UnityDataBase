@@ -339,11 +339,23 @@ main article section form .google-button-wrapper button:hover {
   border: 1px solid white;
   box-sizing: border-box;
 }
-main article section .table-section table {
+main article section .table-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2vw;
+}
+main article section .table-section h1 {
   width: 100%;
+  text-align: center;
+}
+main article section .table-section table {
+  width: clamp(325px, 100%, 1300px);
+  table-layout: fixed;
 }
 main article section .table-section table caption {
-  margin-bottom: 2vmax;
+  padding-bottom: 1vmax;
 }
 main article section .table-section table caption nav {
   display: grid;
@@ -354,13 +366,12 @@ main article section .table-section table caption nav {
 main article section .table-section table tbody tr th {
   border: 1px solid black;
   box-sizing: border-box;
-  max-width: 13vw;
 }
 main article section .table-section table tbody tr th button {
   border: none;
   width: 100%;
   padding: 1.5vmax 0.6vmax;
-  font-size: clamp(12px, 1.5vmax, 20px);
+  font-size: clamp(12px, 2vw, 20px);
   white-space: nowrap;
   font-weight: 600;
   background-color: #693575;
@@ -372,17 +383,12 @@ main article section .table-section table tbody tr th button:hover {
 }
 main article section .table-section table tbody .rating-row td {
   text-align: center;
-  padding: 1.5vmin;
+  padding: 1vmin;
   border: 1px solid black;
-  font-size: clamp(12px, 1.65vmax, 20px);
-  white-space: nowrap;
+  font-size: clamp(12px, 3vw, 20px);
   font-weight: 600;
   overflow: hidden;
-  max-width: 12vw;
   box-sizing: border-box;
-}
-main article section .table-section table tbody .rating-row .rating-player-name {
-  max-width: 24vw;
 }
 
 /*# sourceMappingURL=newMain.css.map */

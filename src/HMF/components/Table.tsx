@@ -53,7 +53,7 @@ export default function Table() {
   return (
     <SectionWrapper>
       <div className="table-section">
-        <h1 style={{ textAlign: "center" }}>Players Table</h1>
+        <h1>Players Table</h1>
         <table>
           <caption>
             <nav>
