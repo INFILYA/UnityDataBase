@@ -359,8 +359,8 @@ main {
                   border: none;
                   width: 100%;
                   padding: 1.5vmax 0.6vmax;
-                  font-size: clamp(12px, 2vw, 20px);
-                  white-space: nowrap;
+                  font-size: clamp(12px, 3vmin, 20px);
+                  // white-space: nowrap;
                   font-weight: 600;
                   background-color: #693575;
                   color: white;
@@ -376,7 +376,7 @@ main {
                 text-align: center;
                 padding: 1vmin;
                 border: 1px solid black;
-                font-size: clamp(12px, 3vw, 20px);
+                font-size: clamp(12px, 3vmin, 20px);
                 // white-space: nowrap;
                 font-weight: 600;
                 overflow: hidden;
