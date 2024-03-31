@@ -271,7 +271,7 @@ export default function PlayerInfo() {
                     <span>
                       <strong>Dominant Hand</strong>
                     </span>
-                    {!userInfo.hand && <span> (required)</span>}
+                    {!currentValue && <span> (required)</span>}
                   </div>
                 </legend>
                 <select onChange={handleEditField} name="hand" value={currentValue}>
