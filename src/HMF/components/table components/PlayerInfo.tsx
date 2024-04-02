@@ -140,8 +140,8 @@ export default function PlayerInfo() {
   }
 
   const properPhoneLength = currentValue.length !== 12;
-  const fieldAccess =
-    isRegistratedUser?.email === myParam || isRegistratedUser?.email === "infilya89@gmail.com";
+  const adminAccess = isRegistratedUser?.email === "infilya89@gmail.com";
+  const fieldAccess = isRegistratedUser?.email === myParam || adminAccess;
   const disabledButton =
     currentField === "telephone" ? properPhoneLength : currentValue.length <= 1;
   if (userInfo === undefined || userInfo === null) return;
@@ -506,7 +506,7 @@ export default function PlayerInfo() {
                     </div>
                   ) : (
                     <>
-                      {fieldAccess && !highlightsDenied && (
+                      {fieldAccess && !highlightsDenied && !adminAccess && (
                         <>
                           {userInfo.highlights ? (
                             <div className="playerInfo-fields" style={{ justifyContent: "center" }}>

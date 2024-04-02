@@ -18,11 +18,10 @@ export default function Table() {
 
   const isUserHaveProfile = (arr: TUserInfo[]): TUserInfo[] => {
     const choosenPlayer = arr.find((player) => player.email === isRegistratedUser?.email);
-    if (
+    const adminAccess =
       isRegistratedUser?.email === "infilya89@gmail.com" ||
-      isRegistratedUser?.email === "daniel@unitysports.ca"
-    )
-      return arr; // EXPERIMENt
+      isRegistratedUser?.email === "daniel@unitysports.ca";
+    if (adminAccess) return arr; // EXPERIMENt
     if (choosenPlayer?.position !== "Coach" && choosenPlayer?.position !== "Parent") {
       return arr.filter(
         (player) =>
