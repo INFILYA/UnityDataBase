@@ -359,7 +359,7 @@ main article section .table-section table caption {
 }
 main article section .table-section table caption nav {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 200px));
   justify-content: center;
   gap: 1vmax;
 }
@@ -388,6 +388,14 @@ main article section .table-section table tbody .rating-row td {
   font-weight: 600;
   overflow: hidden;
   box-sizing: border-box;
+}
+main article section .table-section table tbody .rating-row td div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main article section .table-section table tbody .rating-row td div img {
+  width: clamp(12px, 3vmin, 20px);
 }
 
 /*# sourceMappingURL=newMain.css.map */

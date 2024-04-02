@@ -118,7 +118,7 @@ export default function PlayerInfo() {
       if (!fileUpload) return;
       const filesFoldersRef = ref(storage, `playersPhotos/${id}/${fileUpload.name}`);
       await uploadBytes(filesFoldersRef, fileUpload);
-      await set(playersRef(id), { ...userInfo, photo: fileUpload.name });
+      await set(playersRef(id), { ...userInfo, photo: `C:${fileUpload.name}` });
     } catch (err) {
       console.error(err);
     } finally {
@@ -146,6 +146,9 @@ export default function PlayerInfo() {
     currentField === "telephone" ? properPhoneLength : currentValue.length <= 1;
   if (userInfo === undefined || userInfo === null) return;
   const id = `${userInfo?.firstName} ${userInfo?.lastName}, ${userInfo.team}`;
+  const highlightsDenied =
+    userInfo.position !== ("Coach" || "Parent") &&
+    isRegistratedUser?.email !== "infilya89@gmail.com";
   return (
     <SectionWrapper>
       <FormWrapper onSubmit={(e) => e.preventDefault()}>
@@ -505,7 +508,7 @@ export default function PlayerInfo() {
                     </div>
                   ) : (
                     <>
-                      {fieldAccess && (
+                      {fieldAccess && highlightsDenied && (
                         <>
                           {userInfo.highlights ? (
                             <div className="playerInfo-fields" style={{ justifyContent: "center" }}>

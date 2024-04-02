@@ -2,16 +2,19 @@ import { TUserInfo } from "../../../types/Types";
 import { upgradeAge } from "../../../utilities/functions";
 import { useNavigate } from "react-router-dom";
 import { useSetWidth } from "../../../utilities/useSetWidth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../../config/firebase";
 
 type TRows = {
   filteredPlayers: TUserInfo[];
 };
 
 export function Rows(props: TRows) {
+  const [isRegistratedUser] = useAuthState(auth);
   const { filteredPlayers } = props;
   const navigate = useNavigate();
   const isBurger = useSetWidth() > 639;
-
+  const adminAccess = isRegistratedUser?.email === "infilya89@gmail.com";
   return (
     <>
       {filteredPlayers.map((player) => (
@@ -20,7 +23,15 @@ export function Rows(props: TRows) {
           className="rating-row"
           onClick={() => navigate(`/PlayerInfo?player=${player.email}`)}
         >
-          <td>{player.number}</td>
+          <td>
+            <div>
+              {player.number}{" "}
+              {adminAccess && player.highlightsLink === "" && player.highlights && (
+                <img src="/photos/Hourglass.png" />
+              )}{" "}
+              {adminAccess && player.photo.startsWith(`C:`) && <img src="/photos/noPhoto.png" />}
+            </div>
+          </td>
           <td className="rating-player-name">
             {isBurger && player.firstName} {player.lastName}
           </td>
