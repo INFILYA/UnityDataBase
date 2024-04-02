@@ -213,7 +213,8 @@ main article section form .email-wrapper .playerInfo-wrapper .download-button-wr
 }
 main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper button:hover,
 main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper button:hover {
-  background-color: greenyellow;
+  scale: 1.25;
+  transition: 0.5s;
 }
 main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper button img,
 main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper button img {

@@ -154,16 +154,18 @@ export default function PlayerInfo() {
           {userInfo?.firstName} {userInfo?.lastName}
         </h2>
         <div className="playerInfo-wrapper">
-          {fieldAccess && (
-            <div className="download-button-wrapper">
-              <button onClick={() => navigate("/")} title={`Navigate Back`}>
-                <img src={`/photos/Home.png`} />
-              </button>
+          <div className="download-button-wrapper">
+            <button onClick={() => navigate("/")} title={`Navigate Back`}>
+              <img src={`/photos/Home.png`} />
+            </button>
+            {fieldAccess ? (
               <button onClick={() => setShowDownloadBar(!showDownloadBar)} title={`Download photo`}>
                 <img src={`/photos/Download.png`} />
               </button>
-            </div>
-          )}
+            ) : (
+              <div></div>
+            )}
+          </div>
           <div className="player-photo-wrapper">
             <img src={`/photos/${userInfo.photo}`} alt="" />
           </div>

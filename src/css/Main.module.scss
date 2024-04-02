@@ -205,7 +205,8 @@ main {
                 background-color: transparent;
                 border: 1px solid transparent;
                 &:hover {
-                  background-color: greenyellow;
+                  scale: 1.25;
+                  transition: 0.5s;
                 }
                 img {
                   object-fit: contain;
