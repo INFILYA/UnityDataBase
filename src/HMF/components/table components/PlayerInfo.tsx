@@ -506,7 +506,7 @@ export default function PlayerInfo() {
                     </div>
                   ) : (
                     <>
-                      {fieldAccess && highlightsDenied && (
+                      {fieldAccess && !highlightsDenied && (
                         <>
                           {userInfo.highlights ? (
                             <div className="playerInfo-fields" style={{ justifyContent: "center" }}>
