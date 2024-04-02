@@ -372,6 +372,11 @@ main {
                 }
               }
             }
+            .parents-block-wrapper {
+              width: 100%;
+              display: flex;
+              justify-content: center;
+            }
             .rating-row {
               td {
                 text-align: center;

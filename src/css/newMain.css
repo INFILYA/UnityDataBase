@@ -381,6 +381,11 @@ main article section .table-section table tbody tr th button {
 main article section .table-section table tbody tr th button:hover {
   background-color: #3789b7;
 }
+main article section .table-section table tbody .parents-block-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 main article section .table-section table tbody .rating-row td {
   text-align: center;
   padding: 1vmin;

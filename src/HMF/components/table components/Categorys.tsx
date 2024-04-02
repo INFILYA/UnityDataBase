@@ -18,6 +18,12 @@ export function Categorys(props: TCategorys) {
     "weight",
     "reach",
   ] as const;
+  const players = filteredPlayers.filter(
+    (profile) => profile.position !== "Parent" && profile.position !== "Coach"
+  );
+  const parents = filteredPlayers.filter((profile) => profile.position === "Parent");
+  const coaches = filteredPlayers.filter((profile) => profile.position === "Coach");
+
   return (
     <>
       <tr>
@@ -32,7 +38,9 @@ export function Categorys(props: TCategorys) {
           </th>
         ))}
       </tr>
-      <Rows filteredPlayers={filteredPlayers} />
+      <Rows filteredPlayers={players} />
+      <Rows filteredPlayers={coaches} />
+      <Rows filteredPlayers={parents} />
     </>
   );
 }
