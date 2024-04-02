@@ -197,7 +197,7 @@ main article section form .email-wrapper .playerInfo-wrapper .nav-buttons button
 main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper,
 main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   width: 100%;
   padding: 10px 1vw 5px 2vw;
   box-sizing: border-box;

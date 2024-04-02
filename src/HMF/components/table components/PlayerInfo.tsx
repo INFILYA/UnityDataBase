@@ -156,6 +156,9 @@ export default function PlayerInfo() {
         <div className="playerInfo-wrapper">
           {fieldAccess && (
             <div className="download-button-wrapper">
+              <button onClick={() => navigate("/")} title={`Navigate Back`}>
+                <img src={`/photos/Home.png`} />
+              </button>
               <button onClick={() => setShowDownloadBar(!showDownloadBar)} title={`Download photo`}>
                 <img src={`/photos/Download.png`} />
               </button>

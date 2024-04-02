@@ -29,7 +29,8 @@ export function Rows(props: TRows) {
               {adminAccess && player.highlightsLink === "" && player.highlights && (
                 <img src="/photos/Hourglass.png" />
               )}{" "}
-              {adminAccess && player.photo.startsWith(`C:`) && <img src="/photos/noPhoto.png" />}
+              {adminAccess && player.photo.startsWith(`C:`) && <img src="/photos/noPhoto.png" />}{" "}
+              {adminAccess && player.highlightsLink && <img src="/photos/ok.png" />}
             </div>
           </td>
           <td className="rating-player-name">
