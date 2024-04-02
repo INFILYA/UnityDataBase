@@ -40,14 +40,11 @@ header .barWrapper .innerContainer .titleNavWrapper .logo {
   align-items: center;
   width: 100%;
 }
-header .barWrapper .innerContainer .titleNavWrapper .logo .unity-logo-wrapper {
+header .barWrapper .innerContainer .titleNavWrapper .logo .unity-logo-wrapper,
+header .barWrapper .innerContainer .titleNavWrapper .logo .unity-name-wrapper {
   display: flex;
   height: 60px;
   margin-right: 10px;
-}
-header .barWrapper .innerContainer .titleNavWrapper .logo .unity-name-wrapper {
-  height: 60px;
-  display: flex;
 }
 header .barWrapper .innerContainer .titleNavWrapper .logo .unity-name-wrapper img {
   width: 100%;

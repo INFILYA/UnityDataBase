@@ -35,14 +35,13 @@ header {
           display: flex;
           align-items: center;
           width: 100%;
-          .unity-logo-wrapper {
+          .unity-logo-wrapper,
+          .unity-name-wrapper {
             display: flex;
             height: 60px;
             margin-right: 10px;
           }
           .unity-name-wrapper {
-            height: 60px;
-            display: flex;
             img {
               width: 100%;
             }
