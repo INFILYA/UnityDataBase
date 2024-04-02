@@ -297,7 +297,9 @@ export default function SendForm() {
                   <div className="forspan">
                     <span>
                       <strong>
-                        {userInfo.position === "Coach" ? "Your team gender" : "Your gender"}
+                        {userInfo.position === "Coach" || userInfo.position === "Parent"
+                          ? "Your team gender"
+                          : "Your gender"}
                       </strong>
                     </span>
                     {!userInfo.gender && <span> (required)</span>}

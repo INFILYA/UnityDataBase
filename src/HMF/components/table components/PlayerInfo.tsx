@@ -146,9 +146,7 @@ export default function PlayerInfo() {
     currentField === "telephone" ? properPhoneLength : currentValue.length <= 1;
   if (userInfo === undefined || userInfo === null) return;
   const id = `${userInfo?.firstName} ${userInfo?.lastName}, ${userInfo.team}`;
-  const highlightsDenied =
-    userInfo.position !== ("Coach" || "Parent") &&
-    isRegistratedUser?.email !== "infilya89@gmail.com";
+  const highlightsDenied = userInfo.position === "Coach" || userInfo.position === "Parent";
   return (
     <SectionWrapper>
       <FormWrapper onSubmit={(e) => e.preventDefault()}>
