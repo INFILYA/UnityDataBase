@@ -61,7 +61,7 @@ export default function Table() {
               <h1>Happy Birthday</h1>
               <img src="/photos/confetti.png"></img>
               <div className="close-button-wrapper">
-                <button onClick={() => setShowBirthday(false)}> x </button>
+                <button onClick={() => setShowBirthday(false)}>X</button>
               </div>
             </div>
             <ul>

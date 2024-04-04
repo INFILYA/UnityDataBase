@@ -365,14 +365,9 @@ main {
                 margin-bottom: 40px;
                 border-radius: 50%;
                 border: none;
-                text-align: center;
-                width: clamp(16px, 6vw, 20px);
-                aspect-ratio: 1/1;
-                display: flex;
-                justify-content: center;
-                align-items: self-start;
                 background-color: #3789b7;
                 color: white;
+                font-weight: 600;
                 &:hover {
                   background-color: #693575;
                 }
