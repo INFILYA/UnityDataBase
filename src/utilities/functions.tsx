@@ -38,6 +38,20 @@ export function upgradeAge<T extends TUserInfo>(player: T): T {
   return newPlayer;
 }
 
+export function currentDate() {
+  const date = new Date();
+  // Получаем год, месяц и день
+  const month = date.getMonth() + 1; // Месяц (от 0 до 11, поэтому добавляем 1)
+  const day = date.getDate(); // День месяца (от 1 до 31)
+  // Для форматирования чисел, чтобы добавить ведущий ноль, если число меньше 10
+  function addLeadingZero(number: number): number | string {
+    return number < 10 ? "0" + number : number;
+  }
+  // Форматирование в строку с форматом "год-месяц-день"
+  const formattedDate = addLeadingZero(month) + "-" + addLeadingZero(day);
+  return formattedDate;
+}
+
 export const checkUserEmail = (email: string) => {
   const doubleDots = email.match(/[.]{2,}/g);
   const startWithDot = email.match(/^[.]/);
@@ -54,7 +68,7 @@ export const checkUserEmail = (email: string) => {
   else return false;
 };
 
-export const checkPhotoFormat = (photo: string | null | undefined ) => {
+export const checkPhotoFormat = (photo: string | null | undefined) => {
   if (!photo || photo === null) return true;
   const jpg = photo.toLowerCase().match(/jpg/g);
   const png = photo.toLowerCase().match(/png/g);

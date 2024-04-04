@@ -22,6 +22,10 @@ export function Rows(props: TRows) {
           key={player.email}
           className="rating-row"
           onClick={() => navigate(`/PlayerInfo?player=${player.email}`)}
+          style={{
+            backgroundColor:
+              player.position === "Coach" || player.position === "Parent" ? "gainsboro" : "",
+          }}
         >
           <td>
             <div>
