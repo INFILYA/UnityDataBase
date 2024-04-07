@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { setPlayers } from "../../../states/slices/playersSlice";
+import { selectPlayers, setPlayers } from "../../../states/slices/playersSlice";
 import { ChangeEvent, useEffect, useState } from "react";
 import { TUserInfo } from "../../../types/Types";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -18,10 +18,14 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { onValue, remove, update, set } from "firebase/database";
 import FormWrapper from "../../../wpappers/FormWrapper";
 import { ref, uploadBytes } from "firebase/storage";
+import Diagramm from "./Diagramm";
+import { selectuserToCompare, setUserToCompare } from "../../../states/slices/userToCompareSlice";
 
 export default function PlayerInfo() {
   const [searchParams] = useSearchParams();
   const userInfo = useSelector(selectUserInfo);
+  const players = useSelector(selectPlayers);
+  const userToCompare = useSelector(selectuserToCompare);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isRegistratedUser] = useAuthState(auth);
@@ -31,6 +35,7 @@ export default function PlayerInfo() {
   const [confirmationHighlights, setConfirmationHighlights] = useState(false);
   const [fileUpload, setFileUpload] = useState<File | null>(null);
   const [showDownloadBar, setShowDownloadBar] = useState<boolean>(false);
+  const [showCompareWindow, setShowCompareWindow] = useState<boolean>(false);
 
   const myParam = searchParams.get("player");
 
@@ -139,6 +144,13 @@ export default function PlayerInfo() {
     setConfirmationHighlights(false);
   }
 
+  const selectPlayerToCompare = (playerToCompare: string | null | undefined) => {
+    setShowCompareWindow(true);
+    const userToCompare = players.find((player) => player.email === playerToCompare);
+    if (!userToCompare) return;
+    dispatch(setUserToCompare(userToCompare));
+  };
+
   const properPhoneLength = currentValue.length !== 12;
   const adminAccess = isRegistratedUser?.email === "infilya89@gmail.com";
   const fieldAccess = isRegistratedUser?.email === myParam || adminAccess;
@@ -147,6 +159,11 @@ export default function PlayerInfo() {
   if (userInfo === undefined || userInfo === null) return;
   const id = `${userInfo?.firstName} ${userInfo?.lastName}, ${userInfo.team}`;
   const highlightsDenied = userInfo.position === "Coach" || userInfo.position === "Parent";
+  const filteredPlayers = players.filter(
+    (player) =>
+      player.team === userInfo.team && player.position !== "Coach" && player.position !== "Parent"
+  );
+
   return (
     <SectionWrapper>
       <FormWrapper onSubmit={(e) => e.preventDefault()}>
@@ -159,7 +176,7 @@ export default function PlayerInfo() {
               <img src={`/photos/Home.png`} />
             </button>
             {fieldAccess ? (
-              <button onClick={() => setShowDownloadBar(!showDownloadBar)} title={`Download photo`}>
+              <button onClick={() => setShowDownloadBar(true)} title={`Download photo`}>
                 <img src={`/photos/Download.png`} />
               </button>
             ) : (
@@ -167,8 +184,43 @@ export default function PlayerInfo() {
             )}
           </div>
           <div className="player-photo-wrapper">
-            <img src={`/photos/${userInfo.photo}`} alt="" />
+            {showCompareWindow ? (
+              <div className="dual-photos-wrapper">
+                <img src={`/photos/${userInfo.photo}`} alt="" />
+                <img src={`/photos/${userToCompare.photo}`} alt="" />
+              </div>
+            ) : (
+              <img src={`/photos/${userInfo.photo}`} alt="" />
+            )}
           </div>
+          <div className="compare-block-wrapper">
+            <div>
+              <h3>
+                <strong>Compare with</strong>
+              </h3>
+            </div>
+            <div>
+              <select>
+                <option
+                  defaultValue={userToCompare.lastName}
+                  onClick={() => setShowCompareWindow(false)}
+                >
+                  Choose Player
+                </option>
+                {filteredPlayers.map((player, index) => (
+                  <option
+                    key={index}
+                    value={player.email!}
+                    onClick={() => selectPlayerToCompare(player.email)}
+                  >
+                    {player.firstName} {player.lastName}
+                  </option>
+                ))}
+              </select>
+              {showCompareWindow && <button onClick={() => setShowCompareWindow(false)}>X</button>}
+            </div>
+          </div>
+          {showCompareWindow && <Diagramm />}
           {/* Photo */}
           {showDownloadBar && (
             <Fieldset valid={styledComponentValidator(checkPhotoFormat(fileUpload?.name))}>
@@ -502,6 +554,7 @@ export default function PlayerInfo() {
                   {confirmationHighlights ? (
                     <div className="confirm-wrapper">
                       <div>Are you sure?</div>
+                      {/* add here normal desripion */}
                       <Button type="button" text="Confirm" onClick={confirmHighlights} />
                       <Button
                         type="button"

@@ -194,6 +194,55 @@ main article section form .email-wrapper .sendForm-wrapper .nav-buttons button,
 main article section form .email-wrapper .playerInfo-wrapper .nav-buttons button {
   margin: 2.5%;
 }
+main article section form .email-wrapper .sendForm-wrapper .compare-block-wrapper,
+main article section form .email-wrapper .playerInfo-wrapper .compare-block-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main article section form .email-wrapper .sendForm-wrapper .compare-block-wrapper h3,
+main article section form .email-wrapper .playerInfo-wrapper .compare-block-wrapper h3 {
+  margin-bottom: 5px;
+}
+main article section form .email-wrapper .sendForm-wrapper .compare-block-wrapper button,
+main article section form .email-wrapper .playerInfo-wrapper .compare-block-wrapper button {
+  position: absolute;
+  right: 10%;
+  border: 2px solid azure;
+  background-color: #693575;
+  border-radius: 50%;
+  color: white;
+}
+main article section form .email-wrapper .sendForm-wrapper .compare-block-wrapper button:hover,
+main article section form .email-wrapper .playerInfo-wrapper .compare-block-wrapper button:hover {
+  scale: 1.1;
+  transition: 0.5s;
+  background-color: #3789b7;
+}
+main article section form .email-wrapper .sendForm-wrapper .compare-block-wrapper select,
+main article section form .email-wrapper .playerInfo-wrapper .compare-block-wrapper select {
+  border: none;
+  background-color: #3789b7;
+  color: white;
+  font-size: clamp(14px, 2vw, 18px);
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-align: center;
+}
+main article section form .email-wrapper .sendForm-wrapper .compare-block-wrapper select:hover,
+main article section form .email-wrapper .playerInfo-wrapper .compare-block-wrapper select:hover {
+  scale: 1.1;
+  transition: 0.5s;
+  background-color: #693575;
+}
+main article section form .email-wrapper .sendForm-wrapper .compare-block-wrapper select option,
+main article section form .email-wrapper .playerInfo-wrapper .compare-block-wrapper select option {
+  display: flex;
+  justify-content: center;
+}
 main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper,
 main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper {
   display: flex;
@@ -232,6 +281,16 @@ main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapp
   width: clamp(250px, 85%, 375px);
   object-fit: contain;
   mix-blend-mode: darken;
+}
+main article section form .email-wrapper .sendForm-wrapper .player-photo-wrapper .dual-photos-wrapper,
+main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapper .dual-photos-wrapper {
+  display: flex;
+}
+main article section form .email-wrapper .sendForm-wrapper .player-photo-wrapper .dual-photos-wrapper img,
+main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapper .dual-photos-wrapper img {
+  object-fit: contain;
+  width: 100%;
+  aspect-ratio: 1/1;
 }
 main article section form .email-wrapper .sendForm-wrapper label,
 main article section form .email-wrapper .playerInfo-wrapper label {

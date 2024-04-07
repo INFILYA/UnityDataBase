@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@highcharts/dashboards": "^2.0.0",
     "@reduxjs/toolkit": "^2.0.1",
     "antd": "^5.12.4",
     "components": "^0.1.0",

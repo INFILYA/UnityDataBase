@@ -191,6 +191,48 @@ main {
                 margin: 2.5%;
               }
             }
+            .compare-block-wrapper {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              h3 {
+                margin-bottom: 5px;
+              }
+              button {
+                position: absolute;
+                right: 10%;
+                border: 2px solid azure;
+                background-color: #693575;
+                border-radius: 50%;
+                color: white;
+                &:hover {
+                  scale: 1.1;
+                  transition: 0.5s;
+                  background-color: #3789b7;
+                }
+              }
+              select {
+                border: none;
+                background-color: #3789b7;
+                color: white;
+                font-size: clamp(14px, 2vw, 18px);
+                padding: 10px;
+                padding-left: 20px;
+                padding-right: 20px;
+                border-radius: 25px;
+                font-weight: 600;
+                text-align: center;
+                &:hover {
+                  scale: 1.1;
+                  transition: 0.5s;
+                  background-color: #693575;
+                }
+                option {
+                  display: flex;
+                  justify-content: center;
+                }
+              }
+            }
             .download-button-wrapper {
               display: flex;
               justify-content: space-between;
@@ -222,6 +264,14 @@ main {
                 width: clamp(250px, 85%, 375px);
                 object-fit: contain;
                 mix-blend-mode: darken;
+              }
+              .dual-photos-wrapper {
+                display: flex;
+                img {
+                  object-fit: contain;
+                  width: 100%;
+                  aspect-ratio: 1/1;
+                }
               }
             }
             label {
