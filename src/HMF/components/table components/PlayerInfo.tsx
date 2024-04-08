@@ -35,10 +35,24 @@ export default function PlayerInfo() {
   const [confirmationHighlights, setConfirmationHighlights] = useState(false);
   const [fileUpload, setFileUpload] = useState<File | null>(null);
   const [showDownloadBar, setShowDownloadBar] = useState<boolean>(false);
-  const [showCompareWindow, setShowCompareWindow] = useState<boolean>(false);
+  const [showCompareWindow, setShowCompareWindow] = useState<string>("");
 
   const myParam = searchParams.get("player");
 
+  // useEffect(() => {
+  //   async function getData() {
+  //     try {
+  //       if (isRegistratedUser) {
+  //         dispatch(fetchUsersList());
+  //         if (myParam)
+  //           dispatch(setUserInfo(myParam));
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  //   getData();
+  // }, [dispatch, isRegistratedUser]);
   useEffect(() => {
     async function getData() {
       try {
@@ -144,9 +158,9 @@ export default function PlayerInfo() {
     setConfirmationHighlights(false);
   }
 
-  const selectPlayerToCompare = (playerToCompare: string | null | undefined) => {
-    setShowCompareWindow(true);
-    const userToCompare = players.find((player) => player.email === playerToCompare);
+  const selectPlayerToCompare = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setShowCompareWindow(event.target.value);
+    const userToCompare = players.find((player) => player.email === event.target.value);
     if (!userToCompare) return;
     dispatch(setUserToCompare(userToCompare));
   };
@@ -200,24 +214,15 @@ export default function PlayerInfo() {
               </h3>
             </div>
             <div>
-              <select>
-                <option
-                  defaultValue={userToCompare.lastName}
-                  onClick={() => setShowCompareWindow(false)}
-                >
-                  Choose Player
-                </option>
+              <select onChange={selectPlayerToCompare}>
+                <option value="">Choose Player</option>
                 {filteredPlayers.map((player, index) => (
-                  <option
-                    key={index}
-                    value={player.email!}
-                    onClick={() => selectPlayerToCompare(player.email)}
-                  >
+                  <option key={index} value={player.email!}>
                     {player.firstName} {player.lastName}
                   </option>
                 ))}
               </select>
-              {showCompareWindow && <button onClick={() => setShowCompareWindow(false)}>X</button>}
+              {showCompareWindow && <button onClick={() => setShowCompareWindow("")}>X</button>}
             </div>
           </div>
           {showCompareWindow && <Diagramm />}

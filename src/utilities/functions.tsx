@@ -76,3 +76,21 @@ export const checkPhotoFormat = (photo: string | null | undefined) => {
   if (jpg || png || jpeg) return false;
   else return true;
 };
+
+export const emptyUser: TUserInfo = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  gender: "",
+  team: "",
+  position: "",
+  hand: "",
+  telephone: "",
+  birthday: "",
+  height: "",
+  weight: "",
+  number: "",
+  reach: "",
+  photo: "",
+  highlights: false,
+};

@@ -1,29 +1,14 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { TUserInfo } from "../../types/Types";
 import { RootState } from "../store";
+import { emptyUser } from "../../utilities/functions";
 
 type TUserInformation = {
   userInfo: TUserInfo;
 };
 
 const initialState: TUserInformation = {
-  userInfo: {
-    firstName: "",
-    lastName: "",
-    email: "",
-    gender: "",
-    team: "",
-    position: "",
-    hand: "",
-    telephone: "",
-    birthday: "",
-    height: "",
-    weight: "",
-    number: "",
-    reach: "",
-    photo: "",
-    highlights: false,
-  },
+  userInfo: emptyUser,
 };
 
 export const userInfoSlice = createSlice({
