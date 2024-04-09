@@ -179,6 +179,7 @@ main {
                 background-color: transparent;
                 border: none;
                 margin-left: 10px;
+                cursor: pointer;
               }
               img {
                 width: 20px;
@@ -205,6 +206,7 @@ main {
                 background-color: #693575;
                 border-radius: 50%;
                 color: white;
+                cursor: pointer;
                 &:hover {
                   scale: 1.1;
                   transition: 0.5s;
@@ -222,6 +224,7 @@ main {
                 border-radius: 25px;
                 font-weight: 600;
                 text-align: center;
+                cursor: pointer;
                 &:hover {
                   scale: 1.1;
                   transition: 0.5s;
@@ -246,6 +249,7 @@ main {
                 justify-content: center;
                 background-color: transparent;
                 border: 1px solid transparent;
+                cursor: pointer;
                 &:hover {
                   scale: 1.25;
                   transition: 0.5s;
@@ -418,6 +422,7 @@ main {
                 background-color: #3789b7;
                 color: white;
                 font-weight: 600;
+                cursor: pointer;
                 &:hover {
                   background-color: #693575;
                 }
@@ -429,6 +434,7 @@ main {
             li {
               font-size: clamp(14px, 2vw, 20px);
               padding: 5px;
+              cursor: pointer;
             }
           }
         }
@@ -479,6 +485,7 @@ main {
                 font-weight: 600;
                 overflow: hidden;
                 box-sizing: border-box;
+                cursor: pointer;
                 div {
                   display: flex;
                   align-items: center;

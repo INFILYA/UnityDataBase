@@ -180,6 +180,7 @@ main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields 
   background-color: transparent;
   border: none;
   margin-left: 10px;
+  cursor: pointer;
 }
 main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields img,
 main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields img {
@@ -212,6 +213,7 @@ main article section form .email-wrapper .playerInfo-wrapper .compare-block-wrap
   background-color: #693575;
   border-radius: 50%;
   color: white;
+  cursor: pointer;
 }
 main article section form .email-wrapper .sendForm-wrapper .compare-block-wrapper button:hover,
 main article section form .email-wrapper .playerInfo-wrapper .compare-block-wrapper button:hover {
@@ -231,6 +233,7 @@ main article section form .email-wrapper .playerInfo-wrapper .compare-block-wrap
   border-radius: 25px;
   font-weight: 600;
   text-align: center;
+  cursor: pointer;
 }
 main article section form .email-wrapper .sendForm-wrapper .compare-block-wrapper select:hover,
 main article section form .email-wrapper .playerInfo-wrapper .compare-block-wrapper select:hover {
@@ -259,6 +262,7 @@ main article section form .email-wrapper .playerInfo-wrapper .download-button-wr
   justify-content: center;
   background-color: transparent;
   border: 1px solid transparent;
+  cursor: pointer;
 }
 main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper button:hover,
 main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper button:hover {
@@ -442,6 +446,7 @@ main article section .table-section .happy-birthday-block-wrapper div .close-but
   background-color: #3789b7;
   color: white;
   font-weight: 600;
+  cursor: pointer;
 }
 main article section .table-section .happy-birthday-block-wrapper div .close-button-wrapper button:hover {
   background-color: #693575;
@@ -452,6 +457,7 @@ main article section .table-section .happy-birthday-block-wrapper ul {
 main article section .table-section .happy-birthday-block-wrapper ul li {
   font-size: clamp(14px, 2vw, 20px);
   padding: 5px;
+  cursor: pointer;
 }
 main article section .table-section table {
   width: clamp(325px, 100%, 1300px);
@@ -496,6 +502,7 @@ main article section .table-section table tbody .rating-row td {
   font-weight: 600;
   overflow: hidden;
   box-sizing: border-box;
+  cursor: pointer;
 }
 main article section .table-section table tbody .rating-row td div {
   display: flex;

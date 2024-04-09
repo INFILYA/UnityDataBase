@@ -8,9 +8,11 @@ import Button from "../../utilities/Button";
 import { Categorys } from "./table components/Categorys";
 import { useSelector } from "react-redux";
 import { selectPlayers } from "../../states/slices/playersSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function Table() {
   const [isRegistratedUser] = useAuthState(auth);
+  const navigate = useNavigate();
   const players = useSelector(selectPlayers);
   const [filteredPlayers, setFilteredPlayers] = useState<TUserInfo[]>([]);
   const [isChoosenFilter, setChoosenFilter] = useState<boolean>(false);
@@ -66,8 +68,10 @@ export default function Table() {
             </div>
             <ul>
               {DOB.map((player, index) => (
-                <li key={index}>
-                  {player.firstName + " " + player.lastName + " - " + upgradeAge(player).birthday}
+                <li key={index} onClick={() => navigate(`/PlayerInfo?player=${player.email}`)}>
+                  <strong>{player.firstName + " " + player.lastName}</strong>
+                  {" - "}
+                  {upgradeAge(player).birthday}
                 </li>
               ))}
             </ul>
