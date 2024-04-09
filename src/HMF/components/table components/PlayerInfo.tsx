@@ -207,24 +207,26 @@ export default function PlayerInfo() {
               <img src={`/photos/${userInfo.photo}`} alt="" />
             )}
           </div>
-          <div className="compare-block-wrapper">
-            <div>
-              <h3>
-                <strong>Compare with</strong>
-              </h3>
+          {!highlightsDenied && (
+            <div className="compare-block-wrapper">
+              <div>
+                <h3>
+                  <strong>Compare with</strong>
+                </h3>
+              </div>
+              <div>
+                <select onChange={selectPlayerToCompare}>
+                  <option value="">Choose Player</option>
+                  {filteredPlayers.map((player, index) => (
+                    <option key={index} value={player.email!}>
+                      {player.firstName} {player.lastName}
+                    </option>
+                  ))}
+                </select>
+                {showCompareWindow && <button onClick={() => setShowCompareWindow("")}>X</button>}
+              </div>
             </div>
-            <div>
-              <select onChange={selectPlayerToCompare}>
-                <option value="">Choose Player</option>
-                {filteredPlayers.map((player, index) => (
-                  <option key={index} value={player.email!}>
-                    {player.firstName} {player.lastName}
-                  </option>
-                ))}
-              </select>
-              {showCompareWindow && <button onClick={() => setShowCompareWindow("")}>X</button>}
-            </div>
-          </div>
+          )}
           {showCompareWindow && <Diagramm />}
           {/* Photo */}
           {showDownloadBar && (
