@@ -289,7 +289,7 @@ main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapp
 main article section form .email-wrapper .sendForm-wrapper .player-photo-wrapper .dual-photos-wrapper img,
 main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapper .dual-photos-wrapper img {
   object-fit: contain;
-  width: 100%;
+  width: 50%;
   aspect-ratio: 1/1;
 }
 main article section form .email-wrapper .sendForm-wrapper label,

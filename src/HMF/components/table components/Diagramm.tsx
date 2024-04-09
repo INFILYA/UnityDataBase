@@ -185,7 +185,7 @@ export default function Diagramm() {
       width: average ? 530 : small ? 400 : 300,
     },
     title: {
-      text: userInfo.lastName + " vs " + userToCompare.lastName,
+      text: "",
       align: "center",
       fontSize: "16px",
     },
