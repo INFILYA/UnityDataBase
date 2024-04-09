@@ -21,13 +21,23 @@ export const styledComponentValidator = (boolean: boolean): string => {
   return boolean.toString();
 };
 export function compare<T>(a: T, b: T): number {
-  if (a < b) {
-    return -1;
+  if (+a >= 0) {
+    if (+a < +b) {
+      return -1;
+    }
+    if (+a > +b) {
+      return 1;
+    }
+    return 0;
+  } else {
+    if (a < b) {
+      return -1;
+    }
+    if (a > b) {
+      return 1;
+    }
+    return 0;
   }
-  if (a > b) {
-    return 1;
-  }
-  return 0;
 }
 export function upgradeAge<T extends TUserInfo>(player: T): T {
   if (typeof player.birthday === "number") return player;

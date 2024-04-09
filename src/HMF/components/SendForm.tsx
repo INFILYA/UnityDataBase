@@ -10,7 +10,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useAppDispatch } from "../../states/store";
 // import { fetchUsersList } from "../../states/slices/playersSlice";
 import { setPlayers } from "../../states/slices/playersSlice";
-
 import { checkPhotoFormat, styledComponentValidator } from "../../utilities/functions";
 import { onValue, set } from "firebase/database";
 import FormWrapper from "../../wpappers/FormWrapper";
