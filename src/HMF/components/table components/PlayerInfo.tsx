@@ -7,19 +7,16 @@ import Button from "../../../utilities/Button";
 import { auth, playersRef, storage } from "../../../config/firebase";
 import SectionWrapper from "../../../wpappers/SectionWrapper";
 import { useAppDispatch } from "../../../states/store";
-import { Fieldset } from "../../../css/UnityDataBase.styled";
-import {
-  checkPhotoFormat,
-  firstLetterCapital,
-  styledComponentValidator,
-} from "../../../utilities/functions";
+import { checkPhotoFormat } from "../../../utilities/functions";
 import { selectUserInfo, setUserInfo } from "../../../states/slices/userInfoSlice";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { onValue, remove, update, set } from "firebase/database";
+import { onValue, remove, update } from "firebase/database";
 import FormWrapper from "../../../wpappers/FormWrapper";
 import { ref, uploadBytes } from "firebase/storage";
 import Diagramm from "./Diagramm";
 import { selectuserToCompare, setUserToCompare } from "../../../states/slices/userToCompareSlice";
+import FormFields from "../fields/FormFields";
+import PlayerInfoFields from "../fields/PlayerInfoFields";
 
 export default function PlayerInfo() {
   const [searchParams] = useSearchParams();
@@ -34,7 +31,6 @@ export default function PlayerInfo() {
   const [showHighlights, setShowHighlights] = useState<boolean>(false);
   const [confirmationHighlights, setConfirmationHighlights] = useState(false);
   const [fileUpload, setFileUpload] = useState<File | null>(null);
-  const [showDownloadBar, setShowDownloadBar] = useState<boolean>(false);
   const [showCompareWindow, setShowCompareWindow] = useState<string>("");
 
   const myParam = searchParams.get("player");
@@ -90,16 +86,22 @@ export default function PlayerInfo() {
     try {
       // Змінюю поле гравця
       await update(playersRef(id), updatedInfo);
+      if (!fileUpload) return;
+      const filesFoldersRef = ref(storage, `playersPhotos/${id}/${fileUpload.name}`);
+      await uploadBytes(filesFoldersRef, fileUpload);
     } catch (e) {
       console.error(e);
     } finally {
       setCurrentField("");
+      setFileUpload(null);
     }
   };
 
   const setCurrentFieldValue = (key: keyof TUserInfo, value: string) => {
     setCurrentField(key);
-    setCurrentValue(value);
+    if (key === "photo") {
+      setCurrentValue("");
+    } else setCurrentValue(value);
   };
   const handleEditField = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setCurrentValue(e.target.value);
@@ -129,23 +131,11 @@ export default function PlayerInfo() {
     const files = target.files;
     if (!files) return;
     setFileUpload(files[0]);
-    // dispatch(setUserInfo({ ...userInfo, photo: files[0].name }));
+    setCurrentValue(e.target.value);
   }
 
-  const downloadNewPhoto = async () => {
-    try {
-      if (!fileUpload) return;
-      const filesFoldersRef = ref(storage, `playersPhotos/${id}/${fileUpload.name}`);
-      await uploadBytes(filesFoldersRef, fileUpload);
-      await set(playersRef(id), { ...userInfo, photo: `C:${fileUpload.name}` });
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setShowDownloadBar(false);
-    }
-  };
-  function cancelDownload() {
-    setShowDownloadBar(false);
+  function cancel() {
+    setCurrentField("");
     setFileUpload(null);
   }
 
@@ -190,7 +180,10 @@ export default function PlayerInfo() {
               <img src={`/photos/Home.png`} />
             </button>
             {fieldAccess ? (
-              <button onClick={() => setShowDownloadBar(true)} title={`Download photo`}>
+              <button
+                onClick={() => setCurrentFieldValue("photo", userInfo.photo)}
+                title={`Download photo`}
+              >
                 <img src={`/photos/Download.png`} />
               </button>
             ) : (
@@ -229,303 +222,155 @@ export default function PlayerInfo() {
           )}
           {showCompareWindow && <Diagramm />}
           {/* Photo */}
-          {showDownloadBar && (
-            <Fieldset valid={styledComponentValidator(checkPhotoFormat(fileUpload?.name))}>
-              <legend>
-                <div className="forspan">
-                  <span>
-                    <strong>Photo</strong>
-                  </span>
-                  {!fileUpload?.name && <span> (required)</span>}
-                  {checkPhotoFormat(fileUpload?.name) && fileUpload?.name && (
-                    <span>(File resolution is invalid)</span>
-                  )}
-                </div>
-              </legend>
-              <input type="file" onChange={handleUserUpload} name="photo" />
-              {!checkPhotoFormat(fileUpload?.name) && (
-                <Button
-                  text=" Ok "
-                  type="button"
-                  onClick={downloadNewPhoto}
-                  disabled={checkPhotoFormat(userInfo.photo)}
-                  style={{ width: "auto" }}
-                />
-              )}
-              <Button
-                text="Cancel"
-                type="button"
-                onClick={cancelDownload}
-                style={{ width: "auto", marginLeft: 10 }}
-              />
-            </Fieldset>
+          {currentField === "photo" && (
+            <FormFields
+              access={checkPhotoFormat(fileUpload?.name)}
+              field="photo"
+              type="file"
+              onChange={handleUserUpload}
+            />
           )}
           {/* Birthday */}
           {currentField === "birthday" ? (
-            <Fieldset valid={styledComponentValidator(!currentValue)}>
-              <legend>
-                <div className="forspan">
-                  <span>
-                    <strong>Date of Birth</strong>
-                  </span>
-                  {!userInfo.birthday && <span> (required)</span>}
-                </div>
-              </legend>
-              <input
-                type="date"
-                onChange={handleEditField}
-                value={currentValue}
-                name="birthday"
-                style={{ textAlign: "center" }}
-                required
-              />
-            </Fieldset>
+            <FormFields
+              access={!currentValue}
+              field="birthday"
+              type="date"
+              value={currentValue}
+              onChange={handleEditField}
+            />
           ) : (
-            <div className="playerInfo-fields">
-              <label>Birthday:</label>
-              <div>{userInfo.birthday}</div>
-              {fieldAccess && (
-                <div>
-                  <button onClick={() => setCurrentFieldValue("birthday", userInfo.birthday)}>
-                    <img src="/photos/pencil.png"></img>
-                  </button>
-                </div>
-              )}
-            </div>
+            <PlayerInfoFields
+              field="birthday"
+              setCurrentFieldValue={setCurrentFieldValue}
+              measureValue={userInfo.birthday}
+            />
           )}
           {/* Telephone */}
           {fieldAccess && (
             <>
               {currentField === "telephone" ? (
-                <Fieldset valid={styledComponentValidator(properPhoneLength)}>
-                  <legend>
-                    <div className="forspan">
-                      <span>
-                        <strong>Telephone</strong>
-                      </span>
-                      {properPhoneLength && <span> (required)</span>}
-                    </div>
-                  </legend>
-                  <input
-                    type="tel"
-                    onChange={handlePhoneChange}
-                    value={currentValue}
-                    name="telephone"
-                    required
-                  />
-                </Fieldset>
+                <FormFields
+                  access={properPhoneLength}
+                  field="telephone"
+                  type="tel"
+                  value={currentValue}
+                  onChange={handlePhoneChange}
+                />
               ) : (
-                <div className="playerInfo-fields">
-                  <label>Phone:</label>
-                  <div>{userInfo.telephone}</div>
-                  <div>
-                    <button onClick={() => setCurrentFieldValue("telephone", userInfo.telephone)}>
-                      <img src="/photos/pencil.png"></img>
-                    </button>
-                  </div>
-                </div>
+                <PlayerInfoFields
+                  field="telephone"
+                  setCurrentFieldValue={setCurrentFieldValue}
+                  measureValue={userInfo.telephone}
+                />
               )}
             </>
           )}
           <>
             {/* Hand */}
             {currentField === "hand" ? (
-              <Fieldset valid={styledComponentValidator(!currentValue)}>
-                <legend>
-                  <div className="forspan">
-                    <span>
-                      <strong>Dominant Hand</strong>
-                    </span>
-                    {!currentValue && <span> (required)</span>}
-                  </div>
-                </legend>
-                <select onChange={handleEditField} name="hand" value={currentValue}>
-                  <option value="">Choose hand</option>
-                  <option value="left">Left</option>
-                  <option value="right">Right</option>
-                  <option value="ambidextrous">Ambidextrous</option>
-                </select>
-              </Fieldset>
+              <FormFields
+                access={!currentValue}
+                field="hand"
+                value={currentValue}
+                onChange={handleEditField}
+              />
             ) : (
-              <div className="playerInfo-fields">
-                <label>Dominant Hand:</label>
-                <div>{firstLetterCapital(userInfo?.hand)}</div>
-                {fieldAccess && (
-                  <div>
-                    <button onClick={() => setCurrentFieldValue("hand", userInfo.hand)}>
-                      <img src="/photos/pencil.png"></img>
-                    </button>
-                  </div>
-                )}
-              </div>
+              <PlayerInfoFields
+                field="hand"
+                setCurrentFieldValue={setCurrentFieldValue}
+                measureValue={userInfo.hand}
+              />
             )}
             {/* Height */}
             {currentField === "height" ? (
-              <Fieldset valid={styledComponentValidator(!currentValue)}>
-                <legend>
-                  <div className="forspan">
-                    <span>
-                      <strong>Height</strong>
-                    </span>
-                    {!userInfo.height && <span> (required)</span>}
-                  </div>
-                </legend>
-                <div className="measure-wrapper">
-                  <div>
-                    {currentValue} cm ; {Math.round(+currentValue / 2.54 / 1.2) / 10} ft
-                  </div>
-                  <input
-                    type="range"
-                    onChange={handleEditField}
-                    value={currentValue}
-                    name="height"
-                    min={150}
-                    max={220}
-                  />
-                </div>
-              </Fieldset>
+              <FormFields
+                access={!currentValue}
+                field="height"
+                type="range"
+                value={currentValue}
+                onChange={handleEditField}
+                measureValue={currentValue}
+                min={150}
+                max={220}
+              />
             ) : (
-              <div className="playerInfo-fields">
-                <label>Height:</label>
-                <div>
-                  {userInfo.height} cm ;&nbsp;{Math.round(+userInfo.height / 2.54 / 1.2) / 10} ft
-                </div>
-                {fieldAccess && (
-                  <div>
-                    <button onClick={() => setCurrentFieldValue("height", userInfo.height)}>
-                      <img src="/photos/pencil.png"></img>
-                    </button>
-                  </div>
-                )}
-              </div>
+              <PlayerInfoFields
+                field="height"
+                setCurrentFieldValue={setCurrentFieldValue}
+                measureValue={userInfo.height}
+              />
             )}
             {/* Weight */}
-
             {currentField === "weight" ? (
-              <Fieldset valid={styledComponentValidator(!currentValue)}>
-                <legend>
-                  <div className="forspan">
-                    <span>
-                      <strong>Weight</strong>
-                    </span>
-                    {!userInfo.weight && <span> (required)</span>}
-                  </div>
-                </legend>
-                <div className="measure-wrapper">
-                  <div>
-                    {currentValue} kg ;&nbsp;{Math.round(+currentValue * 2.2)} lbs
-                  </div>
-                  <input
-                    type="range"
-                    onChange={handleEditField}
-                    value={currentValue}
-                    name="weight"
-                    min={40}
-                    max={120}
-                  />
-                </div>
-              </Fieldset>
+              <FormFields
+                access={!currentValue}
+                field="weight"
+                type="range"
+                value={currentValue}
+                onChange={handleEditField}
+                measureValue={currentValue}
+                min={40}
+                max={120}
+              />
             ) : (
-              <div className="playerInfo-fields">
-                <label>Weight:</label>
-                <div>
-                  {userInfo.weight} kg ;&nbsp;{Math.round(+userInfo.weight * 2.2)} lbs
-                </div>
-                {fieldAccess && (
-                  <div>
-                    <button onClick={() => setCurrentFieldValue("weight", userInfo.weight)}>
-                      <img src="/photos/pencil.png"></img>
-                    </button>
-                  </div>
-                )}
-              </div>
+              <PlayerInfoFields
+                field="weight"
+                setCurrentFieldValue={setCurrentFieldValue}
+                measureValue={userInfo.weight}
+              />
             )}
             {/* Reach Height */}
             {currentField === "reach" ? (
-              <Fieldset valid={styledComponentValidator(!currentValue)}>
-                <legend>
-                  <div className="forspan">
-                    <span>
-                      <strong>Reach height</strong>
-                    </span>
-                    {!userInfo.reach && <span> (required)</span>}
-                  </div>
-                </legend>
-                <div className="measure-wrapper">
-                  <div>
-                    {currentValue} cm ; {Math.round(+currentValue / 2.54 / 1.2) / 10} Foots
-                  </div>
-                  <input
-                    type="range"
-                    onChange={handleEditField}
-                    value={currentValue}
-                    name="reach"
-                    min={280}
-                    max={380}
-                  />
-                </div>
-              </Fieldset>
+              <FormFields
+                access={!currentValue}
+                field="reach"
+                type="range"
+                value={currentValue}
+                onChange={handleEditField}
+                measureValue={currentValue}
+                min={280}
+                max={380}
+              />
             ) : (
-              <div className="playerInfo-fields">
-                <label>Reach height:</label>
-                <div>
-                  {userInfo.reach} cm ;&nbsp;{Math.round(+userInfo.reach / 2.54 / 1.2) / 10} ft
-                </div>
-                {fieldAccess && (
-                  <div>
-                    <button onClick={() => setCurrentFieldValue("reach", userInfo.reach)}>
-                      <img src="/photos/pencil.png"></img>
-                    </button>
-                  </div>
-                )}
-              </div>
+              <PlayerInfoFields
+                field="reach"
+                setCurrentFieldValue={setCurrentFieldValue}
+                measureValue={userInfo.reach}
+              />
             )}
             {/* Number */}
             {currentField === "number" ? (
-              <Fieldset valid={styledComponentValidator(!currentValue)}>
-                <legend>
-                  <div className="forspan">
-                    <span>
-                      <strong>Jersey number</strong>
-                    </span>
-                    {!userInfo.number && <span> (required)</span>}
-                  </div>
-                </legend>
-                <div className="measure-wrapper">
-                  <div># {currentValue}</div>
-                  <input
-                    type="range"
-                    onChange={handleUserNumberChange}
-                    value={currentValue}
-                    min={0}
-                    max={99}
-                  />
-                </div>
-              </Fieldset>
+              <FormFields
+                access={!currentValue}
+                field="number"
+                type="range"
+                value={currentValue}
+                onChange={handleUserNumberChange}
+                measureValue={`# ${currentValue}`}
+                min={0}
+                max={99}
+              />
             ) : (
-              <div className="playerInfo-fields">
-                <label>Jersey number:</label>
-                <div>{userInfo.number}</div>
-                {fieldAccess && (
-                  <div>
-                    <button onClick={() => setCurrentFieldValue("number", userInfo.number)}>
-                      <img src="/photos/pencil.png"></img>
-                    </button>
-                  </div>
-                )}
-              </div>
+              <PlayerInfoFields
+                field="number"
+                setCurrentFieldValue={setCurrentFieldValue}
+                measureValue={userInfo.number}
+              />
             )}
           </>
 
-          {currentField ? (
+          {currentField || !checkPhotoFormat(fileUpload?.name) ? (
             <div className="nav-buttons">
               <Button
                 type="button"
                 text="OK"
                 onClick={() => setEditedProfile({ ...userInfo, [currentField]: currentValue })}
-                disabled={disabledButton}
+                disabled={
+                  disabledButton || (currentField === "photo" && checkPhotoFormat(currentValue))
+                }
               />
-              <Button type="button" text="Cancel" onClick={() => setCurrentField("")} />
+              <Button type="button" text="Cancel" onClick={() => cancel()} />
             </div>
           ) : (
             <>

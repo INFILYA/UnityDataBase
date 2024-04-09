@@ -17,7 +17,6 @@ export default function Table() {
   const [filteredPlayers, setFilteredPlayers] = useState<TUserInfo[]>([]);
   const [isChoosenFilter, setChoosenFilter] = useState<boolean>(false);
   const [isBiggest, setIsBiggest] = useState<boolean>(false);
-  const [showBirthday, setShowBirthday] = useState<boolean>(true);
 
   const isUserHaveProfile = (arr: TUserInfo[]): TUserInfo[] => {
     const choosenPlayer = arr.find((player) => player.email === isRegistratedUser?.email);
@@ -57,14 +56,11 @@ export default function Table() {
     <SectionWrapper>
       <div className="table-section">
         <h1>Players Table</h1>
-        {isChoosenFilter && DOB.length > 0 && showBirthday && (
+        {isChoosenFilter && DOB.length > 0 && (
           <div className="happy-birthday-block-wrapper">
             <div>
               <h1>Happy Birthday</h1>
               <img src="/photos/confetti.png"></img>
-              <div className="close-button-wrapper">
-                <button onClick={() => setShowBirthday(false)}>X</button>
-              </div>
             </div>
             <ul>
               {DOB.map((player, index) => (

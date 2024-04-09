@@ -167,13 +167,15 @@ export default function SendForm() {
                 {userInfo.firstName.length <= 1 && <span> (required)</span>}
               </div>
             </legend>
-            <input
-              type="text"
-              onChange={handleUserChange}
-              value={userInfo.firstName.replace(/[^a-zA-Zа-яА-Я]/g, "")}
-              name="firstName"
-              required
-            />
+            <div className="measure-wrapper">
+              <input
+                type="text"
+                onChange={handleUserChange}
+                value={userInfo.firstName.replace(/[^a-zA-Zа-яА-Я]/g, "")}
+                name="firstName"
+                required
+              />
+            </div>
           </Fieldset>
           {/* Surname */}
           <Fieldset valid={styledComponentValidator(userInfo.lastName.length <= 1)}>
@@ -185,13 +187,15 @@ export default function SendForm() {
                 {userInfo.lastName.length <= 1 && <span> (required)</span>}
               </div>
             </legend>
-            <input
-              type="text"
-              onChange={handleUserChange}
-              value={userInfo.lastName.replace(/[^a-zA-Zа-яА-Я]/g, "")}
-              name="lastName"
-              required
-            />
+            <div className="measure-wrapper">
+              <input
+                type="text"
+                onChange={handleUserChange}
+                value={userInfo.lastName.replace(/[^a-zA-Zа-яА-Я]/g, "")}
+                name="lastName"
+                required
+              />
+            </div>
           </Fieldset>
           {/* Telephone */}
           <Fieldset valid={styledComponentValidator(properPhoneLength)}>
@@ -203,13 +207,15 @@ export default function SendForm() {
                 {properPhoneLength && <span> (required)</span>}
               </div>
             </legend>
-            <input
-              type="tel"
-              onChange={handlePhoneChange}
-              value={userInfo.telephone}
-              name="telephone"
-              required
-            />
+            <div className="measure-wrapper">
+              <input
+                type="tel"
+                onChange={handlePhoneChange}
+                value={userInfo.telephone}
+                name="telephone"
+                required
+              />
+            </div>
           </Fieldset>
           {/* Birthday */}
           <Fieldset valid={styledComponentValidator(!userInfo.birthday)}>
@@ -221,14 +227,16 @@ export default function SendForm() {
                 {!userInfo.birthday && <span> (required)</span>}
               </div>
             </legend>
-            <input
-              type="date"
-              onChange={handleUserChange}
-              value={userInfo.birthday}
-              name="birthday"
-              style={{ textAlign: "center" }}
-              required
-            />
+            <div className="measure-wrapper">
+              <input
+                type="date"
+                onChange={handleUserChange}
+                value={userInfo.birthday}
+                name="birthday"
+                style={{ textAlign: "center" }}
+                required
+              />
+            </div>
           </Fieldset>
           {/* Position */}
           <Fieldset valid={styledComponentValidator(!userInfo.position)}>
@@ -240,32 +248,34 @@ export default function SendForm() {
                 {!userInfo.position && <span> (required)</span>}
               </div>
             </legend>
-            <select onChange={handleUserChange} name="position">
-              <option value="" onClick={giveCoachAccess}>
-                Choose position
-              </option>
-              <option value="OH" onClick={giveCoachAccess}>
-                Outside Hitter
-              </option>
-              <option value="Opp" onClick={giveCoachAccess}>
-                Opposite
-              </option>
-              <option value="Set" onClick={giveCoachAccess}>
-                Setter
-              </option>
-              <option value="Lib" onClick={giveCoachAccess}>
-                Libero
-              </option>
-              <option value="MB" onClick={giveCoachAccess}>
-                Middle Blocker
-              </option>
-              <option value="Coach" onClick={giveCoachAccess}>
-                Coach
-              </option>
-              <option value="Parent" onClick={giveCoachAccess}>
-                Parent
-              </option>
-            </select>
+            <div className="measure-wrapper">
+              <select onChange={handleUserChange} name="position">
+                <option value="" onClick={giveCoachAccess}>
+                  Choose position
+                </option>
+                <option value="OH" onClick={giveCoachAccess}>
+                  Outside Hitter
+                </option>
+                <option value="Opp" onClick={giveCoachAccess}>
+                  Opposite
+                </option>
+                <option value="Set" onClick={giveCoachAccess}>
+                  Setter
+                </option>
+                <option value="Lib" onClick={giveCoachAccess}>
+                  Libero
+                </option>
+                <option value="MB" onClick={giveCoachAccess}>
+                  Middle Blocker
+                </option>
+                <option value="Coach" onClick={giveCoachAccess}>
+                  Coach
+                </option>
+                <option value="Parent" onClick={giveCoachAccess}>
+                  Parent
+                </option>
+              </select>
+            </div>
           </Fieldset>
           {/* Acces to Position coach */}
           {coachAcces && (
@@ -278,17 +288,19 @@ export default function SendForm() {
                   {invalidPassword && <span> (invalid)</span>}
                 </div>
               </legend>
-              <input
-                type="text"
-                onChange={(e) => setCoachPassword(e.target.value)}
-                value={coachPassword}
-              />
-              <Button
-                type="button"
-                text="OK"
-                onClick={checkCoachPassword}
-                style={{ marginLeft: 10 }}
-              />
+              <div className="measure-wrapper" style={{ flexDirection: "row" }}>
+                <input
+                  type="text"
+                  onChange={(e) => setCoachPassword(e.target.value)}
+                  value={coachPassword}
+                />
+                <Button
+                  type="button"
+                  text="OK"
+                  onClick={checkCoachPassword}
+                  style={{ marginLeft: 10 }}
+                />
+              </div>
             </Fieldset>
           )}
           {/* Gender*/}
@@ -307,13 +319,15 @@ export default function SendForm() {
                     {!userInfo.gender && <span> (required)</span>}
                   </div>
                 </legend>
-                <select onChange={handleUserChange} name="gender">
-                  <option value="" onClick={handleUserTeamCancel}>
-                    Choose your gender
-                  </option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
+                <div className="measure-wrapper">
+                  <select onChange={handleUserChange} name="gender">
+                    <option value="" onClick={handleUserTeamCancel}>
+                      Choose your gender
+                    </option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
               </Fieldset>
               {/* Belongs to team */}
               <Fieldset valid={styledComponentValidator(!userInfo.team)}>
@@ -325,33 +339,35 @@ export default function SendForm() {
                     {!userInfo.team && <span> (required)</span>}
                   </div>
                 </legend>
-                <select onChange={handleUserChange} name="team">
-                  <option value="">Choose your team</option>
-                  {userInfo.gender === "female" ? (
-                    <>
-                      <option value="Resilience-13">U-13 Girls Resilience</option>
-                      <option value="Vitality-14">U-14 Girls Vitality</option>
-                      <option value="Chaos-15">U-15 Girls Chaos</option>
-                      <option value="Fastball-15">U-15 Girls Fastball</option>
-                      <option value="Strive-16">U-16 Girls Strive</option>
-                      <option value="Tenacity-16">U-16 Girls Tenacity</option>
-                      <option value="Extreme-17">U-17 Girls Extreme</option>
-                      <option value="Shock-17">U-17 Girls Shock</option>
-                      <option value="Ace-18">U-18 Girls Ace</option>
-                    </>
-                  ) : (
-                    <>
-                      <option value="Tigers-12">U-12 Boys Tigers</option>
-                      <option value="Force-13">U-13 Boys Force</option>
-                      <option value="Nova-14">U-14 Boys Nova</option>
-                      <option value="Impact-15">U-15 Boys Impact</option>
-                      <option value="Technique-15">U-15 Boys Technique</option>
-                      <option value="Bushido-16">U-16 Boys Bushido</option>
-                      <option value="Valour-17">U-17 Boys Valour</option>
-                      <option value="Blue-18">U-18 Boys Blue</option>
-                    </>
-                  )}
-                </select>
+                <div className="measure-wrapper">
+                  <select onChange={handleUserChange} name="team">
+                    <option value="">Choose your team</option>
+                    {userInfo.gender === "female" ? (
+                      <>
+                        <option value="Resilience-13">U-13 Girls Resilience</option>
+                        <option value="Vitality-14">U-14 Girls Vitality</option>
+                        <option value="Chaos-15">U-15 Girls Chaos</option>
+                        <option value="Fastball-15">U-15 Girls Fastball</option>
+                        <option value="Strive-16">U-16 Girls Strive</option>
+                        <option value="Tenacity-16">U-16 Girls Tenacity</option>
+                        <option value="Extreme-17">U-17 Girls Extreme</option>
+                        <option value="Shock-17">U-17 Girls Shock</option>
+                        <option value="Ace-18">U-18 Girls Ace</option>
+                      </>
+                    ) : (
+                      <>
+                        <option value="Tigers-12">U-12 Boys Tigers</option>
+                        <option value="Force-13">U-13 Boys Force</option>
+                        <option value="Nova-14">U-14 Boys Nova</option>
+                        <option value="Impact-15">U-15 Boys Impact</option>
+                        <option value="Technique-15">U-15 Boys Technique</option>
+                        <option value="Bushido-16">U-16 Boys Bushido</option>
+                        <option value="Valour-17">U-17 Boys Valour</option>
+                        <option value="Blue-18">U-18 Boys Blue</option>
+                      </>
+                    )}
+                  </select>
+                </div>
               </Fieldset>
             </>
           )}
@@ -367,12 +383,14 @@ export default function SendForm() {
                     {!userInfo.hand && <span> (required)</span>}
                   </div>
                 </legend>
-                <select onChange={handleUserChange} name="hand">
-                  <option value="">Choose hand</option>
-                  <option value="left">Left</option>
-                  <option value="right">Right</option>
-                  <option value="ambidextrous">Ambidextrous</option>
-                </select>
+                <div className="measure-wrapper">
+                  <select onChange={handleUserChange} name="hand">
+                    <option value="">Choose hand</option>
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                    <option value="ambidextrous">Ambidextrous</option>
+                  </select>
+                </div>
               </Fieldset>
               {/* Height */}
               <Fieldset valid={styledComponentValidator(!userInfo.height)}>
@@ -483,13 +501,15 @@ export default function SendForm() {
                 )}
               </div>
             </legend>
-            <input
-              type="file"
-              onChange={handleUserChange}
-              value={userInfo.photo}
-              name="photo"
-              required
-            />
+            <div className="measure-wrapper">
+              <input
+                type="file"
+                onChange={handleUserChange}
+                value={userInfo.photo}
+                name="photo"
+                required
+              />
+            </div>
           </Fieldset>
         </div>
         <div className="form-button-wrapper">
