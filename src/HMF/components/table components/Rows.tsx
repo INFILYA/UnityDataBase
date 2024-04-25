@@ -30,7 +30,7 @@ export function Rows(props: TRows) {
           <td>
             <div>
               {player.number}{" "}
-              {adminAccess && player.highlightsLink === "" && player.highlights && (
+              {adminAccess && player.highlightsLink?.length === 0 && player.highlights && (
                 <img src="/photos/Hourglass.png" />
               )}{" "}
               {adminAccess && player.photo.startsWith(`C:`) && <img src="/photos/noPhoto.png" />}{" "}

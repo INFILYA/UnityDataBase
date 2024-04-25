@@ -139,13 +139,14 @@ main article section form .email-wrapper .playerInfo-wrapper .iframe-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 2.5%;
 }
 main article section form .email-wrapper .sendForm-wrapper .iframe-wrapper .confirm-wrapper,
 main article section form .email-wrapper .playerInfo-wrapper .iframe-wrapper .confirm-wrapper {
   display: flex;
   margin-bottom: 2.5%;
   flex-direction: column;
-  width: 90%;
+  width: 100%;
   align-items: center;
 }
 main article section form .email-wrapper .sendForm-wrapper .iframe-wrapper .confirm-wrapper div,

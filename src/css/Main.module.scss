@@ -145,11 +145,12 @@ main {
               display: flex;
               flex-direction: column;
               align-items: center;
+              margin-bottom: 2.5%;
               .confirm-wrapper {
                 display: flex;
                 margin-bottom: 2.5%;
                 flex-direction: column;
-                width: 90%;
+                width: 100%;
                 align-items: center;
                 div {
                   margin: 5px 0;

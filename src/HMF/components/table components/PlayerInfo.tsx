@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectPlayers, setPlayers } from "../../../states/slices/playersSlice";
+import { setPlayers } from "../../../states/slices/playersSlice";
 import { ChangeEvent, useEffect, useState } from "react";
 import { TUserInfo } from "../../../types/Types";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -13,16 +13,14 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { onValue, remove, update } from "firebase/database";
 import FormWrapper from "../../../wpappers/FormWrapper";
 import { ref, uploadBytes } from "firebase/storage";
-import Diagramm from "./Diagramm";
-import { selectuserToCompare, setUserToCompare } from "../../../states/slices/userToCompareSlice";
+// import { selectuserToCompare, setUserToCompare } from "../../../states/slices/userToCompareSlice";
 import FormFields from "../fields/FormFields";
 import PlayerInfoFields from "../fields/PlayerInfoFields";
 
 export default function PlayerInfo() {
   const [searchParams] = useSearchParams();
   const userInfo = useSelector(selectUserInfo);
-  const players = useSelector(selectPlayers);
-  const userToCompare = useSelector(selectuserToCompare);
+  // const userToCompare = useSelector(selectuserToCompare);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isRegistratedUser] = useAuthState(auth);
@@ -31,7 +29,7 @@ export default function PlayerInfo() {
   const [showHighlights, setShowHighlights] = useState<boolean>(false);
   const [confirmationHighlights, setConfirmationHighlights] = useState(false);
   const [fileUpload, setFileUpload] = useState<File | null>(null);
-  const [showCompareWindow, setShowCompareWindow] = useState<string>("");
+  // const [showCompareWindow, setShowCompareWindow] = useState<string>("");
 
   const myParam = searchParams.get("player");
 
@@ -143,17 +141,17 @@ export default function PlayerInfo() {
     setEditedProfile({
       ...userInfo,
       highlights: true,
-      highlightsLink: "",
+      highlightsLink: [""],
     });
     setConfirmationHighlights(false);
   }
 
-  const selectPlayerToCompare = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setShowCompareWindow(event.target.value);
-    const userToCompare = players.find((player) => player.email === event.target.value);
-    if (!userToCompare) return;
-    dispatch(setUserToCompare(userToCompare));
-  };
+  // const selectPlayerToCompare = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  //   setShowCompareWindow(event.target.value);
+  //   const userToCompare = players.find((player) => player.email === event.target.value);
+  //   if (!userToCompare) return;
+  //   dispatch(setUserToCompare(userToCompare));
+  // };
 
   const properPhoneLength = currentValue.length !== 12;
   const adminAccess = isRegistratedUser?.email === "infilya89@gmail.com";
@@ -163,10 +161,10 @@ export default function PlayerInfo() {
   if (userInfo === undefined || userInfo === null) return;
   const id = `${userInfo?.firstName} ${userInfo?.lastName}, ${userInfo.team}`;
   const highlightsDenied = userInfo.position === "Coach" || userInfo.position === "Parent";
-  const filteredPlayers = players.filter(
-    (player) =>
-      player.team === userInfo.team && player.position !== "Coach" && player.position !== "Parent"
-  );
+  // const filteredPlayers = players.filter(
+  //   (player) =>
+  //     player.team === userInfo.team && player.position !== "Coach" && player.position !== "Parent"
+  // );
 
   return (
     <SectionWrapper>
@@ -191,16 +189,16 @@ export default function PlayerInfo() {
             )}
           </div>
           <div className="player-photo-wrapper">
-            {showCompareWindow ? (
+            {/* {showCompareWindow ? (
               <div className="dual-photos-wrapper">
                 <img src={`/photos/${userInfo.photo}`} alt="" />
                 <img src={`/photos/${userToCompare.photo}`} alt="" />
               </div>
-            ) : (
-              <img src={`/photos/${userInfo.photo}`} alt="" />
-            )}
+            ) : ( */}
+            <img src={`/photos/${userInfo.photo}`} alt="" />
+            {/* )} */}
           </div>
-          {!highlightsDenied && (
+          {/* {!highlightsDenied && (
             <div className="compare-block-wrapper">
               <div>
                 <h3>
@@ -220,7 +218,7 @@ export default function PlayerInfo() {
               </div>
             </div>
           )}
-          {showCompareWindow && <Diagramm />}
+          {showCompareWindow && <Diagramm />} */}
           {/* Photo */}
           {currentField === "photo" && (
             <FormFields
@@ -384,11 +382,9 @@ export default function PlayerInfo() {
                           text="Hide highlights"
                           onClick={() => setShowHighlights(!showHighlights)}
                         />
-                        <iframe
-                          src={userInfo?.highlightsLink}
-                          title="YouTube video player"
-                          allowFullScreen
-                        ></iframe>
+                        {userInfo?.highlightsLink.map((link) => (
+                          <iframe src={link} title="YouTube video player" allowFullScreen></iframe>
+                        ))}
                       </div>
                     </>
                   ) : (
@@ -416,7 +412,7 @@ export default function PlayerInfo() {
                     </div>
                   ) : (
                     <>
-                      {fieldAccess && !highlightsDenied && !adminAccess && (
+                      {fieldAccess && !highlightsDenied && (
                         <>
                           {userInfo.highlights ? (
                             <div className="playerInfo-fields" style={{ justifyContent: "center" }}>
@@ -438,12 +434,21 @@ export default function PlayerInfo() {
                   )}
                 </div>
               )}
+              {!highlightsDenied && (
+                <div className="iframe-wrapper">
+                  <Button
+                    type="button"
+                    text="Additional Stats"
+                    onClick={() => navigate(`/AdditionalStat?player=${userInfo.email}`)}
+                  />
+                </div>
+              )}
               {!confirmationHighlights && (
                 <div className="nav-buttons">
                   {fieldAccess && (
                     <Button type="button" text="Delete Profile" onClick={deletePlayerProfile} />
                   )}
-                  <Button type="button" text="Back" onClick={() => navigate("/")} />
+                  <Button type="button" text="Back" onClick={() => navigate(-1)} />
                 </div>
               )}
             </>

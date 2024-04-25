@@ -32,5 +32,5 @@ export type TUserInfo = {
   reach: string;
   hand: "left" | "right" | "ambidextrous" | "";
   highlights: boolean;
-  highlightsLink?: string;
+  highlightsLink?: string[];
 };
