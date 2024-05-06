@@ -50,7 +50,8 @@ export default function Table() {
   }
 
   const teams = [...new Set(isUserHaveProfile(players).map((player) => player.team))];
-  const DOB = filteredPlayers.filter((player) => player.birthday.includes(currentDate()));
+  const nowaDay = currentDate();
+  const DOB = filteredPlayers.filter((player) => player.birthday.includes(`-${nowaDay}`));
 
   return (
     <SectionWrapper>
