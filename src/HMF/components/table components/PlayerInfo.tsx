@@ -13,14 +13,12 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { onValue, remove, update } from "firebase/database";
 import FormWrapper from "../../../wpappers/FormWrapper";
 import { ref, uploadBytes } from "firebase/storage";
-// import { selectuserToCompare, setUserToCompare } from "../../../states/slices/userToCompareSlice";
 import FormFields from "../fields/FormFields";
 import PlayerInfoFields from "../fields/PlayerInfoFields";
 
 export default function PlayerInfo() {
   const [searchParams] = useSearchParams();
   const userInfo = useSelector(selectUserInfo);
-  // const userToCompare = useSelector(selectuserToCompare);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isRegistratedUser] = useAuthState(auth);
@@ -28,25 +26,10 @@ export default function PlayerInfo() {
   const [currentValue, setCurrentValue] = useState<string>("");
   const [showHighlights, setShowHighlights] = useState<boolean>(false);
   const [confirmationHighlights, setConfirmationHighlights] = useState(false);
+  const [confirmationDelete, setConfirmationDelete] = useState(false);
   const [fileUpload, setFileUpload] = useState<File | null>(null);
-  // const [showCompareWindow, setShowCompareWindow] = useState<string>("");
-
   const myParam = searchParams.get("player");
 
-  // useEffect(() => {
-  //   async function getData() {
-  //     try {
-  //       if (isRegistratedUser) {
-  //         dispatch(fetchUsersList());
-  //         if (myParam)
-  //           dispatch(setUserInfo(myParam));
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  //   getData();
-  // }, [dispatch, isRegistratedUser]);
   useEffect(() => {
     async function getData() {
       try {
@@ -146,13 +129,6 @@ export default function PlayerInfo() {
     setConfirmationHighlights(false);
   }
 
-  // const selectPlayerToCompare = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-  //   setShowCompareWindow(event.target.value);
-  //   const userToCompare = players.find((player) => player.email === event.target.value);
-  //   if (!userToCompare) return;
-  //   dispatch(setUserToCompare(userToCompare));
-  // };
-
   const properPhoneLength = currentValue.length !== 12;
   const adminAccess = isRegistratedUser?.email === "infilya89@gmail.com";
   const fieldAccess = isRegistratedUser?.email === myParam || adminAccess;
@@ -161,10 +137,6 @@ export default function PlayerInfo() {
   if (userInfo === undefined || userInfo === null) return;
   const id = `${userInfo?.firstName} ${userInfo?.lastName}, ${userInfo.team}`;
   const highlightsDenied = userInfo.position === "Coach" || userInfo.position === "Parent";
-  // const filteredPlayers = players.filter(
-  //   (player) =>
-  //     player.team === userInfo.team && player.position !== "Coach" && player.position !== "Parent"
-  // );
 
   return (
     <SectionWrapper>
@@ -189,36 +161,8 @@ export default function PlayerInfo() {
             )}
           </div>
           <div className="player-photo-wrapper">
-            {/* {showCompareWindow ? (
-              <div className="dual-photos-wrapper">
-                <img src={`/photos/${userInfo.photo}`} alt="" />
-                <img src={`/photos/${userToCompare.photo}`} alt="" />
-              </div>
-            ) : ( */}
             <img src={`/photos/${userInfo.photo}`} alt="" />
-            {/* )} */}
           </div>
-          {/* {!highlightsDenied && (
-            <div className="compare-block-wrapper">
-              <div>
-                <h3>
-                  <strong>Compare with</strong>
-                </h3>
-              </div>
-              <div>
-                <select onChange={selectPlayerToCompare}>
-                  <option value="">Choose Player</option>
-                  {filteredPlayers.map((player, index) => (
-                    <option key={index} value={player.email!}>
-                      {player.firstName} {player.lastName}
-                    </option>
-                  ))}
-                </select>
-                {showCompareWindow && <button onClick={() => setShowCompareWindow("")}>X</button>}
-              </div>
-            </div>
-          )}
-          {showCompareWindow && <Diagramm />} */}
           {/* Photo */}
           {currentField === "photo" && (
             <FormFields
@@ -372,21 +316,27 @@ export default function PlayerInfo() {
             </div>
           ) : (
             <>
-              {userInfo.highlightsLink ? (
+              {userInfo.highlightsLink && !confirmationDelete ? (
                 <>
                   {showHighlights ? (
-                    <>
-                      <div className="iframe-wrapper">
-                        <Button
-                          type="button"
-                          text="Hide highlights"
-                          onClick={() => setShowHighlights(!showHighlights)}
-                        />
-                        {userInfo?.highlightsLink.map((link) => (
+                    <div className="iframe-wrapper">
+                      <Button
+                        type="button"
+                        text="Hide highlights"
+                        onClick={() => setShowHighlights(!showHighlights)}
+                      />
+                      {!userInfo.highlightsLink[0] ? (
+                        <div className="confirm-wrapper">
+                          <div>
+                            <strong>Highlights will be here , soon...</strong>
+                          </div>
+                        </div>
+                      ) : (
+                        userInfo.highlightsLink.map((link) => (
                           <iframe src={link} title="YouTube video player" allowFullScreen></iframe>
-                        ))}
-                      </div>
-                    </>
+                        ))
+                      )}
+                    </div>
                   ) : (
                     <div className="iframe-wrapper">
                       <Button
@@ -401,8 +351,9 @@ export default function PlayerInfo() {
                 <div className="iframe-wrapper">
                   {confirmationHighlights ? (
                     <div className="confirm-wrapper">
-                      <div>Are you sure?</div>
-                      {/* add here normal desripion */}
+                      <div>
+                        <strong> Make highlights ?</strong>
+                      </div>
                       <Button type="button" text="Confirm" onClick={confirmHighlights} />
                       <Button
                         type="button"
@@ -411,30 +362,22 @@ export default function PlayerInfo() {
                       />
                     </div>
                   ) : (
-                    <>
-                      {fieldAccess && !highlightsDenied && !adminAccess &&(
-                        <>
-                          {userInfo.highlights ? (
-                            <div className="playerInfo-fields" style={{ justifyContent: "center" }}>
-                              <label style={{ color: "black" }}>
-                                Highlights will be here , soon...
-                              </label>
-                            </div>
-                          ) : (
-                            <Button
-                              type="button"
-                              text="Make highlights 2023/2024"
-                              style={{ background: "orangered" }}
-                              onClick={() => setConfirmationHighlights(true)}
-                            />
-                          )}
-                        </>
-                      )}
-                    </>
+                    fieldAccess &&
+                    !highlightsDenied &&
+                    !adminAccess &&
+                    !confirmationDelete &&
+                    !userInfo.highlights && (
+                      <Button
+                        type="button"
+                        text="Make highlights 2023/2024"
+                        style={{ background: "orangered" }}
+                        onClick={() => setConfirmationHighlights(true)}
+                      />
+                    )
                   )}
                 </div>
               )}
-              {!highlightsDenied && (
+              {!highlightsDenied && !confirmationDelete && !confirmationHighlights && (
                 <div className="iframe-wrapper">
                   <Button
                     type="button"
@@ -443,11 +386,31 @@ export default function PlayerInfo() {
                   />
                 </div>
               )}
-              {!confirmationHighlights && (
-                <div className="nav-buttons">
-                  {fieldAccess && (
-                    <Button type="button" text="Delete Profile" onClick={deletePlayerProfile} />
+              {fieldAccess && !confirmationHighlights && (
+                <div className="iframe-wrapper">
+                  {confirmationDelete ? (
+                    <div className="confirm-wrapper">
+                      <div>
+                        <strong>Delete Profile ?</strong>
+                      </div>
+                      <Button type="button" text="Confirm" onClick={deletePlayerProfile} />
+                      <Button
+                        type="button"
+                        text="Cancel"
+                        onClick={() => setConfirmationDelete(false)}
+                      />
+                    </div>
+                  ) : (
+                    <Button
+                      type="button"
+                      text="Delete Profile"
+                      onClick={() => setConfirmationDelete(true)}
+                    />
                   )}
+                </div>
+              )}
+              {!confirmationDelete && !confirmationHighlights && (
+                <div className="iframe-wrapper" style={{ marginBottom: "2.5%" }}>
                   <Button type="button" text="Back" onClick={() => navigate(-1)} />
                 </div>
               )}

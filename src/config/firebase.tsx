@@ -19,8 +19,8 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 export const facebookProvider = new FacebookAuthProvider();
-export const dataBase = getDatabase();
+export const dataBase = getDatabase(); // Real DataBase
 export const playersRef = (playersRef: string) => ref(dataBase, `unityMembers/${playersRef}`);
-export const dataRef = ref(dataBase);
+export const dataRef = ref(dataBase); // Real DataBase
 export const storage = getStorage(app);
 // const analytics = getAnalytics(app);

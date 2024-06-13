@@ -81,10 +81,31 @@ export default function SendForm() {
   };
 
   function handleUserChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
-    setUserInfo({
-      ...userInfo,
-      [e.target.name]: e.target.value,
-    });
+    if ((e.target.name === "position" && e.target.value === "") || e.target.value === "Coach") {
+      setUserInfo({
+        ...userInfo,
+        position: "",
+        team: "",
+        gender: "",
+        hand: "",
+        height: "",
+        weight: "",
+        number: "",
+        reach: "",
+      });
+      if (e.target.value === "Coach") {
+        setCoachPassword("");
+        setInvalidPassword(false);
+        setCoachAcces(true);
+      } else setCoachAcces(false);
+    } else {
+      setCoachAcces(false);
+      setUserInfo({
+        ...userInfo,
+        [e.target.name]: e.target.value,
+      });
+    }
+
     const target = e.target as HTMLInputElement;
     const files = target.files;
     if (!files) return;
@@ -103,24 +124,6 @@ export default function SendForm() {
         ...userInfo,
         number: e.target.value,
       });
-  }
-
-  function giveCoachAccess() {
-    setUserInfo({
-      ...userInfo,
-      team: "",
-      gender: "",
-      hand: "",
-      height: "",
-      weight: "",
-      number: "",
-      reach: "",
-    });
-    setCoachPassword("");
-    setInvalidPassword(false);
-    if (userInfo.position === "Coach") {
-      setCoachAcces(true);
-    } else setCoachAcces(false);
   }
 
   function handleUserTeamCancel() {
@@ -152,6 +155,7 @@ export default function SendForm() {
   const isEmptyFields = userInfoValues.some((field) => field!.valueOf() === "");
   const properPhoneLength = userInfo.telephone.length !== 12;
   const disabledButton = isEmptyFields || properPhoneLength || checkPhotoFormat(userInfo.photo);
+  console.log(userInfo);
   return (
     <SectionWrapper>
       <FormWrapper onSubmit={submitUserInfo}>
@@ -250,30 +254,14 @@ export default function SendForm() {
             </legend>
             <div className="measure-wrapper">
               <select onChange={handleUserChange} name="position">
-                <option value="" onClick={giveCoachAccess}>
-                  Choose position
-                </option>
-                <option value="OH" onClick={giveCoachAccess}>
-                  Outside Hitter
-                </option>
-                <option value="Opp" onClick={giveCoachAccess}>
-                  Opposite
-                </option>
-                <option value="Set" onClick={giveCoachAccess}>
-                  Setter
-                </option>
-                <option value="Lib" onClick={giveCoachAccess}>
-                  Libero
-                </option>
-                <option value="MB" onClick={giveCoachAccess}>
-                  Middle Blocker
-                </option>
-                <option value="Coach" onClick={giveCoachAccess}>
-                  Coach
-                </option>
-                <option value="Parent" onClick={giveCoachAccess}>
-                  Parent
-                </option>
+                <option value="">Choose position</option>
+                <option value="OH">Outside Hitter</option>
+                <option value="Opp">Opposite</option>
+                <option value="Set">Setter</option>
+                <option value="Lib">Libero</option>
+                <option value="MB">Middle Blocker</option>
+                <option value="Coach">Coach</option>
+                <option value="Parent">Parent</option>
               </select>
             </div>
           </Fieldset>
@@ -330,48 +318,47 @@ export default function SendForm() {
                 </div>
               </Fieldset>
               {/* Belongs to team */}
-              <Fieldset valid={styledComponentValidator(!userInfo.team)}>
-                <legend>
-                  <div className="forspan">
-                    <span>
-                      <strong>Team</strong>
-                    </span>
-                    {!userInfo.team && <span> (required)</span>}
+              {userInfo.gender && (
+                <Fieldset valid={styledComponentValidator(!userInfo.team)}>
+                  <legend>
+                    <div className="forspan">
+                      <span>
+                        <strong>Team</strong>
+                      </span>
+                      {!userInfo.team && <span> (required)</span>}
+                    </div>
+                  </legend>
+                  <div className="measure-wrapper">
+                    <select onChange={handleUserChange} name="team">
+                      <option value="">Choose your team</option>
+                      {userInfo.gender === "female" ? (
+                        <>
+                          <option value="U-12 Girls">U-12 Girls</option>
+                          <option value="U-13 Girls">U-13 Girls</option>
+                          <option value="U-14 Girls">U-14 Girls</option>
+                          <option value="U-15 Girls">U-15 Girls</option>
+                          <option value="U-16 Girls">U-16 Girls</option>
+                          <option value="U-17 Girls">U-17 Girls</option>
+                          <option value="U-18 Girls">U-18 Girls</option>
+                        </>
+                      ) : (
+                        <>
+                          <option value="U-12 Boys">U-12 Boys</option>
+                          <option value="U-13 Boys">U-13 Boys</option>
+                          <option value="U-14 Boys">U-14 Boys</option>
+                          <option value="U-15 Boys">U-15 Boys</option>
+                          <option value="U-16 Boys">U-16 Boys</option>
+                          <option value="U-17 Boys">U-17 Boys</option>
+                          <option value="U-18 Boys">U-18 Boys</option>
+                        </>
+                      )}
+                    </select>
                   </div>
-                </legend>
-                <div className="measure-wrapper">
-                  <select onChange={handleUserChange} name="team">
-                    <option value="">Choose your team</option>
-                    {userInfo.gender === "female" ? (
-                      <>
-                        <option value="Resilience-13">U-13 Girls Resilience</option>
-                        <option value="Vitality-14">U-14 Girls Vitality</option>
-                        <option value="Chaos-15">U-15 Girls Chaos</option>
-                        <option value="Fastball-15">U-15 Girls Fastball</option>
-                        <option value="Strive-16">U-16 Girls Strive</option>
-                        <option value="Tenacity-16">U-16 Girls Tenacity</option>
-                        <option value="Extreme-17">U-17 Girls Extreme</option>
-                        <option value="Shock-17">U-17 Girls Shock</option>
-                        <option value="Ace-18">U-18 Girls Ace</option>
-                      </>
-                    ) : (
-                      <>
-                        <option value="Tigers-12">U-12 Boys Tigers</option>
-                        <option value="Force-13">U-13 Boys Force</option>
-                        <option value="Nova-14">U-14 Boys Nova</option>
-                        <option value="Impact-15">U-15 Boys Impact</option>
-                        <option value="Technique-15">U-15 Boys Technique</option>
-                        <option value="Bushido-16">U-16 Boys Bushido</option>
-                        <option value="Valour-17">U-17 Boys Valour</option>
-                        <option value="Blue-18">U-18 Boys Blue</option>
-                      </>
-                    )}
-                  </select>
-                </div>
-              </Fieldset>
+                </Fieldset>
+              )}
             </>
           )}
-          {!(userInfo.position === "") && (
+          {userInfo.position && (
             <>
               {/* Hand */}
               <Fieldset valid={styledComponentValidator(!userInfo.hand)}>
@@ -481,7 +468,7 @@ export default function SendForm() {
                     onChange={handleUserChange}
                     value={userInfo.reach}
                     name="reach"
-                    min={280}
+                    min={240}
                     max={380}
                   />
                 </div>

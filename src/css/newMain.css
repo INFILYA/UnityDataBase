@@ -139,7 +139,6 @@ main article section form .email-wrapper .playerInfo-wrapper .iframe-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2.5%;
 }
 main article section form .email-wrapper .sendForm-wrapper .iframe-wrapper .confirm-wrapper,
 main article section form .email-wrapper .playerInfo-wrapper .iframe-wrapper .confirm-wrapper {
@@ -151,8 +150,9 @@ main article section form .email-wrapper .playerInfo-wrapper .iframe-wrapper .co
 }
 main article section form .email-wrapper .sendForm-wrapper .iframe-wrapper .confirm-wrapper div,
 main article section form .email-wrapper .playerInfo-wrapper .iframe-wrapper .confirm-wrapper div {
-  margin: 5px 0;
-  font-size: clamp(13px, 2.5vw, 16px);
+  margin: 10px 0 0 0;
+  font-size: clamp(13px, 2.5vw, 18px);
+  color: orangered;
 }
 main article section form .email-wrapper .sendForm-wrapper .iframe-wrapper button,
 main article section form .email-wrapper .playerInfo-wrapper .iframe-wrapper button {
