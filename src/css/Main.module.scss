@@ -279,9 +279,14 @@ main {
                 }
               }
             }
-            label {
+            div {
               font-weight: 600;
-              margin: 0.5vh 0.5vw;
+              width: 100%;
+              text-align: end;
+              white-space: nowrap;
+            }
+            div:first-child {
+              text-align: start;
             }
             fieldset {
               legend {

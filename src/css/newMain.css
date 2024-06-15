@@ -297,10 +297,16 @@ main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapp
   width: 50%;
   aspect-ratio: 1/1;
 }
-main article section form .email-wrapper .sendForm-wrapper label,
-main article section form .email-wrapper .playerInfo-wrapper label {
+main article section form .email-wrapper .sendForm-wrapper div,
+main article section form .email-wrapper .playerInfo-wrapper div {
   font-weight: 600;
-  margin: 0.5vh 0.5vw;
+  width: 100%;
+  text-align: end;
+  white-space: nowrap;
+}
+main article section form .email-wrapper .sendForm-wrapper div:first-child,
+main article section form .email-wrapper .playerInfo-wrapper div:first-child {
+  text-align: start;
 }
 main article section form .email-wrapper .sendForm-wrapper fieldset legend,
 main article section form .email-wrapper .playerInfo-wrapper fieldset legend {

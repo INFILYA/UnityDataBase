@@ -15,17 +15,17 @@ export default function PlayerInfoFields(props: TPlayerInfoFields) {
 
   return (
     <div className="playerInfo-fields">
-      <label>{firstLetterCapital(field)}:</label>
+      <div>{firstLetterCapital(field)}:</div>
       <div>
         {measureValue && (
-          <div>
+          <>
             {measureValue}{" "}
             {cm
               ? `cm  ${Math.round(+measureValue! / 2.54 / 1.2) / 10} ft`
               : kg
               ? `kg ${Math.round(+measureValue * 2.2)} lbs`
               : ""}
-          </div>
+          </>
         )}
       </div>
       {fieldAccess ||
