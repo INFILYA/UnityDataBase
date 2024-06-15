@@ -189,7 +189,6 @@ main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields 
 }
 main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields div,
 main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields div {
-  font-weight: 600;
   width: 100%;
   text-align: end;
   white-space: nowrap;
@@ -197,6 +196,7 @@ main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields 
 main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields div:first-child,
 main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields div:first-child {
   text-align: start;
+  font-weight: 600;
 }
 main article section form .email-wrapper .sendForm-wrapper .nav-buttons,
 main article section form .email-wrapper .playerInfo-wrapper .nav-buttons {
@@ -483,19 +483,23 @@ main article section .table-section table caption nav {
 main article section .table-section table tbody tr th {
   border: 1px solid black;
   box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  background-color: #693575;
 }
 main article section .table-section table tbody tr th button {
   border: none;
-  width: 100%;
-  padding: 1.5vmax 0.6vmax;
   font-size: clamp(12px, 3vmin, 20px);
   font-weight: 600;
-  background-color: #693575;
   color: white;
-  overflow: hidden;
+  background-color: transparent;
+  transform: rotate(90deg);
+  height: 14vmin;
 }
-main article section .table-section table tbody tr th button:hover {
+main article section .table-section table tbody tr th:hover {
   background-color: #3789b7;
+  scale: 1.1;
+  transition: 0.5s;
 }
 main article section .table-section table tbody .parents-block-wrapper {
   width: 100%;

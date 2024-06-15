@@ -186,13 +186,13 @@ main {
                 width: 20px;
               }
               div {
-                font-weight: 600;
                 width: 100%;
                 text-align: end;
                 white-space: nowrap;
               }
               div:first-child {
                 text-align: start;
+                font-weight: 600;
               }
             }
             .nav-buttons {
@@ -462,19 +462,23 @@ main {
               th {
                 border: 1px solid black;
                 box-sizing: border-box;
+                white-space: nowrap;
+                overflow: hidden;
+                background-color: #693575;
+
                 button {
                   border: none;
-                  width: 100%;
-                  padding: 1.5vmax 0.6vmax;
                   font-size: clamp(12px, 3vmin, 20px);
-                  // white-space: nowrap;
                   font-weight: 600;
-                  background-color: #693575;
                   color: white;
-                  overflow: hidden;
-                  &:hover {
-                    background-color: #3789b7;
-                  }
+                  background-color: transparent;
+                  transform: rotate(90deg);
+                  height: 14vmin;
+                }
+                &:hover {
+                  background-color: #3789b7;
+                  scale: 1.1;
+                  transition: 0.5s;
                 }
               }
             }
