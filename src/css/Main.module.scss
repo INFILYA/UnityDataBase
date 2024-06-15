@@ -185,6 +185,15 @@ main {
               img {
                 width: 20px;
               }
+              div {
+                font-weight: 600;
+                width: 100%;
+                text-align: end;
+                white-space: nowrap;
+              }
+              div:first-child {
+                text-align: start;
+              }
             }
             .nav-buttons {
               display: flex;
@@ -278,15 +287,6 @@ main {
                   aspect-ratio: 1/1;
                 }
               }
-            }
-            div {
-              font-weight: 600;
-              width: 100%;
-              text-align: end;
-              white-space: nowrap;
-            }
-            div:first-child {
-              text-align: start;
             }
             fieldset {
               legend {

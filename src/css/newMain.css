@@ -187,6 +187,17 @@ main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields im
 main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields img {
   width: 20px;
 }
+main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields div,
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields div {
+  font-weight: 600;
+  width: 100%;
+  text-align: end;
+  white-space: nowrap;
+}
+main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields div:first-child,
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields div:first-child {
+  text-align: start;
+}
 main article section form .email-wrapper .sendForm-wrapper .nav-buttons,
 main article section form .email-wrapper .playerInfo-wrapper .nav-buttons {
   display: flex;
@@ -296,17 +307,6 @@ main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapp
   object-fit: contain;
   width: 50%;
   aspect-ratio: 1/1;
-}
-main article section form .email-wrapper .sendForm-wrapper div,
-main article section form .email-wrapper .playerInfo-wrapper div {
-  font-weight: 600;
-  width: 100%;
-  text-align: end;
-  white-space: nowrap;
-}
-main article section form .email-wrapper .sendForm-wrapper div:first-child,
-main article section form .email-wrapper .playerInfo-wrapper div:first-child {
-  text-align: start;
 }
 main article section form .email-wrapper .sendForm-wrapper fieldset legend,
 main article section form .email-wrapper .playerInfo-wrapper fieldset legend {
