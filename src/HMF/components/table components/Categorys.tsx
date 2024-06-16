@@ -8,7 +8,7 @@ type TCategorys = {
 
 export function Categorys(props: TCategorys) {
   const { filteredPlayers, rankByValue } = props;
-  const categorys = ["#", "Name", "Age", "Position", "Height", "Weight", "Reach"];
+  const categorys = ["#", "Name", "Age", "Posit", "Height", "Weight", "Reach"];
   const criterias = [
     "number",
     "firstName",

@@ -486,15 +486,19 @@ main article section .table-section table tbody tr th {
   white-space: nowrap;
   overflow: hidden;
   background-color: #693575;
+  height: 12vmin;
 }
 main article section .table-section table tbody tr th button {
   border: none;
-  font-size: clamp(12px, 3vmin, 20px);
+  font-size: clamp(10px, 3vmin, 20px);
   font-weight: 600;
   color: white;
   background-color: transparent;
   transform: rotate(90deg);
-  height: 14vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 main article section .table-section table tbody tr th:hover {
   background-color: #3789b7;
@@ -510,7 +514,7 @@ main article section .table-section table tbody .rating-row td {
   text-align: center;
   padding: 1vmin;
   border: 1px solid black;
-  font-size: clamp(12px, 3vmin, 20px);
+  font-size: clamp(10px, 3vmin, 18px);
   font-weight: 600;
   overflow: hidden;
   box-sizing: border-box;
