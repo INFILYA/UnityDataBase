@@ -4,15 +4,14 @@ import { TUserInfo } from "../../types/Types";
 import Button from "../../utilities/Button";
 import { Fieldset } from "../../css/UnityDataBase.styled";
 import { auth, storage, playersRef } from "../../config/firebase";
-// import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { ref, uploadBytes } from "firebase/storage";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useAppDispatch } from "../../states/store";
-// import { fetchUsersList } from "../../states/slices/playersSlice";
 import { setPlayers } from "../../states/slices/playersSlice";
 import { checkPhotoFormat, styledComponentValidator } from "../../utilities/functions";
 import { onValue, set } from "firebase/database";
 import FormWrapper from "../../wpappers/FormWrapper";
+import FormFields from "./fields/FormFields";
 
 export default function SendForm() {
   const [isRegistratedUser] = useAuthState(auth);
@@ -44,7 +43,6 @@ export default function SendForm() {
     async function getData() {
       try {
         if (isRegistratedUser) {
-          // dispatch(fetchUsersList());
           onValue(playersRef(""), (snapshot) => {
             const data = snapshot.val();
             if (data !== null) {
@@ -67,8 +65,6 @@ export default function SendForm() {
       setIsLoading(!isLoading);
       //Збрігаю гравця
       const id = `${userInfo?.firstName} ${userInfo?.lastName}, ${userInfo.team}`;
-      // const id = isRegistratedUser!.uid;
-
       await set(playersRef(id), userInfo);
       if (!fileUpload) return;
       const filesFoldersRef = ref(storage, `playersPhotos/${id}/${fileUpload.name}`);
@@ -155,93 +151,43 @@ export default function SendForm() {
   const isEmptyFields = userInfoValues.some((field) => field!.valueOf() === "");
   const properPhoneLength = userInfo.telephone.length !== 12;
   const disabledButton = isEmptyFields || properPhoneLength || checkPhotoFormat(userInfo.photo);
-  console.log(userInfo);
   return (
     <SectionWrapper>
       <FormWrapper onSubmit={submitUserInfo}>
         <h2>Unity Member Form</h2>
         <div className="sendForm-wrapper">
           {/* Name  */}
-          <Fieldset valid={styledComponentValidator(userInfo.firstName.length <= 1)}>
-            <legend>
-              <div className="forspan">
-                <span>
-                  <strong>First Name</strong>
-                </span>
-                {userInfo.firstName.length <= 1 && <span> (required)</span>}
-              </div>
-            </legend>
-            <div className="measure-wrapper">
-              <input
-                type="text"
-                onChange={handleUserChange}
-                value={userInfo.firstName.replace(/[^a-zA-Zа-яА-Я]/g, "")}
-                name="firstName"
-                required
-              />
-            </div>
-          </Fieldset>
+          <FormFields
+            access={userInfo.firstName.length <= 1}
+            field="firstName"
+            type="text"
+            value={userInfo.firstName.replace(/[^a-zA-Zа-яА-Я]/g, "")}
+            onChange={handleUserChange}
+          />
           {/* Surname */}
-          <Fieldset valid={styledComponentValidator(userInfo.lastName.length <= 1)}>
-            <legend>
-              <div className="forspan">
-                <span>
-                  <strong>Last Name</strong>
-                </span>
-                {userInfo.lastName.length <= 1 && <span> (required)</span>}
-              </div>
-            </legend>
-            <div className="measure-wrapper">
-              <input
-                type="text"
-                onChange={handleUserChange}
-                value={userInfo.lastName.replace(/[^a-zA-Zа-яА-Я]/g, "")}
-                name="lastName"
-                required
-              />
-            </div>
-          </Fieldset>
+          <FormFields
+            access={userInfo.lastName.length <= 1}
+            field="lastName"
+            type="text"
+            value={userInfo.lastName.replace(/[^a-zA-Zа-яА-Я]/g, "")}
+            onChange={handleUserChange}
+          />
           {/* Telephone */}
-          <Fieldset valid={styledComponentValidator(properPhoneLength)}>
-            <legend>
-              <div className="forspan">
-                <span>
-                  <strong>Telephone</strong>
-                </span>
-                {properPhoneLength && <span> (required)</span>}
-              </div>
-            </legend>
-            <div className="measure-wrapper">
-              <input
-                type="tel"
-                onChange={handlePhoneChange}
-                value={userInfo.telephone}
-                name="telephone"
-                required
-              />
-            </div>
-          </Fieldset>
+          <FormFields
+            access={properPhoneLength}
+            field="telephone"
+            type="tel"
+            value={userInfo.telephone}
+            onChange={handlePhoneChange}
+          />
           {/* Birthday */}
-          <Fieldset valid={styledComponentValidator(!userInfo.birthday)}>
-            <legend>
-              <div className="forspan">
-                <span>
-                  <strong>Date of Birth</strong>
-                </span>
-                {!userInfo.birthday && <span> (required)</span>}
-              </div>
-            </legend>
-            <div className="measure-wrapper">
-              <input
-                type="date"
-                onChange={handleUserChange}
-                value={userInfo.birthday}
-                name="birthday"
-                style={{ textAlign: "center" }}
-                required
-              />
-            </div>
-          </Fieldset>
+          <FormFields
+            access={!userInfo.birthday}
+            field="birthday"
+            type="date"
+            value={userInfo.birthday}
+            onChange={handleUserChange}
+          />
           {/* Position */}
           <Fieldset valid={styledComponentValidator(!userInfo.position)}>
             <legend>
@@ -361,143 +307,66 @@ export default function SendForm() {
           {userInfo.position && (
             <>
               {/* Hand */}
-              <Fieldset valid={styledComponentValidator(!userInfo.hand)}>
-                <legend>
-                  <div className="forspan">
-                    <span>
-                      <strong>Dominant Hand</strong>
-                    </span>
-                    {!userInfo.hand && <span> (required)</span>}
-                  </div>
-                </legend>
-                <div className="measure-wrapper">
-                  <select onChange={handleUserChange} name="hand">
-                    <option value="">Choose hand</option>
-                    <option value="left">Left</option>
-                    <option value="right">Right</option>
-                    <option value="ambidextrous">Ambidextrous</option>
-                  </select>
-                </div>
-              </Fieldset>
+              <FormFields
+                access={!userInfo.hand}
+                field="hand"
+                value={userInfo.hand}
+                onChange={handleUserChange}
+              />
               {/* Height */}
-              <Fieldset valid={styledComponentValidator(!userInfo.height)}>
-                <legend>
-                  <div className="forspan">
-                    <span>
-                      <strong>Height</strong>
-                    </span>
-                    {!userInfo.height && <span> (required)</span>}
-                  </div>
-                </legend>
-                <div className="measure-wrapper">
-                  <div>
-                    {userInfo.height} cm ; {Math.round(+userInfo.height / 2.54 / 1.2) / 10} ft
-                  </div>
-                  <input
-                    type="range"
-                    onChange={handleUserChange}
-                    value={userInfo.height}
-                    name="height"
-                    min={150}
-                    max={220}
-                  />
-                </div>
-              </Fieldset>
+              <FormFields
+                access={!userInfo.height}
+                field="height"
+                type="range"
+                value={userInfo.height}
+                onChange={handleUserChange}
+                measureValue={userInfo.height}
+                min={150}
+                max={220}
+              />
               {/* Weight */}
-              <Fieldset valid={styledComponentValidator(!userInfo.weight)}>
-                <legend>
-                  <div className="forspan">
-                    <span>
-                      <strong>Weight</strong>
-                    </span>
-                    {!userInfo.weight && <span> (required)</span>}
-                  </div>
-                </legend>
-                <div className="measure-wrapper">
-                  <div>
-                    {userInfo.weight} kg ;&nbsp;
-                    {Math.round(+userInfo.weight * 2.2)} lbs
-                  </div>
-                  <input
-                    type="range"
-                    onChange={handleUserChange}
-                    value={userInfo.weight}
-                    name="weight"
-                    min={40}
-                    max={120}
-                  />
-                </div>
-              </Fieldset>
+              <FormFields
+                access={!userInfo.weight}
+                field="weight"
+                type="range"
+                value={userInfo.weight}
+                onChange={handleUserChange}
+                measureValue={userInfo.weight}
+                min={40}
+                max={120}
+              />
               {/* Number */}
-              <Fieldset valid={styledComponentValidator(!userInfo.number)}>
-                <legend>
-                  <div className="forspan">
-                    <span>
-                      <strong>Jersey number</strong>
-                    </span>
-                    {!userInfo.number && <span> (required)</span>}
-                  </div>
-                </legend>
-                <div className="measure-wrapper">
-                  <div># {userInfo.number}</div>
-                  <input
-                    type="range"
-                    onChange={handleUserNumberChange}
-                    value={userInfo.number}
-                    min={0}
-                    max={99}
-                  />
-                </div>
-              </Fieldset>
+              <FormFields
+                access={!userInfo.number}
+                field="number"
+                type="range"
+                value={userInfo.number}
+                onChange={handleUserNumberChange}
+                measureValue={`# ${userInfo.number}`}
+                min={0}
+                max={99}
+              />
               {/* Reach Height */}
-              <Fieldset valid={styledComponentValidator(!userInfo.reach)}>
-                <legend>
-                  <div className="forspan">
-                    <span>
-                      <strong>Reach height</strong>
-                    </span>
-                    {!userInfo.reach && <span> (required)</span>}
-                  </div>
-                </legend>
-                <div className="measure-wrapper">
-                  <div>
-                    {userInfo.reach} cm ; {Math.round(+userInfo.reach / 2.54 / 1.2) / 10} ft
-                  </div>
-                  <input
-                    type="range"
-                    onChange={handleUserChange}
-                    value={userInfo.reach}
-                    name="reach"
-                    min={240}
-                    max={380}
-                  />
-                </div>
-              </Fieldset>
+              <FormFields
+                access={!userInfo.reach}
+                field="reach"
+                type="range"
+                value={userInfo.reach}
+                onChange={handleUserChange}
+                measureValue={userInfo.reach}
+                min={240}
+                max={380}
+              />
             </>
           )}
           {/* Photo */}
-          <Fieldset valid={styledComponentValidator(checkPhotoFormat(userInfo.photo))}>
-            <legend>
-              <div className="forspan">
-                <span>
-                  <strong>Photo</strong>
-                </span>
-                {!userInfo.photo && <span> (required)</span>}
-                {checkPhotoFormat(userInfo.photo) && userInfo.photo && (
-                  <span>(File resolution is invalid)</span>
-                )}
-              </div>
-            </legend>
-            <div className="measure-wrapper">
-              <input
-                type="file"
-                onChange={handleUserChange}
-                value={userInfo.photo}
-                name="photo"
-                required
-              />
-            </div>
-          </Fieldset>
+          <FormFields
+            access={checkPhotoFormat(fileUpload?.name)}
+            field="photo"
+            type="file"
+            onChange={handleUserChange}
+            // value={userInfo.photo}
+          />
         </div>
         <div className="form-button-wrapper">
           <Button text="Submit" type="submit" disabled={disabledButton} />

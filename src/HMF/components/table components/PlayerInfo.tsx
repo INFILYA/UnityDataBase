@@ -271,7 +271,7 @@ export default function PlayerInfo() {
                 value={currentValue}
                 onChange={handleEditField}
                 measureValue={currentValue}
-                min={280}
+                min={240}
                 max={380}
               />
             ) : (

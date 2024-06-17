@@ -18,7 +18,7 @@ export default function FormFields(props: TFormFields) {
   const { field, onChange, type, value, access, measureValue, min, max } = props;
   const cm = field === "reach" || field === "height";
   const kg = field === "weight";
-
+  const photo = field === "photo";
   const hand = field === "hand";
   return (
     <Fieldset valid={styledComponentValidator(access)}>
@@ -27,7 +27,8 @@ export default function FormFields(props: TFormFields) {
           <span>
             <strong>{firstLetterCapital(field)}</strong>
           </span>
-          {access && <span> (required)</span>}
+          {access && !photo && <span> (required)</span>}
+          {access && photo && <span>(File resolution is invalid)</span>}
         </div>
       </legend>
       <div className="measure-wrapper">
