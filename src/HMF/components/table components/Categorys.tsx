@@ -1,4 +1,5 @@
 import { TUserInfo } from "../../../types/Types";
+import { useSetWidth } from "../../../utilities/useSetWidth";
 import { Rows } from "./Rows";
 
 type TCategorys = {
@@ -8,6 +9,8 @@ type TCategorys = {
 
 export function Categorys(props: TCategorys) {
   const { filteredPlayers, rankByValue } = props;
+  const isBurger = useSetWidth() > 639;
+
   const categorys = ["#", "Name", "Age", "Posit", "Height", "Weight", "Reach"];
   const criterias = [
     "number",
@@ -29,7 +32,12 @@ export function Categorys(props: TCategorys) {
       <tr>
         {categorys.map((category, index) => (
           <th key={category} onClick={() => rankByValue(criterias[index], filteredPlayers)}>
-            <button title={`Click to sort by ${category}`}>{category}</button>
+            <button
+              title={`Click to sort by ${category}`}
+              style={{ transform: isBurger ? "rotate(0deg)" : "rotate(90deg)" }}
+            >
+              {category}
+            </button>
           </th>
         ))}
       </tr>
@@ -39,3 +47,4 @@ export function Categorys(props: TCategorys) {
     </>
   );
 }
+// transform: rotate(90deg);

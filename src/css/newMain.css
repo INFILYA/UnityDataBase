@@ -494,7 +494,6 @@ main article section .table-section table tbody tr th button {
   font-weight: 600;
   color: white;
   background-color: transparent;
-  transform: rotate(90deg);
   display: flex;
   justify-content: center;
   align-items: center;
