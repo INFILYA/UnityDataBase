@@ -27,6 +27,7 @@ export default function SendForm() {
     email: isRegistratedUser?.email,
     gender: "",
     team: "",
+    previousTeam: "",
     position: "",
     hand: "",
     telephone: "",
@@ -82,6 +83,7 @@ export default function SendForm() {
         ...userInfo,
         position: "",
         team: "",
+        previousTeam: "",
         gender: "",
         hand: "",
         height: "",
@@ -148,9 +150,13 @@ export default function SendForm() {
     } else setInvalidPassword(true);
   };
   const userInfoValues = Object.values(userInfo).filter((field) => typeof field === "string");
-  const isEmptyFields = userInfoValues.some((field) => field!.valueOf() === "");
+  const isEmptyFields = userInfoValues.some(
+    (field) => field!.valueOf() === "" || (typeof field === "string" && field.length < 2)
+  );
+
   const properPhoneLength = userInfo.telephone.length !== 12;
   const disabledButton = isEmptyFields || properPhoneLength || checkPhotoFormat(userInfo.photo);
+  console.log(userInfo);
   return (
     <SectionWrapper>
       <FormWrapper onSubmit={submitUserInfo}>
@@ -179,6 +185,14 @@ export default function SendForm() {
             type="tel"
             value={userInfo.telephone}
             onChange={handlePhoneChange}
+          />
+          {/* previousTeam  */}
+          <FormFields
+            access={userInfo.previousTeam.length <= 1}
+            field="previousTeam"
+            type="text"
+            value={userInfo.previousTeam}
+            onChange={handleUserChange}
           />
           {/* Birthday */}
           <FormFields

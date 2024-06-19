@@ -21,6 +21,7 @@ export type TUserInfo = {
   lastName: string;
   email: string | null | undefined;
   gender: string;
+  previousTeam: string;
   team: string;
   position: "OH" | "Opp" | "Set" | "Lib" | "MB" | "Coach" | "Parent" | "";
   birthday: string;
