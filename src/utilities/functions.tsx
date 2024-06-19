@@ -91,6 +91,7 @@ export const emptyUser: TUserInfo = {
   firstName: "",
   lastName: "",
   email: "",
+  previousTeam: "",
   gender: "",
   team: "",
   position: "",
