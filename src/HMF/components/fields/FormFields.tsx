@@ -25,7 +25,11 @@ export default function FormFields(props: TFormFields) {
       <legend>
         <div className="forspan">
           <span>
-            <strong>{firstLetterCapital(field)}</strong>
+            <strong>
+              {field === "reach"
+                ? `Height you ${firstLetterCapital(field)}`
+                : firstLetterCapital(field)}
+            </strong>
           </span>
           {access && !photo && <span> (required)</span>}
           {access && photo && <span>(File resolution is invalid)</span>}

@@ -366,7 +366,7 @@ export default function SendForm() {
                 value={userInfo.reach}
                 onChange={handleUserChange}
                 measureValue={userInfo.reach}
-                min={240}
+                min={200}
                 max={380}
               />
             </>
