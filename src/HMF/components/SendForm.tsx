@@ -154,7 +154,8 @@ export default function SendForm() {
   );
 
   const properPhoneLength = userInfo.telephone.length !== 12;
-  const disabledButton = isEmptyFields || properPhoneLength || checkPhotoFormat(userInfo.photo);
+  const disabledButton = isEmptyFields || properPhoneLength || checkPhotoFormat(userInfo.photo); 
+  
   return (
     <SectionWrapper>
       <FormWrapper onSubmit={submitUserInfo}>
