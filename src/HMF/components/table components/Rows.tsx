@@ -15,6 +15,7 @@ export function Rows(props: TRows) {
   const navigate = useNavigate();
   const isBurger = useSetWidth() > 639;
   const adminAccess = isRegistratedUser?.email === "infilya89@gmail.com";
+  console.log(filteredPlayers);
   return (
     <>
       {filteredPlayers.map((player) => (

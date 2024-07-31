@@ -38,6 +38,7 @@ export default function SendForm() {
     reach: "",
     photo: "",
     highlights: false,
+    evaluation: [false, false, false, false, false],
   });
 
   useEffect(() => {
@@ -154,12 +155,12 @@ export default function SendForm() {
   );
 
   const properPhoneLength = userInfo.telephone.length !== 12;
-  const disabledButton = isEmptyFields || properPhoneLength || checkPhotoFormat(userInfo.photo); 
-  
+  const disabledButton = isEmptyFields || properPhoneLength || checkPhotoFormat(userInfo.photo);
+
   return (
     <SectionWrapper>
       <FormWrapper onSubmit={submitUserInfo}>
-        <h2>Unity Member Form</h2>
+        <h2>Unity Try Out Form</h2>
         <div className="sendForm-wrapper">
           {/* Name  */}
           <FormFields

@@ -137,7 +137,7 @@ export default function PlayerInfo() {
   if (userInfo === undefined || userInfo === null) return;
   const id = `${userInfo?.firstName} ${userInfo?.lastName}, ${userInfo.team}`;
   const highlightsDenied = userInfo.position === "Coach" || userInfo.position === "Parent";
-
+  console.log(currentValue);
   return (
     <SectionWrapper>
       <FormWrapper onSubmit={(e) => e.preventDefault()}>
@@ -300,6 +300,50 @@ export default function PlayerInfo() {
                 measureValue={userInfo.number}
               />
             )}
+            {/* Evaulation */}
+            {adminAccess &&
+              (currentField === "evaluation" ? (
+                <div className="playerInfo-fields">
+                  <div className="eval-wrapper">
+                    <div>anthropometry</div>
+                    <input type="checkBox" />
+                  </div>
+                  <div className="eval-wrapper">
+                    <div>coordianation</div>
+                    <input type="checkBox" />
+                  </div>
+                  <div className="eval-wrapper">
+                    <div>critical thinking</div>
+                    <input type="checkBox" />
+                  </div>
+                  <div className="eval-wrapper">
+                    <div>learning ability</div>
+                    <input type="checkBox" />
+                  </div>
+                  <div className="eval-wrapper">
+                    <div>ball control</div>
+                    <input type="checkBox" />
+                  </div>
+                </div>
+              ) : (
+                <div className="playerInfo-fields">
+                  {userInfo.evaluation.map((evaluat) => (
+                    <div className="eval-wrapper">
+                      <div>skill</div>
+                      <div>{evaluat ? "yes" : "no"}</div>
+                    </div>
+                  ))}
+                  <div>
+                    <button
+                      onClick={() =>
+                        setCurrentFieldValue("evaluation", userInfo.evaluation.toString())
+                      }
+                    >
+                      <img src="/photos/pencil.png"></img>
+                    </button>
+                  </div>
+                </div>
+              ))}
           </>
 
           {currentField || !checkPhotoFormat(fileUpload?.name) ? (

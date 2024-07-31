@@ -176,6 +176,19 @@ main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields 
   width: 100%;
   box-sizing: border-box;
 }
+main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields .eval-wrapper,
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields .eval-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 5px;
+  max-width: 75px;
+  overflow: hidden;
+}
+main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields .eval-wrapper div,
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields .eval-wrapper div {
+  text-align: center !important;
+}
 main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields button,
 main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields button {
   background-color: transparent;

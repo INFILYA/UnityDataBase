@@ -104,4 +104,5 @@ export const emptyUser: TUserInfo = {
   reach: "",
   photo: "",
   highlights: false,
+  evaluation: [false, false, false, false, false],
 };

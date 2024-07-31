@@ -176,6 +176,17 @@ main {
               padding: 5px 1vw 5px 2vw;
               width: 100%;
               box-sizing: border-box;
+              .eval-wrapper {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                padding: 5px;
+                max-width: 75px;
+                overflow: hidden;
+                div {
+                  text-align: center !important;
+                }
+              }
               button {
                 background-color: transparent;
                 border: none;
