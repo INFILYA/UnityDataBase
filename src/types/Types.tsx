@@ -34,5 +34,7 @@ export type TUserInfo = {
   hand: "left" | "right" | "ambidextrous" | "";
   highlights: boolean;
   highlightsLink?: string[];
-  evaluation: boolean[];
+  evaluation: TEval;
 };
+
+export type TEval = { [key: string]: boolean };

@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
 import { setPlayers } from "../../../states/slices/playersSlice";
 import { ChangeEvent, useEffect, useState } from "react";
-import { TUserInfo } from "../../../types/Types";
+import { TEval, TUserInfo } from "../../../types/Types";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Button from "../../../utilities/Button";
 import { auth, playersRef, storage } from "../../../config/firebase";
 import SectionWrapper from "../../../wpappers/SectionWrapper";
 import { useAppDispatch } from "../../../states/store";
-import { checkPhotoFormat } from "../../../utilities/functions";
+import { checkPhotoFormat, emptyUser, firstLetterCapital } from "../../../utilities/functions";
 import { selectUserInfo, setUserInfo } from "../../../states/slices/userInfoSlice";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { onValue, remove, update } from "firebase/database";
@@ -24,6 +24,7 @@ export default function PlayerInfo() {
   const [isRegistratedUser] = useAuthState(auth);
   const [currentField, setCurrentField] = useState<keyof TUserInfo | "">("");
   const [currentValue, setCurrentValue] = useState<string>("");
+  const [currentEvalValue, setCurrentEvalValue] = useState<TEval>(emptyUser.evaluation);
   const [showHighlights, setShowHighlights] = useState<boolean>(false);
   const [confirmationHighlights, setConfirmationHighlights] = useState(false);
   const [confirmationDelete, setConfirmationDelete] = useState(false);
@@ -80,8 +81,12 @@ export default function PlayerInfo() {
 
   const setCurrentFieldValue = (key: keyof TUserInfo, value: string) => {
     setCurrentField(key);
-    if (key === "photo") {
+    if (key === "photo" || key === "evaluation") {
       setCurrentValue("");
+    }
+    if (key === "evaluation") {
+      setCurrentValue("evaluation");
+      setCurrentEvalValue(userInfo.evaluation);
     } else setCurrentValue(value);
   };
   const handleEditField = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -129,15 +134,24 @@ export default function PlayerInfo() {
     setConfirmationHighlights(false);
   }
 
+  function handleUserEvaluationEdit(e: ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value;
+    if (value === "false") {
+      setCurrentEvalValue({ ...currentEvalValue, [e.target.name]: true });
+    } else setCurrentEvalValue({ ...currentEvalValue, [e.target.name]: false });
+  }
+
   const properPhoneLength = currentValue.length !== 12;
-  const adminAccess = isRegistratedUser?.email === "infilya89@gmail.com";
+  const adminAccess =
+    isRegistratedUser?.email === "infilya89@gmail.com" ||
+    isRegistratedUser?.email === "kera.salvi@unitysports.ca";
   const fieldAccess = isRegistratedUser?.email === myParam || adminAccess;
   const disabledButton =
     currentField === "telephone" ? properPhoneLength : currentValue.length <= 1;
   if (userInfo === undefined || userInfo === null) return;
   const id = `${userInfo?.firstName} ${userInfo?.lastName}, ${userInfo.team}`;
   const highlightsDenied = userInfo.position === "Coach" || userInfo.position === "Parent";
-  console.log(currentValue);
+  console.log(currentEvalValue);
   return (
     <SectionWrapper>
       <FormWrapper onSubmit={(e) => e.preventDefault()}>
@@ -302,35 +316,30 @@ export default function PlayerInfo() {
             )}
             {/* Evaulation */}
             {adminAccess &&
+              userInfo.evaluation &&
               (currentField === "evaluation" ? (
                 <div className="playerInfo-fields">
-                  <div className="eval-wrapper">
-                    <div>anthropometry</div>
-                    <input type="checkBox" />
-                  </div>
-                  <div className="eval-wrapper">
-                    <div>coordianation</div>
-                    <input type="checkBox" />
-                  </div>
-                  <div className="eval-wrapper">
-                    <div>critical thinking</div>
-                    <input type="checkBox" />
-                  </div>
-                  <div className="eval-wrapper">
-                    <div>learning ability</div>
-                    <input type="checkBox" />
-                  </div>
-                  <div className="eval-wrapper">
-                    <div>ball control</div>
-                    <input type="checkBox" />
-                  </div>
+                  {Object.entries(currentEvalValue).map(([key, value]) => (
+                    <div className="eval-wrapper" key={key}>
+                      <div>{firstLetterCapital(key.slice(0, 5))}</div>
+                      <input
+                        type="checkBox"
+                        checked={value}
+                        onChange={(e) => handleUserEvaluationEdit(e)}
+                        name={key}
+                        value={value.toString()}
+                      />
+                    </div>
+                  ))}
                 </div>
               ) : (
                 <div className="playerInfo-fields">
-                  {userInfo.evaluation.map((evaluat) => (
-                    <div className="eval-wrapper">
-                      <div>skill</div>
-                      <div>{evaluat ? "yes" : "no"}</div>
+                  {Object.entries(userInfo.evaluation).map(([key, value]) => (
+                    <div className="eval-wrapper" key={key}>
+                      <span>{firstLetterCapital(key.slice(0, 5))}</span>
+                      <div>
+                        <img src={value ? `/photos/accepted.png` : `/photos/rejected.png`} alt="" />
+                      </div>
                     </div>
                   ))}
                   <div>
@@ -351,7 +360,12 @@ export default function PlayerInfo() {
               <Button
                 type="button"
                 text="OK"
-                onClick={() => setEditedProfile({ ...userInfo, [currentField]: currentValue })}
+                onClick={() =>
+                  setEditedProfile({
+                    ...userInfo,
+                    [currentField]: currentField === "evaluation" ? currentEvalValue : currentValue,
+                  })
+                }
                 disabled={
                   disabledButton || (currentField === "photo" && checkPhotoFormat(currentValue))
                 }

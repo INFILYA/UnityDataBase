@@ -15,7 +15,6 @@ export function Rows(props: TRows) {
   const navigate = useNavigate();
   const isBurger = useSetWidth() > 639;
   const adminAccess = isRegistratedUser?.email === "infilya89@gmail.com";
-  console.log(filteredPlayers);
   return (
     <>
       {filteredPlayers.map((player) => (
@@ -25,7 +24,20 @@ export function Rows(props: TRows) {
           onClick={() => navigate(`/PlayerInfo?player=${player.email}`)}
           style={{
             backgroundColor:
-              player.position === "Coach" || player.position === "Parent" ? "gainsboro" : "",
+              player.position === "Coach" || player.position === "Parent"
+                ? "gainsboro"
+                : player.evaluation &&
+                  Object.values(player.evaluation).filter((skill) => skill === true).length <= 1
+                ? "orangered"
+                : player.evaluation &&
+                  Object.values(player.evaluation).filter((skill) => skill === true).length <= 2
+                ? "orange"
+                : player.evaluation &&
+                  Object.values(player.evaluation).filter((skill) => skill === true).length <= 3
+                ? "yellow"
+                : player.evaluation
+                ? "greenyellow"
+                : "transparent",
           }}
         >
           <td>

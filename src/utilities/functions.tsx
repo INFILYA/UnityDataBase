@@ -104,5 +104,11 @@ export const emptyUser: TUserInfo = {
   reach: "",
   photo: "",
   highlights: false,
-  evaluation: [false, false, false, false, false],
+  evaluation: {
+    anthropometry: false,
+    coordianation: false,
+    criticalThinking: false,
+    learningAbility: false,
+    ballControl: false,
+  },
 };
