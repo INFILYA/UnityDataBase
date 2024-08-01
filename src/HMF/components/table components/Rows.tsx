@@ -14,7 +14,9 @@ export function Rows(props: TRows) {
   const { filteredPlayers } = props;
   const navigate = useNavigate();
   const isBurger = useSetWidth() > 639;
-  const adminAccess = isRegistratedUser?.email === "infilya89@gmail.com";
+  const adminAccess =
+    isRegistratedUser?.email === "infilya89@gmail.com" ||
+    isRegistratedUser?.email === "kera.salvi@unitysports.ca";
   return (
     <>
       {filteredPlayers.map((player) => (
@@ -22,23 +24,30 @@ export function Rows(props: TRows) {
           key={player.email}
           className="rating-row"
           onClick={() => navigate(`/PlayerInfo?player=${player.email}`)}
-          style={{
-            backgroundColor:
-              player.position === "Coach" || player.position === "Parent"
-                ? "gainsboro"
-                : player.evaluation &&
-                  Object.values(player.evaluation).filter((skill) => skill === true).length <= 1
-                ? "orangered"
-                : player.evaluation &&
-                  Object.values(player.evaluation).filter((skill) => skill === true).length <= 2
-                ? "orange"
-                : player.evaluation &&
-                  Object.values(player.evaluation).filter((skill) => skill === true).length <= 3
-                ? "yellow"
-                : player.evaluation
-                ? "greenyellow"
-                : "transparent",
-          }}
+          style={
+            player.position === "Coach" || adminAccess
+              ? {
+                  backgroundColor:
+                    player.position === "Coach" || player.position === "Parent"
+                      ? "gainsboro"
+                      : player.evaluation &&
+                        Object.values(player.evaluation).filter((skill) => skill === true).length <=
+                          1
+                      ? "orangered"
+                      : player.evaluation &&
+                        Object.values(player.evaluation).filter((skill) => skill === true).length <=
+                          2
+                      ? "orange"
+                      : player.evaluation &&
+                        Object.values(player.evaluation).filter((skill) => skill === true).length <=
+                          3
+                      ? "yellow"
+                      : player.evaluation
+                      ? "greenyellow"
+                      : "transparent",
+                }
+              : {}
+          }
         >
           <td>
             <div>

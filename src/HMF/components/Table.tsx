@@ -22,7 +22,7 @@ export default function Table() {
     const choosenPlayer = arr.find((player) => player.email === isRegistratedUser?.email);
     const adminAccess =
       isRegistratedUser?.email === "infilya89@gmail.com" ||
-      isRegistratedUser?.email === "daniel@unitysports.ca";
+      isRegistratedUser?.email === "kera.salvi@unitysports.ca";
     if (adminAccess) return arr; // EXPERIMENt
     if (choosenPlayer?.position !== "Coach" && choosenPlayer?.position !== "Parent") {
       return arr.filter(
