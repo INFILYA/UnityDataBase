@@ -201,6 +201,7 @@ export default function PlayerInfo() {
               field="birthday"
               setCurrentFieldValue={setCurrentFieldValue}
               measureValue={userInfo.birthday}
+              fieldAccess={fieldAccess}
             />
           )}
           {/* Telephone */}
@@ -219,6 +220,7 @@ export default function PlayerInfo() {
                   field="telephone"
                   setCurrentFieldValue={setCurrentFieldValue}
                   measureValue={userInfo.telephone}
+                  fieldAccess={fieldAccess}
                 />
               )}
             </>
@@ -237,6 +239,7 @@ export default function PlayerInfo() {
                 field="hand"
                 setCurrentFieldValue={setCurrentFieldValue}
                 measureValue={userInfo.hand}
+                fieldAccess={fieldAccess}
               />
             )}
             {/* Height */}
@@ -256,6 +259,7 @@ export default function PlayerInfo() {
                 field="height"
                 setCurrentFieldValue={setCurrentFieldValue}
                 measureValue={userInfo.height}
+                fieldAccess={fieldAccess}
               />
             )}
             {/* Weight
@@ -294,6 +298,7 @@ export default function PlayerInfo() {
                 field="reach"
                 setCurrentFieldValue={setCurrentFieldValue}
                 measureValue={userInfo.reach}
+                fieldAccess={fieldAccess}
               />
             )}
             {/* Number */}
@@ -313,6 +318,7 @@ export default function PlayerInfo() {
                 field="number"
                 setCurrentFieldValue={setCurrentFieldValue}
                 measureValue={userInfo.number}
+                fieldAccess={fieldAccess}
               />
             )}
             {/* Evaulation */}

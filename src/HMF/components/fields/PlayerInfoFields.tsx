@@ -12,6 +12,7 @@ export default function PlayerInfoFields(props: TPlayerInfoFields) {
   const { fieldAccess, setCurrentFieldValue, field, measureValue } = props;
   const cm = field === "reach" || field === "height";
   const phone = field === "telephone";
+  console.log(fieldAccess);
   return (
     <div className="playerInfo-fields">
       <div>{firstLetterCapital(field)}:</div>
@@ -28,14 +29,13 @@ export default function PlayerInfoFields(props: TPlayerInfoFields) {
           )}
         </div>
       )}
-      {fieldAccess ||
-        (true && (
-          <div>
-            <button onClick={() => setCurrentFieldValue(field, measureValue)}>
-              <img src="/photos/pencil.png"></img>
-            </button>
-          </div>
-        ))}
+      {fieldAccess && (
+        <div>
+          <button onClick={() => setCurrentFieldValue(field, measureValue)}>
+            <img src="/photos/pencil.png"></img>
+          </button>
+        </div>
+      )}
     </div>
   );
 }
