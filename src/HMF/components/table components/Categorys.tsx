@@ -10,22 +10,16 @@ type TCategorys = {
 export function Categorys(props: TCategorys) {
   const { filteredPlayers, rankByValue } = props;
   const isBurger = useSetWidth() > 639;
-
-  const categorys = ["#", "Name", "Age", "Posit", "Height", "Weight", "Reach"];
+  const categorys = ["#", "Name", "Age", "Posit", "Height", "Reach", "E-mail"];
   const criterias = [
     "number",
     "firstName",
     "birthday",
     "position",
     "height",
-    "weight",
     "reach",
+    "email",
   ] as const;
-  const players = filteredPlayers.filter(
-    (profile) => profile.position !== "Parent" && profile.position !== "Coach"
-  );
-  const parents = filteredPlayers.filter((profile) => profile.position === "Parent");
-  const coaches = filteredPlayers.filter((profile) => profile.position === "Coach");
 
   return (
     <>
@@ -41,9 +35,7 @@ export function Categorys(props: TCategorys) {
           </th>
         ))}
       </tr>
-      <Rows filteredPlayers={players} />
-      <Rows filteredPlayers={coaches} />
-      <Rows filteredPlayers={parents} />
+      <Rows filteredPlayers={filteredPlayers} />
     </>
   );
 }

@@ -14,21 +14,36 @@ export function Rows(props: TRows) {
   const { filteredPlayers } = props;
   const navigate = useNavigate();
   const isBurger = useSetWidth() > 639;
+
+  function copyEmail(email: string) {
+    const textToCopy = email;
+    navigator.clipboard
+      .writeText(textToCopy)
+      .then(function () {
+        alert("Email copied: " + textToCopy);
+      })
+      .catch(function (error) {
+        console.error("Failed to copy email: ", error);
+      });
+  }
+
   const adminAccess =
     isRegistratedUser?.email === "infilya89@gmail.com" ||
-    isRegistratedUser?.email === "kera.salvi@unitysports.ca";
+    isRegistratedUser?.email === "kera.salvi@unitysports.ca" ||
+    isRegistratedUser?.email === "orest@unitysports.ca" ||
+    isRegistratedUser?.email === "jin.aaron99@gmail.com";
+
   return (
     <>
       {filteredPlayers.map((player) => (
         <tr
           key={player.email}
           className="rating-row"
-          onClick={() => navigate(`/PlayerInfo?player=${player.email}`)}
           style={
-            player.position === "Coach" || adminAccess
+            player.evaluation
               ? {
                   backgroundColor:
-                    player.position === "Coach" || player.position === "Parent"
+                    player.position === "Coach"
                       ? "gainsboro"
                       : player.evaluation &&
                         Object.values(player.evaluation).filter((skill) => skill === true).length <=
@@ -42,11 +57,9 @@ export function Rows(props: TRows) {
                         Object.values(player.evaluation).filter((skill) => skill === true).length <=
                           3
                       ? "yellow"
-                      : player.evaluation
-                      ? "greenyellow"
-                      : "transparent",
+                      : "greenyellow",
                 }
-              : {}
+              : { backgroundColor: player.position === "Coach" ? "gainsboro" : "" }
           }
         >
           <td>
@@ -59,7 +72,10 @@ export function Rows(props: TRows) {
               {adminAccess && player.highlightsLink && <img src="/photos/ok.png" />}
             </div>
           </td>
-          <td className="rating-player-name">
+          <td
+            className="rating-player-name"
+            onClick={() => navigate(`/PlayerInfo?player=${player.email}`)}
+          >
             {isBurger && player.firstName} {player.lastName}
           </td>
           <td>{upgradeAge(player).birthday}</td>
@@ -68,10 +84,12 @@ export function Rows(props: TRows) {
             {Math.round(+player.height / 2.54 / 1.2) / 10} {isBurger && "ft"}
           </td>
           <td>
-            {Math.round(+player.weight * 2.2)} {isBurger && "lbs"}
-          </td>
-          <td>
             {Math.round(+player.reach / 2.54 / 1.2) / 10} {isBurger && "ft"}
+          </td>
+          <td className="email-wrapper">
+            <button onClick={() => copyEmail(player.email!)}>
+              <img src="/photos/copy.png" />
+            </button>
           </td>
         </tr>
       ))}

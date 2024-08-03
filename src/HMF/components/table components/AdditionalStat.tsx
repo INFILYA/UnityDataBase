@@ -53,8 +53,7 @@ export default function AdditionalStat() {
     dispatch(setUserToCompare(userToCompare));
   };
   const filteredPlayers = players.filter(
-    (player) =>
-      player.team === userInfo.team && player.position !== "Coach" && player.position !== "Parent"
+    (player) => player.team === userInfo.team && player.position !== "Coach"
   );
   return (
     <SectionWrapper>

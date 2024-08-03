@@ -17,7 +17,6 @@ type TFormFields = {
 export default function FormFields(props: TFormFields) {
   const { field, onChange, type, value, access, measureValue, min, max } = props;
   const cm = field === "reach" || field === "height";
-  const kg = field === "weight";
   const photo = field === "photo";
   const hand = field === "hand";
   return (
@@ -38,12 +37,7 @@ export default function FormFields(props: TFormFields) {
       <div className="measure-wrapper">
         {measureValue && (
           <div>
-            {measureValue}{" "}
-            {cm
-              ? `cm  ${Math.round(+measureValue! / 2.54 / 1.2) / 10} ft`
-              : kg
-              ? `kg ${Math.round(+measureValue * 2.2)} lbs`
-              : ""}
+            {measureValue} {cm ? `cm  ${Math.round(+measureValue! / 2.54 / 1.2) / 10} ft` : ""}
           </div>
         )}
         {!hand && (

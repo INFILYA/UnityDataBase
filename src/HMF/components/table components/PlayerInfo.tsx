@@ -7,7 +7,7 @@ import Button from "../../../utilities/Button";
 import { auth, playersRef, storage } from "../../../config/firebase";
 import SectionWrapper from "../../../wpappers/SectionWrapper";
 import { useAppDispatch } from "../../../states/store";
-import { checkPhotoFormat, emptyUser, firstLetterCapital } from "../../../utilities/functions";
+import { checkPhotoFormat, emptyUser } from "../../../utilities/functions";
 import { selectUserInfo, setUserInfo } from "../../../states/slices/userInfoSlice";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { onValue, remove, update } from "firebase/database";
@@ -144,14 +144,15 @@ export default function PlayerInfo() {
   const properPhoneLength = currentValue.length !== 12;
   const adminAccess =
     isRegistratedUser?.email === "infilya89@gmail.com" ||
-    isRegistratedUser?.email === "kera.salvi@unitysports.ca";
+    isRegistratedUser?.email === "kera.salvi@unitysports.ca" ||
+    isRegistratedUser?.email === "orest@unitysports.ca" ||
+    isRegistratedUser?.email === "jin.aaron99@gmail.com";
   const fieldAccess = isRegistratedUser?.email === myParam || adminAccess;
   const disabledButton =
     currentField === "telephone" ? properPhoneLength : currentValue.length <= 1;
   if (userInfo === undefined || userInfo === null) return;
   const id = `${userInfo?.firstName} ${userInfo?.lastName}, ${userInfo.team}`;
-  const highlightsDenied = userInfo.position === "Coach" || userInfo.position === "Parent";
-  console.log(currentEvalValue);
+  const highlightsDenied = userInfo.position === "Coach";
   return (
     <SectionWrapper>
       <FormWrapper onSubmit={(e) => e.preventDefault()}>
@@ -257,7 +258,7 @@ export default function PlayerInfo() {
                 measureValue={userInfo.height}
               />
             )}
-            {/* Weight */}
+            {/* Weight
             {currentField === "weight" ? (
               <FormFields
                 access={!currentValue}
@@ -275,7 +276,7 @@ export default function PlayerInfo() {
                 setCurrentFieldValue={setCurrentFieldValue}
                 measureValue={userInfo.weight}
               />
-            )}
+            )} */}
             {/* Reach Height */}
             {currentField === "reach" ? (
               <FormFields
@@ -321,7 +322,9 @@ export default function PlayerInfo() {
                 <div className="playerInfo-fields">
                   {Object.entries(currentEvalValue).map(([key, value]) => (
                     <div className="eval-wrapper" key={key}>
-                      <div>{firstLetterCapital(key.slice(0, 5))}</div>
+                      <div className="eval-img-wrapper">
+                        <img src={`/photos/${key}.png`} />
+                      </div>
                       <input
                         type="checkBox"
                         checked={value}
@@ -336,7 +339,9 @@ export default function PlayerInfo() {
                 <div className="playerInfo-fields">
                   {Object.entries(userInfo.evaluation).map(([key, value]) => (
                     <div className="eval-wrapper" key={key}>
-                      <span>{firstLetterCapital(key.slice(0, 5))}</span>
+                      <div className="eval-img-wrapper">
+                        <img src={`/photos/${key}.png`} />
+                      </div>
                       <div>
                         <img src={value ? `/photos/accepted.png` : `/photos/rejected.png`} alt="" />
                       </div>

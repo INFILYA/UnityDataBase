@@ -23,10 +23,9 @@ export type TUserInfo = {
   gender: string;
   previousTeam: string;
   team: string;
-  position: "OH" | "Opp" | "Set" | "Lib" | "MB" | "Coach" | "Parent" | "";
+  position: "OH" | "Opp" | "Set" | "Lib" | "MB" | "Coach" | "";
   birthday: string;
   height: string;
-  weight: string;
   number: string;
   telephone: string;
   photo: string;

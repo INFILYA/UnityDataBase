@@ -22,15 +22,12 @@ export default function Table() {
     const choosenPlayer = arr.find((player) => player.email === isRegistratedUser?.email);
     const adminAccess =
       isRegistratedUser?.email === "infilya89@gmail.com" ||
-      isRegistratedUser?.email === "kera.salvi@unitysports.ca";
+      isRegistratedUser?.email === "kera.salvi@unitysports.ca" ||
+      isRegistratedUser?.email === "orest@unitysports.ca" ||
+      isRegistratedUser?.email === "jin.aaron99@gmail.com";
     if (adminAccess) return arr; // EXPERIMENt
-    if (choosenPlayer?.position !== "Coach" && choosenPlayer?.position !== "Parent") {
-      return arr.filter(
-        (player) =>
-          player.team === choosenPlayer?.team &&
-          player.position !== "Coach" &&
-          player.position !== "Parent"
-      );
+    if (choosenPlayer?.position !== "Coach") {
+      return arr.filter((player) => player.email === isRegistratedUser?.email);
     } else return arr.filter((player) => player.team === choosenPlayer?.team);
   };
 

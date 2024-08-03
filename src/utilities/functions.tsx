@@ -99,7 +99,6 @@ export const emptyUser: TUserInfo = {
   telephone: "",
   birthday: "",
   height: "",
-  weight: "",
   number: "",
   reach: "",
   photo: "",

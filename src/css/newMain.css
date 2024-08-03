@@ -187,8 +187,13 @@ main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields 
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields .eval-wrapper span,
-main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields .eval-wrapper span {
+main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields .eval-wrapper input,
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields .eval-wrapper input {
+  width: clamp(20px, 66%, 24px);
+  aspect-ratio: 1/1;
+}
+main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields .eval-wrapper .eval-img-wrapper,
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields .eval-wrapper .eval-img-wrapper {
   font-weight: 600;
   margin-bottom: 1vw;
 }
@@ -201,8 +206,8 @@ main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields 
 }
 main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields .eval-wrapper div img,
 main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields .eval-wrapper div img {
-  width: 75%;
-  aspect-ratio: 1.25/1;
+  width: clamp(26px, 66%, 32px);
+  aspect-ratio: 1/1;
 }
 main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields button,
 main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields button {
@@ -537,6 +542,20 @@ main article section .table-section table tbody .parents-block-wrapper {
   display: flex;
   justify-content: center;
 }
+main article section .table-section table tbody .rating-row .rating-player-name {
+  cursor: pointer;
+}
+main article section .table-section table tbody .rating-row .email-wrapper {
+  display: flex;
+  justify-content: center;
+}
+main article section .table-section table tbody .rating-row .email-wrapper button {
+  background-color: transparent;
+  border: transparent;
+}
+main article section .table-section table tbody .rating-row .email-wrapper button img {
+  width: clamp(12px, 3vmin, 20px);
+}
 main article section .table-section table tbody .rating-row td {
   text-align: center;
   padding: 1vmin;
@@ -545,7 +564,6 @@ main article section .table-section table tbody .rating-row td {
   font-weight: 600;
   overflow: hidden;
   box-sizing: border-box;
-  cursor: pointer;
 }
 main article section .table-section table tbody .rating-row td div {
   display: flex;

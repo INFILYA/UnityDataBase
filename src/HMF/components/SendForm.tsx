@@ -8,7 +8,7 @@ import { ref, uploadBytes } from "firebase/storage";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useAppDispatch } from "../../states/store";
 import { setPlayers } from "../../states/slices/playersSlice";
-import { checkPhotoFormat, styledComponentValidator } from "../../utilities/functions";
+import { styledComponentValidator } from "../../utilities/functions";
 import { onValue, set } from "firebase/database";
 import FormWrapper from "../../wpappers/FormWrapper";
 import FormFields from "./fields/FormFields";
@@ -33,10 +33,9 @@ export default function SendForm() {
     telephone: "",
     birthday: "",
     height: "",
-    weight: "",
     number: "",
     reach: "",
-    photo: "",
+    photo: "none",
     highlights: false,
     evaluation: {
       anthropometry: false,
@@ -93,7 +92,6 @@ export default function SendForm() {
         gender: "",
         hand: "",
         height: "",
-        weight: "",
         number: "",
         reach: "",
       });
@@ -161,7 +159,7 @@ export default function SendForm() {
   );
 
   const properPhoneLength = userInfo.telephone.length !== 12;
-  const disabledButton = isEmptyFields || properPhoneLength || checkPhotoFormat(userInfo.photo);
+  const disabledButton = isEmptyFields || properPhoneLength;
 
   return (
     <SectionWrapper>
@@ -344,7 +342,7 @@ export default function SendForm() {
                 min={150}
                 max={220}
               />
-              {/* Weight */}
+              {/* Weight
               <FormFields
                 access={!userInfo.weight}
                 field="weight"
@@ -354,7 +352,7 @@ export default function SendForm() {
                 measureValue={userInfo.weight}
                 min={40}
                 max={120}
-              />
+              /> */}
               {/* Number */}
               <FormFields
                 access={!userInfo.number}
@@ -379,14 +377,13 @@ export default function SendForm() {
               />
             </>
           )}
-          {/* Photo */}
+          {/* Photo
           <FormFields
             access={checkPhotoFormat(fileUpload?.name)}
             field="photo"
             type="file"
             onChange={handleUserChange}
-            // value={userInfo.photo}
-          />
+          /> */}
         </div>
         <div className="form-button-wrapper">
           <Button text="Submit" type="submit" disabled={disabledButton} />
