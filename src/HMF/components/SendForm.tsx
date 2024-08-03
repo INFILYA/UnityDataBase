@@ -145,7 +145,7 @@ export default function SendForm() {
   };
 
   const checkCoachPassword = () => {
-    if (coachPassword === "1234567890") {
+    if (coachPassword === "zMfvS-2cp@d") {
       setUserInfo({
         ...userInfo,
         position: "Coach",

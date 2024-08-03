@@ -513,6 +513,13 @@ main article section .table-section table caption nav {
   justify-content: center;
   gap: 1vmax;
 }
+main article section .table-section table tbody:hover > :not(:hover) {
+  opacity: 0.75;
+  filter: blur(2px);
+}
+main article section .table-section table tbody tr:hover {
+  opacity: 1;
+}
 main article section .table-section table tbody tr th {
   border: 1px solid black;
   box-sizing: border-box;
@@ -545,13 +552,22 @@ main article section .table-section table tbody .parents-block-wrapper {
 main article section .table-section table tbody .rating-row .rating-player-name {
   cursor: pointer;
 }
-main article section .table-section table tbody .rating-row .email-wrapper {
-  display: flex;
-  justify-content: center;
+main article section .table-section table tbody .rating-row .rating-player-name div {
+  width: 100%;
+  min-height: 2vmax;
+}
+main article section .table-section table tbody .rating-row .rating-player-name div:hover {
+  scale: 1.25;
+  transition: 0.5s;
 }
 main article section .table-section table tbody .rating-row .email-wrapper button {
   background-color: transparent;
   border: transparent;
+  width: 100%;
+}
+main article section .table-section table tbody .rating-row .email-wrapper button:hover {
+  scale: 1.5;
+  transition: 0.33s;
 }
 main article section .table-section table tbody .rating-row .email-wrapper button img {
   width: clamp(12px, 3vmin, 20px);

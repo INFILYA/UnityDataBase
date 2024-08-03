@@ -48,9 +48,7 @@ export default function Diagramm() {
       },
       gridLineWidth: 0,
     },
-    tooltip: {
-      // valueSuffix: " %",
-    },
+    tooltip: {},
     plotOptions: {
       bar: {
         borderRadius: "50%",

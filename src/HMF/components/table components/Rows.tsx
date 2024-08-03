@@ -76,7 +76,9 @@ export function Rows(props: TRows) {
             className="rating-player-name"
             onClick={() => navigate(`/PlayerInfo?player=${player.email}`)}
           >
-            {isBurger && player.firstName} {player.lastName}
+            <div>
+              {isBurger && player.firstName} {player.lastName}
+            </div>
           </td>
           <td>{upgradeAge(player).birthday}</td>
           <td>{player.position}</td>
@@ -87,7 +89,10 @@ export function Rows(props: TRows) {
             {Math.round(+player.reach / 2.54 / 1.2) / 10} {isBurger && "ft"}
           </td>
           <td className="email-wrapper">
-            <button onClick={() => copyEmail(player.email!)}>
+            <button
+              onClick={() => copyEmail(player.email!)}
+              title={`Copy ${player.firstName}'s ${player.lastName} Email`}
+            >
               <img src="/photos/copy.png" />
             </button>
           </td>

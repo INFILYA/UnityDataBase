@@ -11,17 +11,23 @@ type TPlayerInfoFields = {
 export default function PlayerInfoFields(props: TPlayerInfoFields) {
   const { fieldAccess, setCurrentFieldValue, field, measureValue } = props;
   const cm = field === "reach" || field === "height";
-
+  const phone = field === "telephone";
   return (
     <div className="playerInfo-fields">
       <div>{firstLetterCapital(field)}:</div>
-      <div>
-        {measureValue && (
-          <>
-            {measureValue} {cm ? `cm  ${Math.round(+measureValue! / 2.54 / 1.2) / 10} ft` : ""}
-          </>
-        )}
-      </div>
+      {phone ? (
+        <div>
+          <a href={`tel:+1${measureValue}`}>{measureValue}</a>
+        </div>
+      ) : (
+        <div>
+          {measureValue && (
+            <>
+              {measureValue} {cm ? `cm  ${Math.round(+measureValue! / 2.54 / 1.2) / 10} ft` : ""}
+            </>
+          )}
+        </div>
+      )}
       {fieldAccess ||
         (true && (
           <div>

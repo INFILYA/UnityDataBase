@@ -486,7 +486,14 @@ main {
             }
           }
           tbody {
+            &:hover > :not(:hover) {
+              opacity: 0.75;
+              filter: blur(2px);
+            }
             tr {
+              &:hover {
+                opacity: 1;
+              }
               th {
                 border: 1px solid black;
                 box-sizing: border-box;
@@ -520,13 +527,24 @@ main {
             .rating-row {
               .rating-player-name {
                 cursor: pointer;
+                div {
+                  width: 100%;
+                  min-height: 2vmax;
+                  &:hover {
+                    scale: 1.25;
+                    transition: 0.5s;
+                  }
+                }
               }
               .email-wrapper {
-                display: flex;
-                justify-content: center;
                 button {
                   background-color: transparent;
                   border: transparent;
+                  width: 100%;
+                  &:hover {
+                    scale: 1.5;
+                    transition: 0.33s;
+                  }
                   img {
                     width: clamp(12px, 3vmin, 20px);
                   }

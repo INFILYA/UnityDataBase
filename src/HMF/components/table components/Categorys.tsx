@@ -39,4 +39,3 @@ export function Categorys(props: TCategorys) {
     </>
   );
 }
-// transform: rotate(90deg);
