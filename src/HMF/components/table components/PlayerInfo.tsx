@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { setPlayers } from "../../../states/slices/playersSlice";
+import { selectPlayers, setPlayers } from "../../../states/slices/playersSlice";
 import { ChangeEvent, useEffect, useState } from "react";
 import { TEval, TUserInfo } from "../../../types/Types";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -22,6 +22,7 @@ export default function PlayerInfo() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isRegistratedUser] = useAuthState(auth);
+  const players = useSelector(selectPlayers);
   const [currentField, setCurrentField] = useState<keyof TUserInfo | "">("");
   const [currentValue, setCurrentValue] = useState<string>("");
   const [currentEvalValue, setCurrentEvalValue] = useState<TEval>(emptyUser.evaluation);
@@ -147,12 +148,13 @@ export default function PlayerInfo() {
     isRegistratedUser?.email === "kera.salvi@unitysports.ca" ||
     isRegistratedUser?.email === "orest@unitysports.ca" ||
     isRegistratedUser?.email === "jin.aaron99@gmail.com";
-  const fieldAccess = isRegistratedUser?.email === myParam || adminAccess;
+  const highlightsDenied = userInfo.position === "Coach";
+  const coachAccess = players.some((player) => player.email === isRegistratedUser?.email);
+  const fieldAccess = isRegistratedUser?.email === myParam || adminAccess || highlightsDenied;
   const disabledButton =
     currentField === "telephone" ? properPhoneLength : currentValue.length <= 1;
   if (userInfo === undefined || userInfo === null) return;
   const id = `${userInfo?.firstName} ${userInfo?.lastName}, ${userInfo.team}`;
-  const highlightsDenied = userInfo.position === "Coach";
   return (
     <SectionWrapper>
       <FormWrapper onSubmit={(e) => e.preventDefault()}>
@@ -205,7 +207,7 @@ export default function PlayerInfo() {
             />
           )}
           {/* Telephone */}
-          {fieldAccess && (
+          {coachAccess && (
             <>
               {currentField === "telephone" ? (
                 <FormFields
