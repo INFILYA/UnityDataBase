@@ -155,7 +155,6 @@ export default function PlayerInfo() {
     currentField === "telephone" ? properPhoneLength : currentValue.length <= 1;
   if (userInfo === undefined || userInfo === null) return;
   const id = `${userInfo?.firstName} ${userInfo?.lastName}, ${userInfo.team}`;
-  console.log(userInfo.evaluation);
   return (
     <SectionWrapper>
       <FormWrapper onSubmit={(e) => e.preventDefault()}>
@@ -438,7 +437,7 @@ export default function PlayerInfo() {
                     !highlightsDenied &&
                     !adminAccess &&
                     !confirmationDelete &&
-                    !userInfo.highlights && (
+                    userInfo.highlights && ( //Reverse !!!
                       <Button
                         type="button"
                         text="Make highlights 2023/2024"

@@ -59,7 +59,7 @@ export function Rows(props: TRows) {
                       ? "yellow"
                       : "greenyellow",
                 }
-              : { backgroundColor: player.position === "Coach" ? "gainsboro" : "" }
+              : {}
           }
         >
           <td>
