@@ -487,8 +487,8 @@ main {
           }
           tbody {
             &:hover > :not(:hover) {
-              opacity: 0.75;
-              filter: blur(2px);
+              opacity: 0.5;
+              // filter: blur(2px);
             }
             tr {
               &:hover {

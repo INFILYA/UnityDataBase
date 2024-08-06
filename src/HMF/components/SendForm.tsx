@@ -39,10 +39,9 @@ export default function SendForm() {
     highlights: false,
     evaluation: {
       anthropometry: false,
-      coordianation: false,
+      agility: false,
       criticalThinking: false,
-      learningAbility: false,
-      ballControl: false,
+      softSkills: false,
     },
   });
 

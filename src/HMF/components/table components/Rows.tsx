@@ -47,15 +47,15 @@ export function Rows(props: TRows) {
                       ? "gainsboro"
                       : player.evaluation &&
                         Object.values(player.evaluation).filter((skill) => skill === true).length <=
-                          1
+                          0
                       ? "orangered"
                       : player.evaluation &&
                         Object.values(player.evaluation).filter((skill) => skill === true).length <=
-                          2
+                          1
                       ? "orange"
                       : player.evaluation &&
                         Object.values(player.evaluation).filter((skill) => skill === true).length <=
-                          3
+                          2
                       ? "yellow"
                       : "greenyellow",
                 }

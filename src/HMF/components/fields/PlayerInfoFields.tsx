@@ -12,7 +12,6 @@ export default function PlayerInfoFields(props: TPlayerInfoFields) {
   const { fieldAccess, setCurrentFieldValue, field, measureValue } = props;
   const cm = field === "reach" || field === "height";
   const phone = field === "telephone";
-  console.log(fieldAccess);
   return (
     <div className="playerInfo-fields">
       <div>{firstLetterCapital(field)}:</div>

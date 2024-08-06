@@ -105,9 +105,8 @@ export const emptyUser: TUserInfo = {
   highlights: false,
   evaluation: {
     anthropometry: false,
-    coordianation: false,
+    agility: false,
     criticalThinking: false,
-    learningAbility: false,
-    ballControl: false,
+    softSkills: false,
   },
 };

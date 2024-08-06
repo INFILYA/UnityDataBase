@@ -148,13 +148,14 @@ export default function PlayerInfo() {
     isRegistratedUser?.email === "kera.salvi@unitysports.ca" ||
     isRegistratedUser?.email === "orest@unitysports.ca" ||
     isRegistratedUser?.email === "jin.aaron99@gmail.com";
-  const highlightsDenied = userInfo.position === "Coach";
+  const highlightsDenied = userInfo?.position === "Coach";
   const coachAccess = players.some((player) => player.email === isRegistratedUser?.email);
   const fieldAccess = isRegistratedUser?.email === myParam || adminAccess || highlightsDenied;
   const disabledButton =
     currentField === "telephone" ? properPhoneLength : currentValue.length <= 1;
   if (userInfo === undefined || userInfo === null) return;
   const id = `${userInfo?.firstName} ${userInfo?.lastName}, ${userInfo.team}`;
+  console.log(userInfo.evaluation);
   return (
     <SectionWrapper>
       <FormWrapper onSubmit={(e) => e.preventDefault()}>
