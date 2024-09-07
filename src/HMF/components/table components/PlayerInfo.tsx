@@ -145,9 +145,9 @@ export default function PlayerInfo() {
   const properPhoneLength = currentValue.length !== 12;
   const adminAccess =
     isRegistratedUser?.email === "infilya89@gmail.com" ||
-    isRegistratedUser?.email === "kera.salvi@unitysports.ca" ||
+    isRegistratedUser?.email === "miguel.sergio@unitysports.ca" ||
     isRegistratedUser?.email === "orest@unitysports.ca" ||
-    isRegistratedUser?.email === "jin.aaron99@gmail.com";
+    isRegistratedUser?.email === "brian.flores@unitysports.ca";
   const highlightsDenied = userInfo?.position === "Coach";
   const coachAccess = players.some((player) => player.email === isRegistratedUser?.email);
   const fieldAccess = isRegistratedUser?.email === myParam || adminAccess || highlightsDenied;

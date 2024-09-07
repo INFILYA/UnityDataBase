@@ -29,9 +29,9 @@ export function Rows(props: TRows) {
 
   const adminAccess =
     isRegistratedUser?.email === "infilya89@gmail.com" ||
-    isRegistratedUser?.email === "kera.salvi@unitysports.ca" ||
+    isRegistratedUser?.email === "miguel.sergio@unitysports.ca" ||
     isRegistratedUser?.email === "orest@unitysports.ca" ||
-    isRegistratedUser?.email === "jin.aaron99@gmail.com";
+    isRegistratedUser?.email === "brian.flores@unitysports.ca";
 
   return (
     <>

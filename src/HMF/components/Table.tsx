@@ -22,9 +22,9 @@ export default function Table() {
     const choosenPlayer = arr.find((player) => player.email === isRegistratedUser?.email);
     const adminAccess =
       isRegistratedUser?.email === "infilya89@gmail.com" ||
-      isRegistratedUser?.email === "kera.salvi@unitysports.ca" ||
+      isRegistratedUser?.email === "miguel.sergio@unitysports.ca" ||
       isRegistratedUser?.email === "orest@unitysports.ca" ||
-      isRegistratedUser?.email === "jin.aaron99@gmail.com";
+      isRegistratedUser?.email === "brian.flores@unitysports.ca";
     if (adminAccess) return arr; // EXPERIMENt
     if (choosenPlayer?.position !== "Coach") {
       return arr.filter((player) => player.email === isRegistratedUser?.email);
