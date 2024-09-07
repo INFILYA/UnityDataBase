@@ -40,7 +40,7 @@ export function Rows(props: TRows) {
           key={player.email}
           className="rating-row"
           style={
-            player.evaluation
+            player.evaluation && adminAccess
               ? {
                   backgroundColor:
                     player.position === "Coach"
