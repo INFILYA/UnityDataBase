@@ -73,7 +73,10 @@ export default function SendForm() {
       const id = `${userInfo?.firstName} ${userInfo?.lastName}, ${userInfo.team}`;
       await set(playersRef(id), userInfo);
       if (!fileUpload) return;
-      const filesFoldersRef = ref(storage, `playersPhotos/${id}/${fileUpload.name}`);
+      const filesFoldersRef = ref(
+        storage,
+        `playersPhotos/${id}/${fileUpload.name}`
+      );
       await uploadBytes(filesFoldersRef, fileUpload);
     } catch (err) {
       console.error(err);
@@ -82,8 +85,13 @@ export default function SendForm() {
     }
   };
 
-  function handleUserChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
-    if ((e.target.name === "position" && e.target.value === "") || e.target.value === "Coach") {
+  function handleUserChange(
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) {
+    if (
+      (e.target.name === "position" && e.target.value === "") ||
+      e.target.value === "Coach"
+    ) {
       setUserInfo({
         ...userInfo,
         position: "",
@@ -135,10 +143,12 @@ export default function SendForm() {
     let inputNumber = e.target.value.replace(/\D/g, "");
     inputNumber = inputNumber.substring(0, 10);
     if (inputNumber.length > 3) {
-      inputNumber = inputNumber.substring(0, 3) + "-" + inputNumber.substring(3);
+      inputNumber =
+        inputNumber.substring(0, 3) + "-" + inputNumber.substring(3);
     }
     if (inputNumber.length > 7) {
-      inputNumber = inputNumber.substring(0, 7) + "-" + inputNumber.substring(7);
+      inputNumber =
+        inputNumber.substring(0, 7) + "-" + inputNumber.substring(7);
     }
     setUserInfo({ ...userInfo, [e.target.name]: inputNumber });
   };
@@ -152,9 +162,12 @@ export default function SendForm() {
       setCoachAcces(false);
     } else setInvalidPassword(true);
   };
-  const userInfoValues = Object.values(userInfo).filter((field) => typeof field === "string");
+  const userInfoValues = Object.values(userInfo).filter(
+    (field) => typeof field === "string"
+  );
   const isEmptyFields = userInfoValues.some(
-    (field) => field!.valueOf() === "" || (typeof field === "string" && field.length < 2)
+    (field) =>
+      field!.valueOf() === "" || (typeof field === "string" && field.length < 2)
   );
 
   const properPhoneLength = userInfo.telephone.length !== 12;
@@ -261,7 +274,9 @@ export default function SendForm() {
                   <div className="forspan">
                     <span>
                       <strong>
-                        {userInfo.position === "Coach" ? "Your team gender" : "Your gender"}
+                        {userInfo.position === "Coach"
+                          ? "Your team gender"
+                          : "Your gender"}
                       </strong>
                     </span>
                     {!userInfo.gender && <span> (required)</span>}
@@ -310,6 +325,7 @@ export default function SendForm() {
                           <option value="U-16 Boys">U-16 Boys</option>
                           <option value="U-17 Boys">U-17 Boys</option>
                           <option value="U-18 Boys">U-18 Boys</option>
+                          <option value="TOR">TOR</option>
                         </>
                       )}
                     </select>
