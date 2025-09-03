@@ -27,14 +27,25 @@ export default function SendForm() {
     email: isRegistratedUser?.email,
     gender: "",
     team: "",
-    previousTeam: "",
     position: "",
-    hand: "",
     telephone: "",
     birthday: "",
-    height: "",
-    number: "",
-    reach: "",
+    height: "00",
+    number: "00",
+    standingVerticalJump: "00",
+    approachingVerticalJump: "00",
+    twentyMeterSprint: "00",
+    fourOnNineRun: "00",
+    pushUpsFromKnees: "00",
+    pullUpsOnLowBar: "00",
+    overheadMedicineBallThrow: "00",
+    plank: "00",
+    apleyScratch: "00",
+    kneeToWall: "00",
+    sitAndReach: "00",
+    shoulderFlexion: "00",
+    seatedTrunk: "00",
+    butterfly: "00",
     photo: "none",
     highlights: false,
     evaluation: {
@@ -90,19 +101,15 @@ export default function SendForm() {
   ) {
     if (
       (e.target.name === "position" && e.target.value === "") ||
-      e.target.value === "Coach"
+      e.target.value === "COACH"
     ) {
       setUserInfo({
         ...userInfo,
         position: "",
         team: "",
         gender: "",
-        hand: "",
-        height: "",
-        number: "",
-        reach: "",
       });
-      if (e.target.value === "Coach") {
+      if (e.target.value === "COACH") {
         setCoachPassword("");
         setInvalidPassword(false);
         setCoachAcces(true);
@@ -121,19 +128,19 @@ export default function SendForm() {
     setFileUpload(files[0]);
   }
 
-  function handleUserNumberChange(e: ChangeEvent<HTMLInputElement>) {
-    if (e.target.value.length === 1) {
-      const value = `0${e.target.value}`;
-      setUserInfo({
-        ...userInfo,
-        number: value,
-      });
-    } else
-      setUserInfo({
-        ...userInfo,
-        number: e.target.value,
-      });
-  }
+  // function handleUserNumberChange(e: ChangeEvent<HTMLInputElement>) {
+  //   if (e.target.value.length === 1) {
+  //     const value = `0${e.target.value}`;
+  //     setUserInfo({
+  //       ...userInfo,
+  //       number: value,
+  //     });
+  //   } else
+  //     setUserInfo({
+  //       ...userInfo,
+  //       number: e.target.value,
+  //     });
+  // }
 
   function handleUserTeamCancel() {
     setUserInfo({ ...userInfo, team: "" });
@@ -157,7 +164,7 @@ export default function SendForm() {
     if (coachPassword === "zMfvS-2cp@d") {
       setUserInfo({
         ...userInfo,
-        position: "Coach",
+        position: "COACH",
       });
       setCoachAcces(false);
     } else setInvalidPassword(true);
@@ -172,7 +179,7 @@ export default function SendForm() {
 
   const properPhoneLength = userInfo.telephone.length !== 12;
   const disabledButton = isEmptyFields || properPhoneLength;
-
+  console.log(userInfo);
   return (
     <SectionWrapper>
       <FormWrapper onSubmit={submitUserInfo}>
@@ -202,14 +209,6 @@ export default function SendForm() {
             value={userInfo.telephone}
             onChange={handlePhoneChange}
           />
-          {/* previousTeam  */}
-          <FormFields
-            access={userInfo.previousTeam.length <= 1}
-            field="previousTeam"
-            type="text"
-            value={userInfo.previousTeam}
-            onChange={handleUserChange}
-          />
           {/* Birthday */}
           <FormFields
             access={!userInfo.birthday}
@@ -232,11 +231,11 @@ export default function SendForm() {
               <select onChange={handleUserChange} name="position">
                 <option value="">Choose position</option>
                 <option value="OH">Outside Hitter</option>
-                <option value="Opp">Opposite</option>
-                <option value="Set">Setter</option>
-                <option value="Lib">Libero</option>
+                <option value="OPP">Opposite</option>
+                <option value="SET">Setter</option>
+                <option value="LIB">Libero</option>
                 <option value="MB">Middle Blocker</option>
-                <option value="Coach">Coach</option>
+                <option value="COACH">Coach</option>
               </select>
             </div>
           </Fieldset>
@@ -274,7 +273,7 @@ export default function SendForm() {
                   <div className="forspan">
                     <span>
                       <strong>
-                        {userInfo.position === "Coach"
+                        {userInfo.position === "COACH"
                           ? "Your team gender"
                           : "Your gender"}
                       </strong>
@@ -308,24 +307,19 @@ export default function SendForm() {
                       <option value="">Choose your team</option>
                       {userInfo.gender === "female" ? (
                         <>
-                          <option value="U-12 Girls">U-12 Girls</option>
                           <option value="U-13 Girls">U-13 Girls</option>
                           <option value="U-14 Girls">U-14 Girls</option>
                           <option value="U-15 Girls">U-15 Girls</option>
                           <option value="U-16 Girls">U-16 Girls</option>
                           <option value="U-17 Girls">U-17 Girls</option>
-                          <option value="U-18 Girls">U-18 Girls</option>
                         </>
                       ) : (
                         <>
-                          <option value="U-12 Boys">U-12 Boys</option>
-                          <option value="U-13 Boys">U-13 Boys</option>
                           <option value="U-14 Boys">U-14 Boys</option>
                           <option value="U-15 Boys">U-15 Boys</option>
                           <option value="U-16 Boys">U-16 Boys</option>
                           <option value="U-17 Boys">U-17 Boys</option>
                           <option value="U-18 Boys">U-18 Boys</option>
-                          <option value="TOR">TOR</option>
                         </>
                       )}
                     </select>
@@ -334,17 +328,10 @@ export default function SendForm() {
               )}
             </>
           )}
-          {userInfo.position && (
-            <>
-              {/* Hand */}
-              <FormFields
-                access={!userInfo.hand}
-                field="hand"
-                value={userInfo.hand}
-                onChange={handleUserChange}
-              />
-              {/* Height */}
-              <FormFields
+          {/* {userInfo.position && ( */}
+          <>
+            {/* Height */}
+            {/* <FormFields
                 access={!userInfo.height}
                 field="height"
                 type="range"
@@ -353,20 +340,9 @@ export default function SendForm() {
                 measureValue={userInfo.height}
                 min={150}
                 max={220}
-              />
-              {/* Weight
-              <FormFields
-                access={!userInfo.weight}
-                field="weight"
-                type="range"
-                value={userInfo.weight}
-                onChange={handleUserChange}
-                measureValue={userInfo.weight}
-                min={40}
-                max={120}
               /> */}
-              {/* Number */}
-              <FormFields
+            {/* Number */}
+            {/* <FormFields
                 access={!userInfo.number}
                 field="number"
                 type="range"
@@ -375,20 +351,20 @@ export default function SendForm() {
                 measureValue={`# ${userInfo.number}`}
                 min={0}
                 max={99}
-              />
-              {/* Reach Height */}
-              <FormFields
-                access={!userInfo.reach}
-                field="reach"
+              /> */}
+            {/* Reach Height */}
+            {/* <FormFields
+                access={!userInfo.standingVerticalJump}
+                field="standingVerticalJump"
                 type="range"
-                value={userInfo.reach}
+                value={userInfo.standingVerticalJump}
                 onChange={handleUserChange}
-                measureValue={userInfo.reach}
+                measureValue={userInfo.standingVerticalJump}
                 min={200}
                 max={380}
-              />
-            </>
-          )}
+              /> */}
+          </>
+          {/* )} */}
           {/* Photo
           <FormFields
             access={checkPhotoFormat(fileUpload?.name)}

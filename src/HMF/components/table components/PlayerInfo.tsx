@@ -8,7 +8,10 @@ import { auth, playersRef, storage } from "../../../config/firebase";
 import SectionWrapper from "../../../wpappers/SectionWrapper";
 import { useAppDispatch } from "../../../states/store";
 import { checkPhotoFormat, emptyUser } from "../../../utilities/functions";
-import { selectUserInfo, setUserInfo } from "../../../states/slices/userInfoSlice";
+import {
+  selectUserInfo,
+  setUserInfo,
+} from "../../../states/slices/userInfoSlice";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { onValue, remove, update } from "firebase/database";
 import FormWrapper from "../../../wpappers/FormWrapper";
@@ -25,12 +28,33 @@ export default function PlayerInfo() {
   const players = useSelector(selectPlayers);
   const [currentField, setCurrentField] = useState<keyof TUserInfo | "">("");
   const [currentValue, setCurrentValue] = useState<string>("");
-  const [currentEvalValue, setCurrentEvalValue] = useState<TEval>(emptyUser.evaluation);
+  const [currentEvalValue, setCurrentEvalValue] = useState<TEval>(
+    emptyUser.evaluation
+  );
   const [showHighlights, setShowHighlights] = useState<boolean>(false);
   const [confirmationHighlights, setConfirmationHighlights] = useState(false);
   const [confirmationDelete, setConfirmationDelete] = useState(false);
   const [fileUpload, setFileUpload] = useState<File | null>(null);
   const myParam = searchParams.get("player");
+
+  const tests = [
+    "number",
+    "height",
+    "standingVerticalJump",
+    "approachingVerticalJump",
+    "twentyMeterSprint",
+    "fourOnNineRun",
+    "pushUpsFromKnees",
+    "pullUpsOnLowBar",
+    "overheadMedicineBallThrow",
+    "plank",
+    "apleyScratch",
+    "kneeToWall",
+    "sitAndReach",
+    "shoulderFlexion",
+    "seatedTrunk",
+    "butterfly",
+  ] as const;
 
   useEffect(() => {
     async function getData() {
@@ -42,7 +66,11 @@ export default function PlayerInfo() {
               const updatedPlayers = Object.values(data) as TUserInfo[];
               dispatch(setPlayers(updatedPlayers));
               if (myParam)
-                dispatch(setUserInfo(updatedPlayers.find((player) => player.email === myParam)!));
+                dispatch(
+                  setUserInfo(
+                    updatedPlayers.find((player) => player.email === myParam)!
+                  )
+                );
             }
           });
         }
@@ -70,7 +98,10 @@ export default function PlayerInfo() {
       // Змінюю поле гравця
       await update(playersRef(id), updatedInfo);
       if (!fileUpload) return;
-      const filesFoldersRef = ref(storage, `playersPhotos/${id}/${fileUpload.name}`);
+      const filesFoldersRef = ref(
+        storage,
+        `playersPhotos/${id}/${fileUpload.name}`
+      );
       await uploadBytes(filesFoldersRef, fileUpload);
     } catch (e) {
       console.error(e);
@@ -90,30 +121,36 @@ export default function PlayerInfo() {
       setCurrentEvalValue(userInfo.evaluation);
     } else setCurrentValue(value);
   };
-  const handleEditField = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleEditField = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setCurrentValue(e.target.value);
   };
 
-  function handleUserNumberChange(e: ChangeEvent<HTMLInputElement>) {
-    if (e.target.value.length === 1) {
-      const value = `0${e.target.value}`;
-      setCurrentValue(value);
-    } else setCurrentValue(e.target.value);
-  }
+  // function handleUserNumberChange(e: ChangeEvent<HTMLInputElement>) {
+  //   if (e.target.value.length === 1) {
+  //     const value = `0${e.target.value}`;
+  //     setCurrentValue(value);
+  //   } else setCurrentValue(e.target.value);
+  // }
 
   const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
     let inputNumber = e.target.value.replace(/\D/g, "");
     inputNumber = inputNumber.substring(0, 10);
     if (inputNumber.length > 3) {
-      inputNumber = inputNumber.substring(0, 3) + "-" + inputNumber.substring(3);
+      inputNumber =
+        inputNumber.substring(0, 3) + "-" + inputNumber.substring(3);
     }
     if (inputNumber.length > 7) {
-      inputNumber = inputNumber.substring(0, 7) + "-" + inputNumber.substring(7);
+      inputNumber =
+        inputNumber.substring(0, 7) + "-" + inputNumber.substring(7);
     }
     setCurrentValue(inputNumber);
   };
 
-  function handleUserUpload(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+  function handleUserUpload(
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) {
     const target = e.target as HTMLInputElement;
     const files = target.files;
     if (!files) return;
@@ -146,11 +183,13 @@ export default function PlayerInfo() {
   const adminAccess =
     isRegistratedUser?.email === "infilya89@gmail.com" ||
     isRegistratedUser?.email === "miguel.sergio@unitysports.ca" ||
-    isRegistratedUser?.email === "orest@unitysports.ca" ||
     isRegistratedUser?.email === "brian.flores@unitysports.ca";
-  const highlightsDenied = userInfo?.position === "Coach";
-  const coachAccess = players.some((player) => player.email === isRegistratedUser?.email);
-  const fieldAccess = isRegistratedUser?.email === myParam || adminAccess || highlightsDenied;
+  const highlightsDenied = userInfo.position === "COACH";
+  const coachAccess = players.some(
+    (player) => player.email === isRegistratedUser?.email
+  );
+  const fieldAccess =
+    isRegistratedUser?.email === myParam || adminAccess || highlightsDenied;
   const disabledButton =
     currentField === "telephone" ? properPhoneLength : currentValue.length <= 1;
   if (userInfo === undefined || userInfo === null) return;
@@ -228,100 +267,27 @@ export default function PlayerInfo() {
             </>
           )}
           <>
-            {/* Hand */}
-            {currentField === "hand" ? (
-              <FormFields
-                access={!currentValue}
-                field="hand"
-                value={currentValue}
-                onChange={handleEditField}
-              />
-            ) : (
-              <PlayerInfoFields
-                field="hand"
-                setCurrentFieldValue={setCurrentFieldValue}
-                measureValue={userInfo.hand}
-                fieldAccess={fieldAccess}
-              />
-            )}
-            {/* Height */}
-            {currentField === "height" ? (
-              <FormFields
-                access={!currentValue}
-                field="height"
-                type="range"
-                value={currentValue}
-                onChange={handleEditField}
-                measureValue={currentValue}
-                min={150}
-                max={220}
-              />
-            ) : (
-              <PlayerInfoFields
-                field="height"
-                setCurrentFieldValue={setCurrentFieldValue}
-                measureValue={userInfo.height}
-                fieldAccess={fieldAccess}
-              />
-            )}
-            {/* Weight
-            {currentField === "weight" ? (
-              <FormFields
-                access={!currentValue}
-                field="weight"
-                type="range"
-                value={currentValue}
-                onChange={handleEditField}
-                measureValue={currentValue}
-                min={40}
-                max={120}
-              />
-            ) : (
-              <PlayerInfoFields
-                field="weight"
-                setCurrentFieldValue={setCurrentFieldValue}
-                measureValue={userInfo.weight}
-              />
-            )} */}
-            {/* Reach Height */}
-            {currentField === "reach" ? (
-              <FormFields
-                access={!currentValue}
-                field="reach"
-                type="range"
-                value={currentValue}
-                onChange={handleEditField}
-                measureValue={currentValue}
-                min={200}
-                max={380}
-              />
-            ) : (
-              <PlayerInfoFields
-                field="reach"
-                setCurrentFieldValue={setCurrentFieldValue}
-                measureValue={userInfo.reach}
-                fieldAccess={fieldAccess}
-              />
-            )}
-            {/* Number */}
-            {currentField === "number" ? (
-              <FormFields
-                access={!currentValue}
-                field="number"
-                type="range"
-                value={currentValue}
-                onChange={handleUserNumberChange}
-                measureValue={`# ${currentValue}`}
-                min={0}
-                max={99}
-              />
-            ) : (
-              <PlayerInfoFields
-                field="number"
-                setCurrentFieldValue={setCurrentFieldValue}
-                measureValue={userInfo.number}
-                fieldAccess={fieldAccess}
-              />
+            {/* Tests */}
+            {tests.map((test) =>
+              currentField === test ? (
+                <FormFields
+                  access={!currentValue}
+                  field={test}
+                  type="range"
+                  value={currentValue}
+                  onChange={handleEditField}
+                  measureValue={currentValue}
+                  min={0}
+                  max={test === "number" ? 99 : 399}
+                />
+              ) : (
+                <PlayerInfoFields
+                  field={test}
+                  setCurrentFieldValue={setCurrentFieldValue}
+                  measureValue={userInfo[test]}
+                  fieldAccess={adminAccess || false}
+                />
+              )
             )}
             {/* Evaulation */}
             {adminAccess &&
@@ -351,14 +317,24 @@ export default function PlayerInfo() {
                         <img src={`/photos/${key}.png`} />
                       </div>
                       <div>
-                        <img src={value ? `/photos/accepted.png` : `/photos/rejected.png`} alt="" />
+                        <img
+                          src={
+                            value
+                              ? `/photos/accepted.png`
+                              : `/photos/rejected.png`
+                          }
+                          alt=""
+                        />
                       </div>
                     </div>
                   ))}
                   <div>
                     <button
                       onClick={() =>
-                        setCurrentFieldValue("evaluation", userInfo.evaluation.toString())
+                        setCurrentFieldValue(
+                          "evaluation",
+                          userInfo.evaluation.toString()
+                        )
                       }
                     >
                       <img src="/photos/pencil.png"></img>
@@ -376,11 +352,15 @@ export default function PlayerInfo() {
                 onClick={() =>
                   setEditedProfile({
                     ...userInfo,
-                    [currentField]: currentField === "evaluation" ? currentEvalValue : currentValue,
+                    [currentField]:
+                      currentField === "evaluation"
+                        ? currentEvalValue
+                        : currentValue,
                   })
                 }
                 disabled={
-                  disabledButton || (currentField === "photo" && checkPhotoFormat(currentValue))
+                  disabledButton ||
+                  (currentField === "photo" && checkPhotoFormat(currentValue))
                 }
               />
               <Button type="button" text="Cancel" onClick={() => cancel()} />
@@ -404,7 +384,11 @@ export default function PlayerInfo() {
                         </div>
                       ) : (
                         userInfo.highlightsLink.map((link) => (
-                          <iframe src={link} title="YouTube video player" allowFullScreen></iframe>
+                          <iframe
+                            src={link}
+                            title="YouTube video player"
+                            allowFullScreen
+                          ></iframe>
                         ))
                       )}
                     </div>
@@ -425,7 +409,11 @@ export default function PlayerInfo() {
                       <div>
                         <strong> Make highlights ?</strong>
                       </div>
-                      <Button type="button" text="Confirm" onClick={confirmHighlights} />
+                      <Button
+                        type="button"
+                        text="Confirm"
+                        onClick={confirmHighlights}
+                      />
                       <Button
                         type="button"
                         text="Cancel"
@@ -448,15 +436,19 @@ export default function PlayerInfo() {
                   )}
                 </div>
               )}
-              {!highlightsDenied && !confirmationDelete && !confirmationHighlights && (
-                <div className="iframe-wrapper">
-                  <Button
-                    type="button"
-                    text="Additional Stats"
-                    onClick={() => navigate(`/AdditionalStat?player=${userInfo.email}`)}
-                  />
-                </div>
-              )}
+              {!highlightsDenied &&
+                !confirmationDelete &&
+                !confirmationHighlights && (
+                  <div className="iframe-wrapper">
+                    <Button
+                      type="button"
+                      text="Additional Stats"
+                      onClick={() =>
+                        navigate(`/AdditionalStat?player=${userInfo.email}`)
+                      }
+                    />
+                  </div>
+                )}
               {fieldAccess && !confirmationHighlights && (
                 <div className="iframe-wrapper">
                   {confirmationDelete ? (
@@ -464,7 +456,11 @@ export default function PlayerInfo() {
                       <div>
                         <strong>Delete Profile ?</strong>
                       </div>
-                      <Button type="button" text="Confirm" onClick={deletePlayerProfile} />
+                      <Button
+                        type="button"
+                        text="Confirm"
+                        onClick={deletePlayerProfile}
+                      />
                       <Button
                         type="button"
                         text="Cancel"
@@ -481,8 +477,15 @@ export default function PlayerInfo() {
                 </div>
               )}
               {!confirmationDelete && !confirmationHighlights && (
-                <div className="iframe-wrapper" style={{ marginBottom: "2.5%" }}>
-                  <Button type="button" text="Back" onClick={() => navigate(-1)} />
+                <div
+                  className="iframe-wrapper"
+                  style={{ marginBottom: "2.5%" }}
+                >
+                  <Button
+                    type="button"
+                    text="Back"
+                    onClick={() => navigate(-1)}
+                  />
                 </div>
               )}
             </>

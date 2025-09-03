@@ -8,9 +8,15 @@ import { onValue } from "firebase/database";
 import { useAppDispatch } from "../../../states/store";
 import { TUserInfo } from "../../../types/Types";
 import { selectPlayers, setPlayers } from "../../../states/slices/playersSlice";
-import { selectUserInfo, setUserInfo } from "../../../states/slices/userInfoSlice";
+import {
+  selectUserInfo,
+  setUserInfo,
+} from "../../../states/slices/userInfoSlice";
 import { useSelector } from "react-redux";
-import { selectuserToCompare, setUserToCompare } from "../../../states/slices/userToCompareSlice";
+import {
+  selectuserToCompare,
+  setUserToCompare,
+} from "../../../states/slices/userToCompareSlice";
 import Diagramm from "./Diagramm";
 import Button from "../../../utilities/Button";
 
@@ -35,7 +41,11 @@ export default function AdditionalStat() {
               const updatedPlayers = Object.values(data) as TUserInfo[];
               dispatch(setPlayers(updatedPlayers));
               if (myParam)
-                dispatch(setUserInfo(updatedPlayers.find((player) => player.email === myParam)!));
+                dispatch(
+                  setUserInfo(
+                    updatedPlayers.find((player) => player.email === myParam)!
+                  )
+                );
             }
           });
         }
@@ -46,14 +56,18 @@ export default function AdditionalStat() {
     getData();
   }, [dispatch, isRegistratedUser, myParam]);
 
-  const selectPlayerToCompare = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const selectPlayerToCompare = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setShowCompareWindow(event.target.value);
-    const userToCompare = players.find((player) => player.email === event.target.value);
+    const userToCompare = players.find(
+      (player) => player.email === event.target.value
+    );
     if (!userToCompare) return;
     dispatch(setUserToCompare(userToCompare));
   };
   const filteredPlayers = players.filter(
-    (player) => player.team === userInfo.team && player.position !== "Coach"
+    (player) => player.team === userInfo.team && player.position !== "COACH"
   );
   return (
     <SectionWrapper>
@@ -87,7 +101,9 @@ export default function AdditionalStat() {
                   </option>
                 ))}
               </select>
-              {showCompareWindow && <button onClick={() => setShowCompareWindow("")}>X</button>}
+              {showCompareWindow && (
+                <button onClick={() => setShowCompareWindow("")}>X</button>
+              )}
             </div>
           </div>
           {showCompareWindow && <Diagramm />}

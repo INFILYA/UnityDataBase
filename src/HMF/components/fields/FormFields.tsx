@@ -1,7 +1,10 @@
 import { ChangeEvent } from "react";
 import { Fieldset } from "../../../css/UnityDataBase.styled";
 import { TUserInfo } from "../../../types/Types";
-import { firstLetterCapital, styledComponentValidator } from "../../../utilities/functions";
+import {
+  firstLetterCapital,
+  styledComponentValidator,
+} from "../../../utilities/functions";
 
 type TFormFields = {
   access: boolean;
@@ -15,20 +18,16 @@ type TFormFields = {
 };
 
 export default function FormFields(props: TFormFields) {
-  const { field, onChange, type, value, access, measureValue, min, max } = props;
-  const cm = field === "reach" || field === "height";
+  const { field, onChange, type, value, access, measureValue, min, max } =
+    props;
+  const cm = field === "height";
   const photo = field === "photo";
-  const hand = field === "hand";
   return (
     <Fieldset valid={styledComponentValidator(access)}>
       <legend>
         <div className="forspan">
           <span>
-            <strong>
-              {field === "reach"
-                ? `Height you ${firstLetterCapital(field)}`
-                : firstLetterCapital(field)}
-            </strong>
+            <strong>{firstLetterCapital(field)}</strong>
           </span>
           {access && !photo && <span> (required)</span>}
           {access && photo && <span>(File resolution is invalid)</span>}
@@ -37,28 +36,19 @@ export default function FormFields(props: TFormFields) {
       <div className="measure-wrapper">
         {measureValue && (
           <div>
-            {measureValue} {cm ? `cm  ${Math.round(+measureValue! / 2.54 / 1.2) / 10} ft` : ""}
+            {measureValue}{" "}
+            {cm ? `cm  ${Math.round(+measureValue! / 2.54 / 1.2) / 10} ft` : ""}
           </div>
         )}
-        {!hand && (
-          <input
-            type={type}
-            onChange={onChange}
-            value={value}
-            name={field}
-            required
-            min={min}
-            max={max}
-          />
-        )}
-        {hand && (
-          <select onChange={onChange} name={field} value={value}>
-            <option value="">Choose hand</option>
-            <option value="left">Left</option>
-            <option value="right">Right</option>
-            <option value="ambidextrous">Ambidextrous</option>
-          </select>
-        )}
+        <input
+          type={type}
+          onChange={onChange}
+          value={value}
+          name={field}
+          required
+          min={min}
+          max={max}
+        />
       </div>
     </Fieldset>
   );

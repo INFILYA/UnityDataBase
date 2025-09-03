@@ -5,7 +5,8 @@ import { TUserInfo } from "../../types/Types";
 import { compare, currentDate, upgradeAge } from "../../utilities/functions";
 import SectionWrapper from "../../wpappers/SectionWrapper";
 import Button from "../../utilities/Button";
-import { Categorys } from "./table components/Categorys";
+import { CategorysStrength } from "./table components/CategorysStrength";
+import { CategorysMobility } from "./table components/CategorysMobility";
 import { useSelector } from "react-redux";
 import { selectPlayers } from "../../states/slices/playersSlice";
 import { useNavigate } from "react-router-dom";
@@ -19,16 +20,21 @@ export default function Table() {
   const [isBiggest, setIsBiggest] = useState<boolean>(false);
 
   const isUserHaveProfile = (arr: TUserInfo[]): TUserInfo[] => {
-    const choosenPlayer = arr.find((player) => player.email === isRegistratedUser?.email);
+    const choosenPlayer = arr.find(
+      (player) => player.email === isRegistratedUser?.email
+    );
     const adminAccess =
       isRegistratedUser?.email === "infilya89@gmail.com" ||
       isRegistratedUser?.email === "miguel.sergio@unitysports.ca" ||
-      isRegistratedUser?.email === "orest@unitysports.ca" ||
       isRegistratedUser?.email === "brian.flores@unitysports.ca";
     if (adminAccess) return arr; // EXPERIMENt
-    if (choosenPlayer?.position !== "Coach") {
-      return arr.filter((player) => player.email === isRegistratedUser?.email);
-    } else return arr.filter((player) => player.team === choosenPlayer?.team);
+    // if (choosenPlayer?.position !== "COACH") {
+    //   return arr.filter((player) => player.email === isRegistratedUser?.email);
+    // }
+    else
+      return arr
+        .filter((player) => player.team === choosenPlayer?.team)
+        .filter((player) => player.position !== "COACH");
   };
 
   const filterForTeams = (team: string) => {
@@ -46,9 +52,13 @@ export default function Table() {
     setIsBiggest(!isBiggest);
   }
 
-  const teams = [...new Set(isUserHaveProfile(players).map((player) => player.team))];
+  const teams = [
+    ...new Set(isUserHaveProfile(players).map((player) => player.team)),
+  ];
   const nowaDay = currentDate();
-  const DOB = filteredPlayers.filter((player) => player.birthday.includes(`-${nowaDay}`));
+  const DOB = filteredPlayers.filter((player) =>
+    player.birthday.includes(`-${nowaDay}`)
+  );
 
   return (
     <SectionWrapper>
@@ -62,7 +72,10 @@ export default function Table() {
             </div>
             <ul>
               {DOB.map((player, index) => (
-                <li key={index} onClick={() => navigate(`/PlayerInfo?player=${player.email}`)}>
+                <li
+                  key={index}
+                  onClick={() => navigate(`/PlayerInfo?player=${player.email}`)}
+                >
                   <strong>{player.firstName + " " + player.lastName}</strong>
                   {" - "}
                   {upgradeAge(player).birthday}
@@ -76,15 +89,30 @@ export default function Table() {
             <nav>
               {teams.map((team) => (
                 <div key={team} className="table-nav-buttons">
-                  <Button text={team} type="button" onClick={() => filterForTeams(team)} />
+                  <Button
+                    text={team}
+                    type="button"
+                    onClick={() => filterForTeams(team)}
+                  />
                 </div>
               ))}
             </nav>
           </caption>
           {isChoosenFilter && (
-            <tbody className="rating-table-wrapper">
-              <Categorys filteredPlayers={filteredPlayers} rankByValue={rankByValue} />
-            </tbody>
+            <>
+              <tbody className="rating-table-wrapper">
+                <CategorysMobility
+                  filteredPlayers={filteredPlayers}
+                  rankByValue={rankByValue}
+                />
+              </tbody>
+              <tbody className="rating-table-wrapper">
+                <CategorysStrength
+                  filteredPlayers={filteredPlayers}
+                  rankByValue={rankByValue}
+                />
+              </tbody>
+            </>
           )}
         </table>
       </div>

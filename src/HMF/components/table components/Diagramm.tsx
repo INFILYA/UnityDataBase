@@ -12,8 +12,11 @@ export default function Diagramm() {
   const small = useSetWidth() > 629;
   const average = useSetWidth() > 839;
 
-  const playerToCompare = [+userToCompare.height, +userToCompare.reach];
-  const currentUser = [+userInfo.height, +userInfo.reach];
+  const playerToCompare = [
+    +userToCompare.height,
+    +userToCompare.standingVerticalJump,
+  ];
+  const currentUser = [+userInfo.height, +userInfo.standingVerticalJump];
 
   const options = {
     chart: {

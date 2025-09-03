@@ -1,5 +1,5 @@
 import { TUserInfo } from "../../../types/Types";
-import { upgradeAge } from "../../../utilities/functions";
+// import { upgradeAge } from "../../../utilities/functions";
 import { useNavigate } from "react-router-dom";
 import { useSetWidth } from "../../../utilities/useSetWidth";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -9,23 +9,11 @@ type TRows = {
   filteredPlayers: TUserInfo[];
 };
 
-export function Rows(props: TRows) {
+export function RowsForMobility(props: TRows) {
   const [isRegistratedUser] = useAuthState(auth);
   const { filteredPlayers } = props;
   const navigate = useNavigate();
   const isBurger = useSetWidth() > 639;
-
-  function copyEmail(email: string) {
-    const textToCopy = email;
-    navigator.clipboard
-      .writeText(textToCopy)
-      .then(function () {
-        alert("Email copied: " + textToCopy);
-      })
-      .catch(function (error) {
-        console.error("Failed to copy email: ", error);
-      });
-  }
 
   const adminAccess =
     isRegistratedUser?.email === "infilya89@gmail.com" ||
@@ -43,19 +31,22 @@ export function Rows(props: TRows) {
             player.evaluation && adminAccess
               ? {
                   backgroundColor:
-                    player.position === "Coach"
+                    player.position === "COACH"
                       ? "gainsboro"
                       : player.evaluation &&
-                        Object.values(player.evaluation).filter((skill) => skill === true).length <=
-                          0
+                        Object.values(player.evaluation).filter(
+                          (skill) => skill === true
+                        ).length <= 0
                       ? "orangered"
                       : player.evaluation &&
-                        Object.values(player.evaluation).filter((skill) => skill === true).length <=
-                          1
+                        Object.values(player.evaluation).filter(
+                          (skill) => skill === true
+                        ).length <= 1
                       ? "orange"
                       : player.evaluation &&
-                        Object.values(player.evaluation).filter((skill) => skill === true).length <=
-                          2
+                        Object.values(player.evaluation).filter(
+                          (skill) => skill === true
+                        ).length <= 2
                       ? "yellow"
                       : "greenyellow",
                 }
@@ -65,11 +56,15 @@ export function Rows(props: TRows) {
           <td>
             <div>
               {player.number}{" "}
-              {adminAccess && player.highlightsLink?.length === 0 && player.highlights && (
-                <img src="/photos/Hourglass.png" />
+              {adminAccess &&
+                player.highlightsLink?.length === 0 &&
+                player.highlights && <img src="/photos/Hourglass.png" />}{" "}
+              {adminAccess && player.photo.startsWith(`C:`) && (
+                <img src="/photos/noPhoto.png" />
               )}{" "}
-              {adminAccess && player.photo.startsWith(`C:`) && <img src="/photos/noPhoto.png" />}{" "}
-              {adminAccess && player.highlightsLink && <img src="/photos/ok.png" />}
+              {adminAccess && player.highlightsLink && (
+                <img src="/photos/ok.png" />
+              )}
             </div>
           </td>
           <td
@@ -80,22 +75,36 @@ export function Rows(props: TRows) {
               {isBurger && player.firstName} {player.lastName}
             </div>
           </td>
-          <td>{upgradeAge(player).birthday}</td>
           <td>{player.position}</td>
           <td>
             {Math.round(+player.height / 2.54 / 1.2) / 10} {isBurger && "ft"}
           </td>
           <td>
-            {Math.round(+player.reach / 2.54 / 1.2) / 10} {isBurger && "ft"}
+            {Math.round(+player.apleyScratch)} {isBurger && "cm"}
           </td>
-          <td className="email-wrapper">
+          <td>
+            {Math.round(+player.kneeToWall)} {isBurger && "cm"}
+          </td>
+          <td>
+            {Math.round(+player.sitAndReach)} {isBurger && "cm"}
+          </td>
+          <td>
+            {Math.round(+player.shoulderFlexion)} {isBurger && "cm"}
+          </td>
+          <td>
+            {Math.round(+player.seatedTrunk)} {isBurger && "cm"}
+          </td>
+          <td>
+            {Math.round(+player.butterfly)} {isBurger && "cm"}
+          </td>
+          {/* <td className="email-wrapper">
             <button
               onClick={() => copyEmail(player.email!)}
               title={`Copy ${player.firstName}'s ${player.lastName} Email`}
             >
               <img src="/photos/copy.png" />
             </button>
-          </td>
+          </td> */}
         </tr>
       ))}
     </>

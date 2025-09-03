@@ -106,25 +106,11 @@ main article section form .email-wrapper .auth-wrapper .email-field-content {
   width: 100%;
   margin: 8px 0 16px 0;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .auth-wrapper
-  .email-field-content
-  label {
+main article section form .email-wrapper .auth-wrapper .email-field-content label {
   margin-bottom: 5px;
   font-size: clamp(14px, 2vw, 17px);
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .auth-wrapper
-  .email-field-content
-  input {
+main article section form .email-wrapper .auth-wrapper .email-field-content input {
   height: 32px;
   border-radius: 4px;
   padding: 0 10px;
@@ -154,97 +140,33 @@ main article section form .email-wrapper .playerInfo-wrapper .iframe-wrapper {
   flex-direction: column;
   align-items: center;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .iframe-wrapper
-  .confirm-wrapper,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .iframe-wrapper
-  .confirm-wrapper {
+main article section form .email-wrapper .sendForm-wrapper .iframe-wrapper .confirm-wrapper,
+main article section form .email-wrapper .playerInfo-wrapper .iframe-wrapper .confirm-wrapper {
   display: flex;
   margin-bottom: 2.5%;
   flex-direction: column;
   width: 100%;
   align-items: center;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .iframe-wrapper
-  .confirm-wrapper
-  div,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .iframe-wrapper
-  .confirm-wrapper
-  div {
+main article section form .email-wrapper .sendForm-wrapper .iframe-wrapper .confirm-wrapper div,
+main article section form .email-wrapper .playerInfo-wrapper .iframe-wrapper .confirm-wrapper div {
   margin: 10px 0 0 0;
   font-size: clamp(13px, 2.5vw, 18px);
   color: orangered;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .iframe-wrapper
-  button,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .iframe-wrapper
-  button {
+main article section form .email-wrapper .sendForm-wrapper .iframe-wrapper button,
+main article section form .email-wrapper .playerInfo-wrapper .iframe-wrapper button {
   margin: 2.5% 2.5% 0 2.5%;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .iframe-wrapper
-  iframe,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .iframe-wrapper
-  iframe {
+main article section form .email-wrapper .sendForm-wrapper .iframe-wrapper iframe,
+main article section form .email-wrapper .playerInfo-wrapper .iframe-wrapper iframe {
   width: inherit;
   aspect-ratio: 16/9;
   margin-top: 2.5%;
   border: none;
 }
 main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .playerInfo-fields {
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -254,22 +176,8 @@ main
   width: 100%;
   box-sizing: border-box;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .playerInfo-fields
-  .eval-wrapper,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .playerInfo-fields
-  .eval-wrapper {
+main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields .eval-wrapper,
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields .eval-wrapper {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -279,169 +187,47 @@ main
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .playerInfo-fields
-  .eval-wrapper
-  input,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .playerInfo-fields
-  .eval-wrapper
-  input {
+main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields .eval-wrapper input,
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields .eval-wrapper input {
   width: clamp(20px, 66%, 24px);
   aspect-ratio: 1/1;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .playerInfo-fields
-  .eval-wrapper
-  .eval-img-wrapper,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .playerInfo-fields
-  .eval-wrapper
-  .eval-img-wrapper {
+main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields .eval-wrapper .eval-img-wrapper,
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields .eval-wrapper .eval-img-wrapper {
   font-weight: 600;
   margin-bottom: 1vw;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .playerInfo-fields
-  .eval-wrapper
-  div,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .playerInfo-fields
-  .eval-wrapper
-  div {
+main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields .eval-wrapper div,
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields .eval-wrapper div {
   text-align: center !important;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .playerInfo-fields
-  .eval-wrapper
-  div
-  img,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .playerInfo-fields
-  .eval-wrapper
-  div
-  img {
+main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields .eval-wrapper div img,
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields .eval-wrapper div img {
   width: clamp(26px, 66%, 32px);
   aspect-ratio: 1/1;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .playerInfo-fields
-  button,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .playerInfo-fields
-  button {
+main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields button,
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields button {
   background-color: transparent;
   border: none;
   margin-left: 10px;
   cursor: pointer;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .playerInfo-fields
-  img,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .playerInfo-fields
-  img {
+main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields img,
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields img {
   width: 20px;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .playerInfo-fields
-  div,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .playerInfo-fields
-  div {
+main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields div,
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields div {
   width: 100%;
   text-align: end;
   white-space: nowrap;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .playerInfo-fields
-  div:first-child,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .playerInfo-fields
-  div:first-child {
+main article section form .email-wrapper .sendForm-wrapper .playerInfo-fields div:first-child,
+main article section form .email-wrapper .playerInfo-wrapper .playerInfo-fields div:first-child {
   text-align: start;
   font-weight: 600;
 }
@@ -451,68 +237,21 @@ main article section form .email-wrapper .playerInfo-wrapper .nav-buttons {
   width: 100%;
 }
 main article section form .email-wrapper .sendForm-wrapper .nav-buttons button,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .nav-buttons
-  button {
+main article section form .email-wrapper .playerInfo-wrapper .nav-buttons button {
   margin: 2.5%;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .compare-block-wrapper,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .compare-block-wrapper {
+main article section form .email-wrapper .sendForm-wrapper .compare-block-wrapper,
+main article section form .email-wrapper .playerInfo-wrapper .compare-block-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .compare-block-wrapper
-  h3,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .compare-block-wrapper
-  h3 {
+main article section form .email-wrapper .sendForm-wrapper .compare-block-wrapper h3,
+main article section form .email-wrapper .playerInfo-wrapper .compare-block-wrapper h3 {
   margin-bottom: 5px;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .compare-block-wrapper
-  button,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .compare-block-wrapper
-  button {
+main article section form .email-wrapper .sendForm-wrapper .compare-block-wrapper button,
+main article section form .email-wrapper .playerInfo-wrapper .compare-block-wrapper button {
   position: absolute;
   right: 10%;
   border: 2px solid azure;
@@ -521,42 +260,14 @@ main
   color: white;
   cursor: pointer;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .compare-block-wrapper
-  button:hover,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .compare-block-wrapper
-  button:hover {
+main article section form .email-wrapper .sendForm-wrapper .compare-block-wrapper button:hover,
+main article section form .email-wrapper .playerInfo-wrapper .compare-block-wrapper button:hover {
   scale: 1.1;
   transition: 0.5s;
   background-color: #3789b7;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .compare-block-wrapper
-  select,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .compare-block-wrapper
-  select {
+main article section form .email-wrapper .sendForm-wrapper .compare-block-wrapper select,
+main article section form .email-wrapper .playerInfo-wrapper .compare-block-wrapper select {
   border: none;
   background-color: #3789b7;
   color: white;
@@ -569,83 +280,27 @@ main
   text-align: center;
   cursor: pointer;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .compare-block-wrapper
-  select:hover,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .compare-block-wrapper
-  select:hover {
+main article section form .email-wrapper .sendForm-wrapper .compare-block-wrapper select:hover,
+main article section form .email-wrapper .playerInfo-wrapper .compare-block-wrapper select:hover {
   scale: 1.1;
   transition: 0.5s;
   background-color: #693575;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .compare-block-wrapper
-  select
-  option,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .compare-block-wrapper
-  select
-  option {
+main article section form .email-wrapper .sendForm-wrapper .compare-block-wrapper select option,
+main article section form .email-wrapper .playerInfo-wrapper .compare-block-wrapper select option {
   display: flex;
   justify-content: center;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .download-button-wrapper,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .download-button-wrapper {
+main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper,
+main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper {
   display: flex;
   justify-content: space-between;
   width: 100%;
   padding: 10px 1vw 5px 2vw;
   box-sizing: border-box;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .download-button-wrapper
-  button,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .download-button-wrapper
-  button {
+main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper button,
+main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper button {
   width: clamp(35px, 4vw, 45px);
   aspect-ratio: 1/1;
   display: flex;
@@ -654,120 +309,34 @@ main
   border: 1px solid transparent;
   cursor: pointer;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .download-button-wrapper
-  button:hover,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .download-button-wrapper
-  button:hover {
+main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper button:hover,
+main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper button:hover {
   scale: 1.25;
   transition: 0.5s;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .download-button-wrapper
-  button
-  img,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .download-button-wrapper
-  button
-  img {
+main article section form .email-wrapper .sendForm-wrapper .download-button-wrapper button img,
+main article section form .email-wrapper .playerInfo-wrapper .download-button-wrapper button img {
   object-fit: contain;
   width: 100%;
   width: clamp(35px, 4vw, 45px);
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .player-photo-wrapper,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .player-photo-wrapper {
+main article section form .email-wrapper .sendForm-wrapper .player-photo-wrapper,
+main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapper {
   display: flex;
   justify-content: center;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .player-photo-wrapper
-  img,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .player-photo-wrapper
-  img {
+main article section form .email-wrapper .sendForm-wrapper .player-photo-wrapper img,
+main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapper img {
   width: clamp(250px, 85%, 375px);
   object-fit: contain;
   mix-blend-mode: darken;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .player-photo-wrapper
-  .dual-photos-wrapper,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .player-photo-wrapper
-  .dual-photos-wrapper {
+main article section form .email-wrapper .sendForm-wrapper .player-photo-wrapper .dual-photos-wrapper,
+main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapper .dual-photos-wrapper {
   display: flex;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  .player-photo-wrapper
-  .dual-photos-wrapper
-  img,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  .player-photo-wrapper
-  .dual-photos-wrapper
-  img {
+main article section form .email-wrapper .sendForm-wrapper .player-photo-wrapper .dual-photos-wrapper img,
+main article section form .email-wrapper .playerInfo-wrapper .player-photo-wrapper .dual-photos-wrapper img {
   object-fit: contain;
   width: 50%;
   aspect-ratio: 1/1;
@@ -776,80 +345,26 @@ main article section form .email-wrapper .sendForm-wrapper fieldset legend,
 main article section form .email-wrapper .playerInfo-wrapper fieldset legend {
   font-size: clamp(16px, 2vw, 20px);
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  fieldset
-  legend
-  span:first-child,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  fieldset
-  legend
-  span:first-child {
+main article section form .email-wrapper .sendForm-wrapper fieldset legend span:first-child,
+main article section form .email-wrapper .playerInfo-wrapper fieldset legend span:first-child {
   color: black;
   opacity: 1;
 }
 main article section form .email-wrapper .sendForm-wrapper fieldset legend span,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  fieldset
-  legend
-  span {
+main article section form .email-wrapper .playerInfo-wrapper fieldset legend span {
   color: red;
   margin-right: 5px;
   opacity: 0.5;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  fieldset
-  .measure-wrapper,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  fieldset
-  .measure-wrapper {
+main article section form .email-wrapper .sendForm-wrapper fieldset .measure-wrapper,
+main article section form .email-wrapper .playerInfo-wrapper fieldset .measure-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 90%;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  fieldset
-  .measure-wrapper
-  div,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  fieldset
-  .measure-wrapper
-  div {
+main article section form .email-wrapper .sendForm-wrapper fieldset .measure-wrapper div,
+main article section form .email-wrapper .playerInfo-wrapper fieldset .measure-wrapper div {
   font-size: 20px;
 }
 main article section form .email-wrapper .sendForm-wrapper fieldset input,
@@ -876,44 +391,14 @@ main article section form .email-wrapper .playerInfo-wrapper fieldset select {
   font-weight: 600;
   text-align: center;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  fieldset
-  select:hover,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  fieldset
-  select:hover {
+main article section form .email-wrapper .sendForm-wrapper fieldset select:hover,
+main article section form .email-wrapper .playerInfo-wrapper fieldset select:hover {
   scale: 1.1;
   transition: 0.5s;
   background-color: #693575;
 }
-main
-  article
-  section
-  form
-  .email-wrapper
-  .sendForm-wrapper
-  fieldset
-  select
-  option,
-main
-  article
-  section
-  form
-  .email-wrapper
-  .playerInfo-wrapper
-  fieldset
-  select
-  option {
+main article section form .email-wrapper .sendForm-wrapper fieldset select option,
+main article section form .email-wrapper .playerInfo-wrapper fieldset select option {
   display: flex;
   justify-content: center;
 }
@@ -991,24 +476,11 @@ main article section .table-section .happy-birthday-block-wrapper div img {
   margin-left: 10px;
   width: clamp(45px, 5vw, 60px);
 }
-main
-  article
-  section
-  .table-section
-  .happy-birthday-block-wrapper
-  div
-  .close-button-wrapper {
+main article section .table-section .happy-birthday-block-wrapper div .close-button-wrapper {
   margin-left: 10px;
   height: 100%;
 }
-main
-  article
-  section
-  .table-section
-  .happy-birthday-block-wrapper
-  div
-  .close-button-wrapper
-  button {
+main article section .table-section .happy-birthday-block-wrapper div .close-button-wrapper button {
   margin-bottom: 40px;
   border-radius: 50%;
   border: none;
@@ -1017,14 +489,7 @@ main
   font-weight: 600;
   cursor: pointer;
 }
-main
-  article
-  section
-  .table-section
-  .happy-birthday-block-wrapper
-  div
-  .close-button-wrapper
-  button:hover {
+main article section .table-section .happy-birthday-block-wrapper div .close-button-wrapper button:hover {
   background-color: #693575;
 }
 main article section .table-section .happy-birthday-block-wrapper ul {
@@ -1083,75 +548,27 @@ main article section .table-section table tbody .parents-block-wrapper {
   display: flex;
   justify-content: center;
 }
-main
-  article
-  section
-  .table-section
-  table
-  tbody
-  .rating-row
-  .rating-player-name {
+main article section .table-section table tbody .rating-row .rating-player-name {
   cursor: pointer;
 }
-main
-  article
-  section
-  .table-section
-  table
-  tbody
-  .rating-row
-  .rating-player-name
-  div {
+main article section .table-section table tbody .rating-row .rating-player-name div {
   width: 100%;
   min-height: 2vmax;
 }
-main
-  article
-  section
-  .table-section
-  table
-  tbody
-  .rating-row
-  .rating-player-name
-  div:hover {
+main article section .table-section table tbody .rating-row .rating-player-name div:hover {
   scale: 1.25;
   transition: 0.5s;
 }
-main
-  article
-  section
-  .table-section
-  table
-  tbody
-  .rating-row
-  .email-wrapper
-  button {
+main article section .table-section table tbody .rating-row .email-wrapper button {
   background-color: transparent;
   border: transparent;
   width: 100%;
 }
-main
-  article
-  section
-  .table-section
-  table
-  tbody
-  .rating-row
-  .email-wrapper
-  button:hover {
+main article section .table-section table tbody .rating-row .email-wrapper button:hover {
   scale: 1.5;
   transition: 0.33s;
 }
-main
-  article
-  section
-  .table-section
-  table
-  tbody
-  .rating-row
-  .email-wrapper
-  button
-  img {
+main article section .table-section table tbody .rating-row .email-wrapper button img {
   width: clamp(12px, 3vmin, 20px);
 }
 main article section .table-section table tbody .rating-row td {
