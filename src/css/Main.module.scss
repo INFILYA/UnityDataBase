@@ -428,6 +428,12 @@ main {
           width: 100%;
           text-align: center;
         }
+        .videoOfTests-wrapper {
+          display: flex;
+          justify-content: space-between;
+          width: 75%;
+          padding: 3px;
+        }
         .happy-birthday-block-wrapper {
           display: flex;
           flex-direction: column;

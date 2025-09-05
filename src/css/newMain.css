@@ -1039,6 +1039,12 @@ main article section .table-section table {
   width: clamp(325px, 100%, 1300px);
   table-layout: fixed;
 }
+main article section .table-section .videoOfTests-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 75%;
+  padding: 3px;
+}
 main article section .table-section table caption {
   padding-bottom: 1vmax;
 }

@@ -18,11 +18,13 @@ export default function Table() {
   const [filteredPlayers, setFilteredPlayers] = useState<TUserInfo[]>([]);
   const [isChoosenFilter, setChoosenFilter] = useState<boolean>(false);
   const [isBiggest, setIsBiggest] = useState<boolean>(false);
+  const [showVideos, setShowVideos] = useState<boolean>(false);
 
   const isUserHaveProfile = (arr: TUserInfo[]): TUserInfo[] => {
     const choosenPlayer = arr.find(
       (player) => player.email === isRegistratedUser?.email
     );
+
     const adminAccess =
       isRegistratedUser?.email === "infilya89@gmail.com" ||
       isRegistratedUser?.email === "miguel.sergio@unitysports.ca" ||
@@ -36,6 +38,32 @@ export default function Table() {
         .filter((player) => player.team === choosenPlayer?.team)
         .filter((player) => player.position !== "COACH");
   };
+
+  const namesAndVideosOfTests = [
+    ["Standing Vertical Jump", "https://www.youtube.com/watch?v=QVhZZuUgyos"],
+    [
+      "Vertical Jump with approach",
+      "https://youtube.com/shorts/2_tNlHjHIhE?si=fbLr2qodxHkkMeDw",
+    ],
+    [
+      "20m Sprint",
+      "https://youtube.com/shorts/nQ7xsx2O-Ak?si=uBy5jZ5cUSu5fwyV",
+    ],
+    ["Run 4 x 9m", "https://youtu.be/NUsXRKcn63s"],
+    ["Push ups from Knees", "https://youtu.be/Ahf4t9ky3d8?si=cAVVepft9UhhbTqw"],
+    ["Pull ups on low bar", "https://youtu.be/bHO0A4ZF_Zg?si=q7HrsYAbQHqzRpr4"],
+    [
+      "Overhead medicine ball throw",
+      "https://youtu.be/55_xvu4SoIU?si=dVUTGAv3W0UdEhKX",
+    ],
+    ["Plank", "https://youtu.be/d1nd1EJ666Q?si=y3ka7Z7BjmY_D4qb"],
+    ["Apley scratch", "https://www.youtube.com/watch?v=oORkZ2gLlbA"],
+    ["Knee to wall", "https://www.youtube.com/watch?v=rulADo6OOLs"],
+    ["Sit and reach", "https://www.youtube.com/watch?v=kdOrfiy9tV8"],
+    ["Shoulder flexion", "https://www.youtube.com/shorts/WgsCNDdLQOo"],
+    ["Seated trunk", "https://www.youtube.com/watch?v=nZ_8FkorIgg"],
+    ["Butterfly", "https://www.youtube.com/watch?v=FZNOQkSrxac"],
+  ] as const;
 
   const filterForTeams = (team: string) => {
     const filteredPlayers = isUserHaveProfile(players)
@@ -86,6 +114,25 @@ export default function Table() {
         )}
         <table>
           <caption>
+            <nav style={{ marginBottom: "2vw" }}>
+              <Button
+                text={"Video of Tests"}
+                type="button"
+                onClick={() => setShowVideos(!showVideos)}
+              />
+            </nav>
+            {showVideos && (
+              <div>
+                {namesAndVideosOfTests.map((test) => (
+                  <div className="videoOfTests-wrapper" key={test[0]}>
+                    <div>{test[0]}</div>
+                    <a href={test[1]}>
+                      <button>Play</button>
+                    </a>
+                  </div>
+                ))}
+              </div>
+            )}
             <nav>
               {teams.map((team) => (
                 <div key={team} className="table-nav-buttons">

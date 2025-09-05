@@ -183,7 +183,7 @@ export default function SendForm() {
   return (
     <SectionWrapper>
       <FormWrapper onSubmit={submitUserInfo}>
-        <h2>Unity Try Out Form</h2>
+        <h2>Unity Member Form</h2>
         <div className="sendForm-wrapper">
           {/* Name  */}
           <FormFields
