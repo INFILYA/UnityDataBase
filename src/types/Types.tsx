@@ -44,7 +44,7 @@ export type TUserInfo = {
   butterfly: string;
   highlights: boolean;
   highlightsLink?: string[];
-  evaluation: TEval;
+  // evaluation: TEval;
 };
 
 export type TEval = { [key: string]: boolean };

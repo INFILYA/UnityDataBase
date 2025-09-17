@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
 import { selectPlayers, setPlayers } from "../../../states/slices/playersSlice";
 import { ChangeEvent, useEffect, useState } from "react";
-import { TEval, TUserInfo } from "../../../types/Types";
+import { TUserInfo } from "../../../types/Types";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Button from "../../../utilities/Button";
 import { auth, playersRef, storage } from "../../../config/firebase";
 import SectionWrapper from "../../../wpappers/SectionWrapper";
 import { useAppDispatch } from "../../../states/store";
-import { checkPhotoFormat, emptyUser } from "../../../utilities/functions";
+import { checkPhotoFormat } from "../../../utilities/functions";
 import {
   selectUserInfo,
   setUserInfo,
@@ -28,9 +28,9 @@ export default function PlayerInfo() {
   const players = useSelector(selectPlayers);
   const [currentField, setCurrentField] = useState<keyof TUserInfo | "">("");
   const [currentValue, setCurrentValue] = useState<string>("");
-  const [currentEvalValue, setCurrentEvalValue] = useState<TEval>(
-    emptyUser.evaluation
-  );
+  // const [currentEvalValue, setCurrentEvalValue] = useState<TEval>(
+  //   emptyUser.evaluation
+  // );
   const [showHighlights, setShowHighlights] = useState<boolean>(false);
   const [confirmationHighlights, setConfirmationHighlights] = useState(false);
   const [confirmationDelete, setConfirmationDelete] = useState(false);
@@ -113,18 +113,22 @@ export default function PlayerInfo() {
 
   const setCurrentFieldValue = (key: keyof TUserInfo, value: string) => {
     setCurrentField(key);
-    if (key === "photo" || key === "evaluation") {
+    if (key === "photo") {
       setCurrentValue("");
     }
-    if (key === "evaluation") {
-      setCurrentValue("evaluation");
-      setCurrentEvalValue(userInfo.evaluation);
-    } else setCurrentValue(value);
+    // if (key === "evaluation") {
+    //   setCurrentValue("evaluation");
+    //   setCurrentEvalValue(userInfo.evaluation);
+    // }
+    else setCurrentValue(value);
   };
   const handleEditField = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setCurrentValue(e.target.value);
+    if (e.target.value.length === 1) {
+      const value = `0${e.target.value}`;
+      setCurrentValue(value);
+    } else setCurrentValue(e.target.value);
   };
 
   // function handleUserNumberChange(e: ChangeEvent<HTMLInputElement>) {
@@ -172,12 +176,12 @@ export default function PlayerInfo() {
     setConfirmationHighlights(false);
   }
 
-  function handleUserEvaluationEdit(e: ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value;
-    if (value === "false") {
-      setCurrentEvalValue({ ...currentEvalValue, [e.target.name]: true });
-    } else setCurrentEvalValue({ ...currentEvalValue, [e.target.name]: false });
-  }
+  // function handleUserEvaluationEdit(e: ChangeEvent<HTMLInputElement>) {
+  //   const value = e.target.value;
+  //   if (value === "false") {
+  //     setCurrentEvalValue({ ...currentEvalValue, [e.target.name]: true });
+  //   } else setCurrentEvalValue({ ...currentEvalValue, [e.target.name]: false });
+  // }
 
   const properPhoneLength = currentValue.length !== 12;
   const adminAccess =
@@ -277,8 +281,37 @@ export default function PlayerInfo() {
                   value={currentValue}
                   onChange={handleEditField}
                   measureValue={currentValue}
-                  min={0}
-                  max={test === "number" ? 99 : 399}
+                  min={
+                    test === "apleyScratch" ||
+                    test === "kneeToWall" ||
+                    test === "sitAndReach" ||
+                    test === "butterfly"
+                      ? -50
+                      : 0
+                  }
+                  max={
+                    test === "butterfly"
+                      ? 0
+                      : test === "shoulderFlexion" || test === "seatedTrunk"
+                      ? 1
+                      : test === "twentyMeterSprint" ||
+                        test === "fourOnNineRun" ||
+                        test === "overheadMedicineBallThrow"
+                      ? 11.99
+                      : test === "approachingVerticalJump" ||
+                        test === "plank" ||
+                        test === "standingVerticalJump" ||
+                        test === "height"
+                      ? 399
+                      : 99
+                  }
+                  step={
+                    test === "twentyMeterSprint" ||
+                    test === "fourOnNineRun" ||
+                    test === "overheadMedicineBallThrow"
+                      ? 0.01
+                      : 1
+                  }
                 />
               ) : (
                 <PlayerInfoFields
@@ -290,7 +323,7 @@ export default function PlayerInfo() {
               )
             )}
             {/* Evaulation */}
-            {adminAccess &&
+            {/* {adminAccess &&
               userInfo.evaluation &&
               (currentField === "evaluation" ? (
                 <div className="playerInfo-fields">
@@ -341,7 +374,7 @@ export default function PlayerInfo() {
                     </button>
                   </div>
                 </div>
-              ))}
+              ))} */}
           </>
 
           {currentField || !checkPhotoFormat(fileUpload?.name) ? (
@@ -352,10 +385,7 @@ export default function PlayerInfo() {
                 onClick={() =>
                   setEditedProfile({
                     ...userInfo,
-                    [currentField]:
-                      currentField === "evaluation"
-                        ? currentEvalValue
-                        : currentValue,
+                    [currentField]: currentValue,
                   })
                 }
                 disabled={

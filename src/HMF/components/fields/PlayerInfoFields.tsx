@@ -3,8 +3,8 @@ import { TUserInfo } from "../../../types/Types";
 
 type TPlayerInfoFields = {
   field: keyof TUserInfo;
-  setCurrentFieldValue(key: keyof TUserInfo, value: string): void;
-  measureValue: string;
+  setCurrentFieldValue(key: keyof TUserInfo, value: string | boolean): void;
+  measureValue: string | boolean;
   fieldAccess?: boolean;
 };
 

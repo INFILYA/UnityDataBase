@@ -15,10 +15,11 @@ type TFormFields = {
   measureValue?: string;
   min?: number;
   max?: number;
+  step?: number;
 };
 
 export default function FormFields(props: TFormFields) {
-  const { field, onChange, type, value, access, measureValue, min, max } =
+  const { field, onChange, type, value, access, measureValue, min, max, step } =
     props;
   const cm = field === "height";
   const photo = field === "photo";
@@ -48,6 +49,7 @@ export default function FormFields(props: TFormFields) {
           required
           min={min}
           max={max}
+          step={step}
         />
       </div>
     </Fieldset>

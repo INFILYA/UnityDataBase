@@ -27,31 +27,31 @@ export function RowsForStrength(props: TRows) {
         <tr
           key={player.email}
           className="rating-row"
-          style={
-            player.evaluation && adminAccess
-              ? {
-                  backgroundColor:
-                    player.position === "COACH"
-                      ? "gainsboro"
-                      : player.evaluation &&
-                        Object.values(player.evaluation).filter(
-                          (skill) => skill === true
-                        ).length <= 0
-                      ? "orangered"
-                      : player.evaluation &&
-                        Object.values(player.evaluation).filter(
-                          (skill) => skill === true
-                        ).length <= 1
-                      ? "orange"
-                      : player.evaluation &&
-                        Object.values(player.evaluation).filter(
-                          (skill) => skill === true
-                        ).length <= 2
-                      ? "yellow"
-                      : "greenyellow",
-                }
-              : {}
-          }
+          // style={
+          //   player.evaluation && adminAccess
+          //     ? {
+          //         backgroundColor:
+          //           player.position === "COACH"
+          //             ? "gainsboro"
+          //             : player.evaluation &&
+          //               Object.values(player.evaluation).filter(
+          //                 (skill) => skill === true
+          //               ).length <= 0
+          //             ? "orangered"
+          //             : player.evaluation &&
+          //               Object.values(player.evaluation).filter(
+          //                 (skill) => skill === true
+          //               ).length <= 1
+          //             ? "orange"
+          //             : player.evaluation &&
+          //               Object.values(player.evaluation).filter(
+          //                 (skill) => skill === true
+          //               ).length <= 2
+          //             ? "yellow"
+          //             : "greenyellow",
+          //       }
+          //     : {}
+          // }
         >
           <td>
             <div>
@@ -84,10 +84,10 @@ export function RowsForStrength(props: TRows) {
             {isBurger && "ft"}
           </td>
           <td>
-            {Math.round(+player.twentyMeterSprint)} {isBurger && "sec"}
+            {+player.twentyMeterSprint} {isBurger && "sec"}
           </td>
           <td>
-            {Math.round(+player.fourOnNineRun)} {isBurger && "sec"}
+            {+player.fourOnNineRun} {isBurger && "sec"}
           </td>
           <td>
             {Math.round(+player.pushUpsFromKnees)} {isBurger && "times"}
@@ -96,7 +96,7 @@ export function RowsForStrength(props: TRows) {
             {Math.round(+player.pullUpsOnLowBar)} {isBurger && "times"}
           </td>
           <td>
-            {Math.round(+player.overheadMedicineBallThrow)} {isBurger && "m"}
+            {+player.overheadMedicineBallThrow} {isBurger && "m"}
           </td>
           <td>
             {Math.round(+player.plank)} {isBurger && "sec"}

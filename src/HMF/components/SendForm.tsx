@@ -48,12 +48,12 @@ export default function SendForm() {
     butterfly: "00",
     photo: "none",
     highlights: false,
-    evaluation: {
-      anthropometry: false,
-      agility: false,
-      criticalThinking: false,
-      softSkills: false,
-    },
+    // evaluation: {
+    //   anthropometry: false,
+    //   agility: false,
+    //   criticalThinking: false,
+    //   softSkills: false,
+    // },
   });
 
   useEffect(() => {

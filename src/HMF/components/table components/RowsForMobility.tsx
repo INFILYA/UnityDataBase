@@ -27,31 +27,31 @@ export function RowsForMobility(props: TRows) {
         <tr
           key={player.email}
           className="rating-row"
-          style={
-            player.evaluation && adminAccess
-              ? {
-                  backgroundColor:
-                    player.position === "COACH"
-                      ? "gainsboro"
-                      : player.evaluation &&
-                        Object.values(player.evaluation).filter(
-                          (skill) => skill === true
-                        ).length <= 0
-                      ? "orangered"
-                      : player.evaluation &&
-                        Object.values(player.evaluation).filter(
-                          (skill) => skill === true
-                        ).length <= 1
-                      ? "orange"
-                      : player.evaluation &&
-                        Object.values(player.evaluation).filter(
-                          (skill) => skill === true
-                        ).length <= 2
-                      ? "yellow"
-                      : "greenyellow",
-                }
-              : {}
-          }
+          // style={
+          //   player.evaluation && adminAccess
+          //     ? {
+          //         backgroundColor:
+          //           player.position === "COACH"
+          //             ? "gainsboro"
+          //             : player.evaluation &&
+          //               Object.values(player.evaluation).filter(
+          //                 (skill) => skill === true
+          //               ).length <= 0
+          //             ? "orangered"
+          //             : player.evaluation &&
+          //               Object.values(player.evaluation).filter(
+          //                 (skill) => skill === true
+          //               ).length <= 1
+          //             ? "orange"
+          //             : player.evaluation &&
+          //               Object.values(player.evaluation).filter(
+          //                 (skill) => skill === true
+          //               ).length <= 2
+          //             ? "yellow"
+          //             : "greenyellow",
+          //       }
+          //     : {}
+          // }
         >
           <td>
             <div>
@@ -88,12 +88,8 @@ export function RowsForMobility(props: TRows) {
           <td>
             {Math.round(+player.sitAndReach)} {isBurger && "cm"}
           </td>
-          <td>
-            {Math.round(+player.shoulderFlexion)} {isBurger && "cm"}
-          </td>
-          <td>
-            {Math.round(+player.seatedTrunk)} {isBurger && "cm"}
-          </td>
+          <td>{Math.round(+player.shoulderFlexion) ? "Yes" : "No"}</td>
+          <td>{Math.round(+player.seatedTrunk) ? "Yes" : "No"}</td>
           <td>
             {Math.round(+player.butterfly)} {isBurger && "cm"}
           </td>
