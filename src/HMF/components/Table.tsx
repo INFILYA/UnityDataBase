@@ -120,6 +120,9 @@ export default function Table() {
                 type="button"
                 onClick={() => setShowVideos(!showVideos)}
               />
+              <a href="https://docs.google.com/spreadsheets/d/1DzvCd27TqTQWI4PeOTTBC0FGznfUvvcdEygnkyCVZ2k/edit?gid=1723663768#gid=1723663768">
+                <Button text={"Workout video 17U"} type="button" />
+              </a>
             </nav>
             {showVideos && (
               <div>
